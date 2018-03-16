@@ -16,4 +16,8 @@ public interface CoffeeService {
     @GET("users/{user}/repos")
     Call<List<Repo>> listRepos(@Path("user") String user);
 
+
+    @GET("CoffeeService/GetCoffeeList.json")
+    Call <CoffeeList> listCoffeeMachines();
+
 }

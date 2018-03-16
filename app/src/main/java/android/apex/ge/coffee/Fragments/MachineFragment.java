@@ -2,8 +2,9 @@ package android.apex.ge.coffee.Fragments;
 
 
 import android.apex.ge.coffee.R;
+import android.apex.ge.coffee.Retrofit.BasicAuthInterceptor;
+import android.apex.ge.coffee.Retrofit.CoffeeList;
 import android.apex.ge.coffee.Retrofit.CoffeeService;
-import android.apex.ge.coffee.Retrofit.Repo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -55,23 +57,65 @@ public class MachineFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OkHttpClient client = new OkHttpClient.Builder()
+                        .addInterceptor(new BasicAuthInterceptor("rpl", "9"))
+                        .build();
+
                 Retrofit retrofit = new Retrofit.Builder()
                         .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl("https://api.github.com/")
+                        .baseUrl("http://support.apex.ge:83")
+                        .client(client)
                         .build();
+
                 CoffeeService service = retrofit.create(CoffeeService.class);
+
+                Call <CoffeeList> coffees = service.listCoffeeMachines();
+
+
+
+
+                coffees.enqueue(new Callback<CoffeeList>() {
+                    @Override
+                    public void onResponse(Call<CoffeeList> call, Response<CoffeeList> response) {
+                        if(response.isSuccessful()) {
+                            Log.d(LOG_TAG, response.code() + "");
+
+                            String displayCoffeeResponse = "";
+                            List<CoffeeList.Result> kofe = response.body().getResult();
+                            displayCoffeeResponse += "\n    " + kofe.size() + " \n";
+
+                            for (CoffeeList.Result coffeeResult : kofe) {
+                                displayCoffeeResponse += coffeeResult.toString();
+//                                Log.d(LOG_TAG, coffeeResult.getAcc().toString());
+
+                            }
+                            textView.setText(displayCoffeeResponse);
+                        }else
+                            textView.setText(response.toString());
+                        textView.setMovementMethod(new ScrollingMovementMethod());
+                    }
+
+                    @Override
+                    public void onFailure(Call<CoffeeList> call, Throwable t) {
+                        call.cancel();
+                    }
+                });
+
+/*
                 Call<List<Repo>> repos = service.listRepos("nkhar");
+
+
                 repos.enqueue(new Callback<List<Repo>>() {
                     @Override
                     public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
-                        Log.d(LOG_TAG,response.code()+"");
+                        Log.d(LOG_TAG, response.code() + "");
 
                         String displayResponse = "";
 
                         List<Repo> repo = response.body();
-                        displayResponse+="\n    " + repo.size() + " \n";
-                        for(Repo rep : repo){
-                            displayResponse+=rep.toString();
+                        displayResponse += "\n    " + repo.size() + " \n";
+                        for (Repo rep : repo) {
+                            displayResponse += rep.toString();
                             Log.d(LOG_TAG, rep.getDefaultBranch().toString());
 
                         }
@@ -84,13 +128,9 @@ public class MachineFragment extends Fragment {
                     public void onFailure(Call<List<Repo>> call, Throwable t) {
                         call.cancel();
                     }
-                });
+                });*/
             }
         });
-
-
-
-
 
 
         return view;
