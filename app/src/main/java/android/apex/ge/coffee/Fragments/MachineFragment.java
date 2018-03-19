@@ -3,7 +3,7 @@ package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.CoffeeMachineDetailActivity;
 import android.apex.ge.coffee.R;
-import android.apex.ge.coffee.Retrofit.BasicAuthInterceptor;
+import android.apex.ge.coffee.Retrofit.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.CoffeeMachine;
 import android.apex.ge.coffee.Retrofit.CoffeeService;
 import android.content.Context;
@@ -25,12 +25,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import okhttp3.OkHttpClient;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 /**
  * Created by Nika on 14/03/2018.
@@ -93,7 +92,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OkHttpClient client = new OkHttpClient.Builder()
+                /*OkHttpClient client = new OkHttpClient.Builder()
                         .addInterceptor(new BasicAuthInterceptor("rpl", "9"))
                         .build();
 
@@ -101,9 +100,9 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
                         .addConverterFactory(GsonConverterFactory.create())
                         .baseUrl("http://support.apex.ge:83")
                         .client(client)
-                        .build();
+                        .build();*/
 
-                CoffeeService service = retrofit.create(CoffeeService.class);
+                CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
                 Call <CoffeeMachine> coffees = service.listCoffeeMachines();
 
