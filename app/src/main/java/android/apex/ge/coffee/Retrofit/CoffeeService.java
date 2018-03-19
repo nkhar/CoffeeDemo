@@ -18,6 +18,8 @@ public interface CoffeeService {
 
 
     @GET("CoffeeService/GetCoffeeList.json")
-    Call <CoffeeList> listCoffeeMachines();
+    Call <CoffeeMachine> listCoffeeMachines();
+
+
 
 }

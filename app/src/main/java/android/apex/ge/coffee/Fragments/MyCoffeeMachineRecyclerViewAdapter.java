@@ -1,7 +1,7 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
-import android.apex.ge.coffee.Retrofit.CoffeeList;
+import android.apex.ge.coffee.Retrofit.CoffeeMachine;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,12 +17,16 @@ import java.util.List;
  * adapter for coffee machines recycler view
  */
 
-public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<MyCoffeeMachineRecyclerViewAdapter.ViewHolder, CoffeeList.Result> {
+public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<MyCoffeeMachineRecyclerViewAdapter.ViewHolder, CoffeeMachine.Result> {
 
     protected final String LOG_TAG = "MyCofRecyclerVAdapter";
 
+    /*private final String accountACC= "ანგ#:";
+    private final String accountName= "დასახელება:";
+    private final String accountAddress= "მისამართი:";*/
 
-    public MyCoffeeMachineRecyclerViewAdapter(List<CoffeeList.Result> items) {
+
+    public MyCoffeeMachineRecyclerViewAdapter(List<CoffeeMachine.Result> items) {
         super(items);
         Log.d(LOG_TAG, "We are in MyCoffeeMachineRecyclerViewAdapter   constructor   ");
     }
@@ -35,12 +39,13 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
     }
 
     @Override
-    public void onBindViewHolder( final ViewHolder holder, final CoffeeList.Result value) {
+    public void onBindViewHolder( final ViewHolder holder, final CoffeeMachine.Result value) {
         if(value == null) {
             return;
         }
 
         holder.coffeeListResult = value;
+
         holder.mCoffeeMachineAccTextView.setText(value.getAcc());
         holder.mCoffeeMachineNameTextView.setText(value.getName());
         holder.mCoffeeMachineAddressTextView.setText(value.getAddress());
@@ -72,7 +77,7 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
         public final TextView mCoffeeMachineAccTextView;
         public final TextView mCoffeeMachineNameTextView;
         public final TextView mCoffeeMachineAddressTextView;
-        public CoffeeList.Result coffeeListResult;
+        public CoffeeMachine.Result coffeeListResult;
 
         public ViewHolder(View itemView) {
             // Stores the itemView in a public final member variable that can be used

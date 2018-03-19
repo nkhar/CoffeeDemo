@@ -1,11 +1,13 @@
 package android.apex.ge.coffee.Fragments;
 
 
+import android.apex.ge.coffee.CoffeeMachineDetailActivity;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.BasicAuthInterceptor;
-import android.apex.ge.coffee.Retrofit.CoffeeList;
+import android.apex.ge.coffee.Retrofit.CoffeeMachine;
 import android.apex.ge.coffee.Retrofit.CoffeeService;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -103,25 +105,25 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
 
                 CoffeeService service = retrofit.create(CoffeeService.class);
 
-                Call <CoffeeList> coffees = service.listCoffeeMachines();
+                Call <CoffeeMachine> coffees = service.listCoffeeMachines();
 
 
 
 
-                coffees.enqueue(new Callback<CoffeeList>() {
+                coffees.enqueue(new Callback<CoffeeMachine>() {
                     @Override
-                    public void onResponse(Call<CoffeeList> call, Response<CoffeeList> response) {
+                    public void onResponse(Call<CoffeeMachine> call, Response<CoffeeMachine> response) {
                         if(response.isSuccessful()) {
                             Log.d(LOG_TAG, response.code() + "");
 
                            /* String displayCoffeeResponse = "";*/
-                            List<CoffeeList.Result> kofe = response.body().getResult();
+                            List<CoffeeMachine.Result> kofe = response.body().getResult();
                             adapter = new MyCoffeeMachineRecyclerViewAdapter(kofe);
                             adapter.setmListener(MachineFragment.this);
                             MachineFragment.this.recyclerView.setAdapter(adapter);
                            /* displayCoffeeResponse += "\n    " + kofe.size() + " \n";*/
 
-                           /* for (CoffeeList.Result coffeeResult : kofe) {
+                           /* for (CoffeeMachine.Result coffeeResult : kofe) {
                                 displayCoffeeResponse += coffeeResult.toString();
 //                                Log.d(LOG_TAG, coffeeResult.getAcc().toString());
                             }*/
@@ -132,7 +134,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
                     }
 
                     @Override
-                    public void onFailure(Call<CoffeeList> call, Throwable t) {
+                    public void onFailure(Call<CoffeeMachine> call, Throwable t) {
                         call.cancel();
                     }
                 });
@@ -175,6 +177,8 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
     @Override
     public void onClick(Object value) {
         Log.d(LOG_TAG, "Something was clicked" + value.toString());
+        Intent intent = new Intent(getActivity(), CoffeeMachineDetailActivity.class);
+        startActivity(intent);
     }
 
     @Override

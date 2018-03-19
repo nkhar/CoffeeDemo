@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">Coffee</string>
 
+    <string name="title_activity_coffee_machine_detail">CoffeeMachineDetailActivity</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_drawer_menu_item_1">Machines</string>
     <string name="nav_drawer_menu_item_2">Reservations</string>
     <string name="nav_drawer_menu_item_3">Document Registry</string>
+
 
 
 </resources>

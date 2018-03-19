@@ -10,7 +10,7 @@ import java.util.List;
  * This is a POJO class used for json serialization/deserialization.
  */
 
-public class CoffeeList {
+public class CoffeeMachine {
     @SerializedName("ResponseStatus")
     @Expose
     private ResponseStatus responseStatus;
