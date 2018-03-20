@@ -21,10 +21,8 @@ public interface CoffeeService {
     @GET("CoffeeService/GetCoffeeList.json")
     Call <CoffeeMachineList> listCoffeeMachines(@Query("VanAcc") String vanAcc);
 
-   /*
-    Not yet implemented
     @GET("CoffeeService/GetSaleGoods.json")
-    Call<ProductData> listSaleGoods (@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);*/
+    Call<SaleGoods> listSaleGoods (@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
 
     @GET("CoffeeService/GetProducedGoods.json")
     Call <ProducedGoods> listProducedGoods(@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
