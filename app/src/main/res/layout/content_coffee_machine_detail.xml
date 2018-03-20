@@ -8,4 +8,19 @@
     tools:context="android.apex.ge.coffee.CoffeeMachineDetailActivity"
     tools:showIn="@layout/activity_coffee_machine_detail">
 
+   <!-- <FrameLayout
+        android:id="@+id/coffee_machine_tab_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>-->
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="54dp" />
 </android.support.constraint.ConstraintLayout>

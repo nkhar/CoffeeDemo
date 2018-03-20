@@ -34,10 +34,6 @@ public class CoffeeMachine {
         this.result = result;
     }
 
-    public class ResponseStatus {
-
-    }
-
     public class Result {
 
         @SerializedName("Acc")
