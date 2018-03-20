@@ -19,7 +19,7 @@ public interface CoffeeService {
 
 
     @GET("CoffeeService/GetCoffeeList.json")
-    Call <CoffeeMachine> listCoffeeMachines(@Query("VanAcc") String vanAcc);
+    Call <CoffeeMachineList> listCoffeeMachines(@Query("VanAcc") String vanAcc);
 
    /*
     Not yet implemented

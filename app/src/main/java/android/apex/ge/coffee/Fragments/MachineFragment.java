@@ -3,8 +3,9 @@ package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.CoffeeMachineDetailActivity;
 import android.apex.ge.coffee.R;
-import android.apex.ge.coffee.Retrofit.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.CoffeeMachine;
+import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
+import android.apex.ge.coffee.Retrofit.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.CoffeeService;
 import android.content.Context;
 import android.content.Intent;
@@ -104,25 +105,25 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
 
                 CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
-                Call <CoffeeMachine> coffees = service.listCoffeeMachines(null);
+                Call <CoffeeMachineList> coffees = service.listCoffeeMachines(null);
 
 
 
 
-                coffees.enqueue(new Callback<CoffeeMachine>() {
+                coffees.enqueue(new Callback<CoffeeMachineList>() {
                     @Override
-                    public void onResponse(Call<CoffeeMachine> call, Response<CoffeeMachine> response) {
+                    public void onResponse(Call<CoffeeMachineList> call, Response<CoffeeMachineList> response) {
                         if(response.isSuccessful()) {
                             Log.d(LOG_TAG, response.code() + "");
 
                            /* String displayCoffeeResponse = "";*/
-                            List<CoffeeMachine.Result> kofe = response.body().getResult();
+                            List<CoffeeMachine> kofe = response.body().getResult();
                             adapter = new MyCoffeeMachineRecyclerViewAdapter(kofe);
                             adapter.setmListener(MachineFragment.this);
                             MachineFragment.this.recyclerView.setAdapter(adapter);
                            /* displayCoffeeResponse += "\n    " + kofe.size() + " \n";*/
 
-                           /* for (CoffeeMachine.Result coffeeResult : kofe) {
+                           /* for (CoffeeMachineList.Result coffeeResult : kofe) {
                                 displayCoffeeResponse += coffeeResult.toString();
 //                                Log.d(LOG_TAG, coffeeResult.getAcc().toString());
                             }*/
@@ -133,7 +134,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
                     }
 
                     @Override
-                    public void onFailure(Call<CoffeeMachine> call, Throwable t) {
+                    public void onFailure(Call<CoffeeMachineList> call, Throwable t) {
                         call.cancel();
                         textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
                     }

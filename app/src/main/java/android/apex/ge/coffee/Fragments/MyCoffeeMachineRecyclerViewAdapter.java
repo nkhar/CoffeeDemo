@@ -2,6 +2,7 @@ package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeMachine;
+import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,7 +18,7 @@ import java.util.List;
  * adapter for coffee machines recycler view
  */
 
-public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<MyCoffeeMachineRecyclerViewAdapter.ViewHolder, CoffeeMachine.Result> {
+public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<MyCoffeeMachineRecyclerViewAdapter.ViewHolder, CoffeeMachine> {
 
     protected final String LOG_TAG = "MyCofRecyclerVAdapter";
 
@@ -26,7 +27,7 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
     private final String accountAddress= "მისამართი:";*/
 
 
-    public MyCoffeeMachineRecyclerViewAdapter(List<CoffeeMachine.Result> items) {
+    public MyCoffeeMachineRecyclerViewAdapter(List<CoffeeMachine> items) {
         super(items);
         Log.d(LOG_TAG, "We are in MyCoffeeMachineRecyclerViewAdapter   constructor   ");
     }
@@ -39,7 +40,7 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
     }
 
     @Override
-    public void onBindViewHolder( final ViewHolder holder, final CoffeeMachine.Result value) {
+    public void onBindViewHolder( final ViewHolder holder, final CoffeeMachine value) {
         if(value == null) {
             return;
         }
@@ -77,7 +78,7 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
         public final TextView mCoffeeMachineAccTextView;
         public final TextView mCoffeeMachineNameTextView;
         public final TextView mCoffeeMachineAddressTextView;
-        public CoffeeMachine.Result coffeeListResult;
+        public CoffeeMachine coffeeListResult;
 
         public ViewHolder(View itemView) {
             // Stores the itemView in a public final member variable that can be used
