@@ -5,6 +5,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Nika on 16/03/2018.
@@ -18,7 +19,17 @@ public interface CoffeeService {
 
 
     @GET("CoffeeService/GetCoffeeList.json")
-    Call <CoffeeMachine> listCoffeeMachines();
+    Call <CoffeeMachine> listCoffeeMachines(@Query("VanAcc") String vanAcc);
+
+   /*
+    Not yet implemented
+    @GET("CoffeeService/GetSaleGoods.json")
+    Call<ProductData> listSaleGoods (@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);*/
+
+    @GET("CoffeeService/GetProducedGoods.json")
+    Call <ProducedGoods> listProducedGoods(@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
+
+
 
 
 

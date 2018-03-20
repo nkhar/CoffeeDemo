@@ -104,7 +104,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
 
                 CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
-                Call <CoffeeMachine> coffees = service.listCoffeeMachines();
+                Call <CoffeeMachine> coffees = service.listCoffeeMachines(null);
 
 
 
@@ -135,6 +135,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
                     @Override
                     public void onFailure(Call<CoffeeMachine> call, Throwable t) {
                         call.cancel();
+                        textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
                     }
                 });
 
