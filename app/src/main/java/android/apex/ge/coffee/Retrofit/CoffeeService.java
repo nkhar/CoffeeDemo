@@ -58,6 +58,10 @@ public interface CoffeeService {
     @FormUrlEncoded
     Call<SaveCoffeeStatsResponse> listSaveCoffeeStatsResponse(@Body SaveCoffeeStats saveCoffeeStats);
 
+    @POST("CoffeeService/SavePreorder")
+    @FormUrlEncoded
+    Call<SaveCoffeePreOrderResponse> listSaveCoffeePreOrderResponse(@Body SaveCoffeePreOrder saveCoffeePreOrder);
+
 
 
 }
