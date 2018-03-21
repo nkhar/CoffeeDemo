@@ -20,7 +20,7 @@ public class RetrofitClient {
 
         retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://support.apex.ge:83")
+                .baseUrl("http://support.apex.ge:83/")
                 .client(client)
                 .build();
 

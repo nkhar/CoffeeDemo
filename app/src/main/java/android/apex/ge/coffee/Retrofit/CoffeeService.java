@@ -46,6 +46,6 @@ public interface CoffeeService {
     Call<DocGoods> listDocGoods(@Query("DocsID") String docsID);
 
     @GET("CoffeeService/GetLastCoffeCupsCount.json")
-    Call<DocGoods> listLastCoffeeCupsCount(@Query("CoffeeAcc") String coffeeAcc);
+    Call<LastCoffeeCupsCount> listLastCoffeeCupsCount(@Query("CoffeeAcc") String coffeeAcc);
 
 }
