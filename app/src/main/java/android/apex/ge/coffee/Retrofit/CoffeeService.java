@@ -4,7 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -20,6 +23,7 @@ public interface CoffeeService {
 
 
 
+    /*GET methods*/
 
     @GET("CoffeeService/GetCoffeeList.json")
     Call <CoffeeMachineList> listCoffeeMachines(@Query("VanAcc") String vanAcc);
@@ -47,5 +51,13 @@ public interface CoffeeService {
 
     @GET("CoffeeService/GetLastCoffeCupsCount.json")
     Call<LastCoffeeCupsCount> listLastCoffeeCupsCount(@Query("CoffeeAcc") String coffeeAcc);
+
+
+    /*POST methods*/
+    @POST("CoffeeService/SaveCoffeeStats")
+    @FormUrlEncoded
+    Call<SaveCoffeeStatsResponse> listSaveCoffeeStatsResponse(@Body SaveCoffeeStats saveCoffeeStats);
+
+
 
 }
