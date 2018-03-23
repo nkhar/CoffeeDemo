@@ -1,5 +1,6 @@
 package android.apex.ge.coffee;
 
+import android.apex.ge.coffee.Fragments.CoffeeFragmentPagerAdapter;
 import android.apex.ge.coffee.Retrofit.CoffeeService;
 import android.apex.ge.coffee.Retrofit.ProducedGoods;
 import android.apex.ge.coffee.Retrofit.ProductData;
@@ -7,6 +8,9 @@ import android.apex.ge.coffee.Retrofit.RetrofitClient;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
@@ -23,7 +27,7 @@ import retrofit2.Response;
 
 public class CoffeeMachineDetailActivity extends AppCompatActivity {
 
-    protected final String LOG_TAG= "CoffeeMachDetAct";
+    protected final String LOG_TAG = "CoffeeMachDetAct";
 
 
     private Button mButtonProducedGoods;
@@ -34,19 +38,37 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(LOG_TAG, "We are in onCreate method");
         setContentView(R.layout.activity_coffee_machine_detail);
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_coffee_detail);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab =  findViewById(R.id.fab);
+        /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
-        mTextViewProducedGoods = findViewById(R.id.producedGoodsTextView);
+
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        ViewPager viewPager = findViewById(R.id.viewpager_coffee_detail);
+        viewPager.setAdapter(new CoffeeFragmentPagerAdapter(getSupportFragmentManager(),
+                CoffeeMachineDetailActivity.this));
+
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+
+
+
+
+
+
+
+      /*  mTextViewProducedGoods = findViewById(R.id.producedGoodsTextView);
         mTextViewProducedGoods.setMovementMethod(new ScrollingMovementMethod());
 
         mButtonProducedGoods = findViewById(R.id.buttonProducedGoods);
@@ -61,20 +83,20 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
                 producedGoods.enqueue(new Callback<ProducedGoods>() {
                     @Override
                     public void onResponse(Call<ProducedGoods> call, Response<ProducedGoods> response) {
-                        if(response.isSuccessful()) {
+                        if (response.isSuccessful()) {
                             Log.d(LOG_TAG, response.code() + "");
 
-                           String displayCoffeeResponse = "";
+                            String displayCoffeeResponse = "";
                             List<ProductData> producedGoodsProductData = response.body().getResult();
 
-                           displayCoffeeResponse += "\n    " + producedGoodsProductData.size() + " \n";
+                            displayCoffeeResponse += "\n    " + producedGoodsProductData.size() + " \n";
 
-                           for (ProductData prodData : producedGoodsProductData) {
+                            for (ProductData prodData : producedGoodsProductData) {
                                 displayCoffeeResponse += prodData.toString();
                             }
                             mTextViewProducedGoods.setText(displayCoffeeResponse);
-                            /*mTextViewProducedGoods.setText(" \n\n " + producedGoodsProductData.size() + "\n\n");*/
-                        }else
+                            *//*mTextViewProducedGoods.setText(" \n\n " + producedGoodsProductData.size() + "\n\n");*//*
+                        } else
                             mTextViewProducedGoods.setText(response.toString());
                     }
 
@@ -84,7 +106,7 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
     }
 
 }
