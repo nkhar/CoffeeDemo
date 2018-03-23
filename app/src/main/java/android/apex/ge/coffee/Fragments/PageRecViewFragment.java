@@ -104,9 +104,13 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
     }
 
     private void setUpCorrectAdapter() {
-        if(mPage==1) {
+        if (mPage == 1) {
             adapter = new MySaleRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
-        }else {
+        } else if (mPage == 2) {
+            adapter = new MyProducedRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
+        } else if (mPage == 3) {
+            adapter = new MyRawMaterialsRecyclerViewAdapter (new ArrayList<CoffeeMachine>());
+        } else {
             adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
         }
     }
@@ -122,15 +126,15 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
 
             @Override
             public void onResponse(Call<CoffeeMachineList> call, Response<CoffeeMachineList> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     Log.d(LOG_TAG, response.code() + "");
 
                     List<CoffeeMachine> coffee = response.body().getResult();
                     // Here is the real list
                     adapter.updateList(coffee);
 
-                    textView.setText(textView.getText()+ " \n\n " + coffee.size() + "\n\n");
-                }else
+                    textView.setText(textView.getText() + " \n\n " + coffee.size() + "\n\n");
+                } else
                     textView.setText(response.toString());
                 textView.setMovementMethod(new ScrollingMovementMethod());
             }
