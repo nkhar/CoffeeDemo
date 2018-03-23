@@ -24,7 +24,7 @@ public class CoffeeFragmentPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        return PageSaleFragment.newInstance(position+1);
+        return PageRecViewFragment.newInstance(position+1);
     }
 
     @Override

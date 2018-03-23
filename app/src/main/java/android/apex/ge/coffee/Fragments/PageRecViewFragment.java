@@ -33,11 +33,11 @@ import retrofit2.Response;
  * @see android.apex.ge.coffee.CoffeeMachineDetailActivity
  */
 
-public class PageSaleFragment extends Fragment implements ILibObjectCrud {
+public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
 
-    protected final String LOG_TAG = "PageSaleFragment";
+    protected final String LOG_TAG = "PageRecViewFragment";
     RecyclerView recyclerView;
-    MyCoffeeMachineRecyclerViewAdapter adapter;
+    RecyclerViewListAdapter adapter;
 
     private final int mColumnCount = 1;
 
@@ -51,13 +51,13 @@ public class PageSaleFragment extends Fragment implements ILibObjectCrud {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public PageSaleFragment() {
+    public PageRecViewFragment() {
     }
 
-    public static PageSaleFragment newInstance(int page) {
+    public static PageRecViewFragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
-        PageSaleFragment fragment = new PageSaleFragment();
+        PageRecViewFragment fragment = new PageRecViewFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -71,7 +71,7 @@ public class PageSaleFragment extends Fragment implements ILibObjectCrud {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "We are in onCreateView method of the PageSaleFragment class");
+        Log.d(LOG_TAG, "We are in onCreateView method of the PageRecViewFragment class");
 
         View view = inflater.inflate(R.layout.fragment_page_sale, container, false);
         // TextView
@@ -80,25 +80,35 @@ public class PageSaleFragment extends Fragment implements ILibObjectCrud {
 
         // RecyclerView
         Context context = view.getContext();
-        recyclerView = view.findViewById(R.id.page_sale_recycler_view);
+        recyclerView = view.findViewById(R.id.page_recycler_view);
         if (mColumnCount <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
 
-        adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
+        setUpCorrectAdapter();
+
+        //adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
         // Method to get a list of CoffeeMachines
         getCoffeeListFromAPI();
 
 
-        adapter.setmListener(PageSaleFragment.this);
+        adapter.setmListener(PageRecViewFragment.this);
         recyclerView.setAdapter(adapter);
 
         RecyclerView.ItemDecoration localItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(localItemDecoration);
 
         return view;
+    }
+
+    private void setUpCorrectAdapter() {
+        if(mPage==1) {
+            adapter = new MySaleRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
+        }else {
+            adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
+        }
     }
 
     private void getCoffeeListFromAPI() {
@@ -119,7 +129,7 @@ public class PageSaleFragment extends Fragment implements ILibObjectCrud {
                     // Here is the real list
                     adapter.updateList(coffee);
 
-                    textView.setText( " \n\n " + coffee.size() + "\n\n");
+                    textView.setText(textView.getText()+ " \n\n " + coffee.size() + "\n\n");
                 }else
                     textView.setText(response.toString());
                 textView.setMovementMethod(new ScrollingMovementMethod());
