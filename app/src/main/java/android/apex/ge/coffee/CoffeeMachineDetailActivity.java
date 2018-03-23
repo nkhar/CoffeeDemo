@@ -1,29 +1,14 @@
 package android.apex.ge.coffee;
 
 import android.apex.ge.coffee.Fragments.CoffeeFragmentPagerAdapter;
-import android.apex.ge.coffee.Retrofit.CoffeeService;
-import android.apex.ge.coffee.Retrofit.ProducedGoods;
-import android.apex.ge.coffee.Retrofit.ProductData;
-import android.apex.ge.coffee.Retrofit.RetrofitClient;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CoffeeMachineDetailActivity extends AppCompatActivity {
 

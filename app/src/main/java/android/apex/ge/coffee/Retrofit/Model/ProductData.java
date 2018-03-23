@@ -1,4 +1,4 @@
-package android.apex.ge.coffee.Retrofit;
+package android.apex.ge.coffee.Retrofit.Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

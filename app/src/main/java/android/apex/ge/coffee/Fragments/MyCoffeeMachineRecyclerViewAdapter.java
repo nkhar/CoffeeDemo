@@ -1,8 +1,7 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
-import android.apex.ge.coffee.Retrofit.CoffeeMachine;
-import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
+import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;

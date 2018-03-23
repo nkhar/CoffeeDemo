@@ -1,5 +1,8 @@
 package android.apex.ge.coffee.Retrofit;
 
+import android.apex.ge.coffee.Retrofit.Model.SaveCoffeePreOrder;
+import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
+
 import java.util.Date;
 import java.util.List;
 

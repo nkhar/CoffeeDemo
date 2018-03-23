@@ -3,7 +3,7 @@ package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.CoffeeMachineDetailActivity;
 import android.apex.ge.coffee.R;
-import android.apex.ge.coffee.Retrofit.CoffeeMachine;
+import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
 import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
 import android.apex.ge.coffee.Retrofit.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.CoffeeService;

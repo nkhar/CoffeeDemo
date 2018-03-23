@@ -1,4 +1,6 @@
-package android.apex.ge.coffee.Retrofit;
+package android.apex.ge.coffee.Retrofit.Model;
+
+import android.apex.ge.coffee.Retrofit.Model.ProdTransactionData;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
