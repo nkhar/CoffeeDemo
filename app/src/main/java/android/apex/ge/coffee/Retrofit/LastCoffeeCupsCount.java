@@ -1,9 +1,9 @@
 package android.apex.ge.coffee.Retrofit;
 
+import android.apex.ge.coffee.Retrofit.Model.ResponseStatus;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 /**
  * Created by Nika on 20/03/2018.

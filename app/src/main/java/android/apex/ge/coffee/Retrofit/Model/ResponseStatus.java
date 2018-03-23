@@ -1,4 +1,4 @@
-package android.apex.ge.coffee.Retrofit;
+package android.apex.ge.coffee.Retrofit.Model;
 
 /**
  * Created by Nika on 20/03/2018.
