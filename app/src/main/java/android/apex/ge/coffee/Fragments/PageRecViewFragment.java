@@ -5,6 +5,8 @@ import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
 import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
+import android.apex.ge.coffee.Retrofit.Model.ProductData;
+import android.apex.ge.coffee.Retrofit.SaleGoods;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -91,7 +93,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
 
         //adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
         // Method to get a list of CoffeeMachines
-        getCoffeeListFromAPI();
+       // getCoffeeListFromAPI();
 
 
         adapter.setmListener(PageRecViewFragment.this);
@@ -106,14 +108,51 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
     private void setUpCorrectAdapter() {
         if (mPage == 1) {
             adapter = new MySaleRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
+            getSaleGoodsListFromAPI();
         } else if (mPage == 2) {
             adapter = new MyProducedRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
+            getCoffeeListFromAPI();
         } else if (mPage == 3) {
             adapter = new MyRawMaterialsRecyclerViewAdapter (new ArrayList<CoffeeMachine>());
+            getCoffeeListFromAPI();
         } else {
             adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
+            getCoffeeListFromAPI();
         }
     }
+
+    private void getSaleGoodsListFromAPI() {
+        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+
+        Call <SaleGoods> callSaleGoods = service.listSaleGoods("","");
+
+        callSaleGoods.enqueue(new Callback<SaleGoods>() {
+            @Override
+            public void onResponse(Call<SaleGoods> call, Response<SaleGoods> response) {
+                if (response.isSuccessful()) {
+                    Log.d(LOG_TAG, response.code() + "");
+
+                    List<ProductData> sales = response.body().getResult();
+                    // Here is the real list
+                    adapter.updateList(sales);
+
+                    textView.setText(textView.getText() + " \n\n " + sales.size() + "\n\n");
+                } else
+                    textView.setText(response.toString());
+                textView.setMovementMethod(new ScrollingMovementMethod());
+            }
+
+            @Override
+            public void onFailure(Call<SaleGoods> call, Throwable t) {
+
+                call.cancel();
+                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+
+            }
+        });
+    }
+
+
 
     private void getCoffeeListFromAPI() {
 

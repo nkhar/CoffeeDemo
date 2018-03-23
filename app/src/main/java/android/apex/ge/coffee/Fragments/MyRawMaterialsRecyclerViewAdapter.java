@@ -41,7 +41,7 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
             return;
         }
 
-        holder.saleListResult = value;
+        holder.rawMaterialsListResult = value;
 
         holder.mCoffeeMachineAccTextView.setText(value.getAcc());
         holder.mCoffeeMachineNameTextView.setText("");
@@ -75,7 +75,7 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
         public final TextView mCoffeeMachineAccTextView;
         public final TextView mCoffeeMachineNameTextView;
         public final TextView mCoffeeMachineAddressTextView;
-        public CoffeeMachine saleListResult;
+        public CoffeeMachine rawMaterialsListResult;
 
         public ViewHolder(View itemView) {
             // Stores the itemView in a public final member variable that can be used

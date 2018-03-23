@@ -105,7 +105,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
 
                 CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
-                Call <CoffeeMachineList> coffees = service.listCoffeeMachines(null);
+                Call <CoffeeMachineList> coffees = service.listCoffeeMachines("1610003000");
 
 
 

@@ -15,14 +15,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit;
 
+    /*
+    http://support.apex.ge:83/
+    user:"rpl"
+    password: "9"
+     */
     public static Retrofit getRetrofitClient() {
         OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(new BasicAuthInterceptor("rpl", "9"))
+                .addInterceptor(new BasicAuthInterceptor("sa", "client"))
                 .build();
 
         retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://support.apex.ge:83/")
+                .baseUrl("http://92.241.94.50:8181/")
                 .client(client)
                 .build();
 
