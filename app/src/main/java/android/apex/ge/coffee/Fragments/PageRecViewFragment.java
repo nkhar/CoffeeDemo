@@ -107,7 +107,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
 
     private void setUpCorrectAdapter() {
         if (mPage == 1) {
-            adapter = new MySaleRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
+            adapter = new MySaleRecyclerViewAdapter(new ArrayList<ProductData>());
             getSaleGoodsListFromAPI();
         } else if (mPage == 2) {
             adapter = new MyProducedRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
@@ -124,7 +124,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
     private void getSaleGoodsListFromAPI() {
         CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
-        Call <SaleGoods> callSaleGoods = service.listSaleGoods("","");
+        Call <SaleGoods> callSaleGoods = service.listSaleGoods("1610003000","1610007800");
 
         callSaleGoods.enqueue(new Callback<SaleGoods>() {
             @Override

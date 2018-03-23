@@ -2,6 +2,7 @@ package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
+import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,11 +19,11 @@ import java.util.List;
  * CoffeeMachineDetailActivity.
  */
 
-public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRecyclerViewAdapter.ViewHolder, CoffeeMachine>{
+public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRecyclerViewAdapter.ViewHolder, ProductData>{
 
     protected final String LOG_TAG = "MySaleRecyclerVAdapter";
 
-    public MySaleRecyclerViewAdapter(List<CoffeeMachine> items) {
+    public MySaleRecyclerViewAdapter(List<ProductData> items) {
         super(items);
         Log.d(LOG_TAG, "We are in MySaleRecyclerViewAdapter   constructor   ");
     }
@@ -35,7 +36,7 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final CoffeeMachine value) {
+    public void onBindViewHolder(final ViewHolder holder, final ProductData value) {
 
         if(value == null) {
             return;
@@ -43,9 +44,9 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
 
         holder.saleListResult = value;
 
-        holder.mCoffeeMachineAccTextView.setText(value.getAcc());
-        //holder.mCoffeeMachineNameTextView.setText(value.getName());
-        //holder.mCoffeeMachineAddressTextView.setText(value.getAddress());
+        holder.mCoffeeMachineAccTextView.setText(value.getProdPPID());
+        holder.mCoffeeMachineNameTextView.setText(value.getName());
+        holder.mCoffeeMachineAddressTextView.setText(value.getbCode());
         final ILibObjectCrud listener = getmListener();
         if (listener != null) {
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -74,9 +75,9 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
         // for any view that will be set as you render a row
         public final View mView;
         public final TextView mCoffeeMachineAccTextView;
-        //public final TextView mCoffeeMachineNameTextView;
-        //public final TextView mCoffeeMachineAddressTextView;
-        public CoffeeMachine saleListResult;
+        public final TextView mCoffeeMachineNameTextView;
+        public final TextView mCoffeeMachineAddressTextView;
+        public ProductData saleListResult;
 
         public ViewHolder(View itemView) {
             // Stores the itemView in a public final member variable that can be used
@@ -84,8 +85,8 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
             super(itemView);
             mView = itemView;
             mCoffeeMachineAccTextView = itemView.findViewById(R.id.page_sale_ProdPPID);
-           // mCoffeeMachineNameTextView = itemView.findViewById(R.id.page_sale_Name);
-           // mCoffeeMachineAddressTextView = itemView.findViewById(R.id.page_sale_BCode);
+            mCoffeeMachineNameTextView = itemView.findViewById(R.id.page_sale_Name);
+            mCoffeeMachineAddressTextView = itemView.findViewById(R.id.page_sale_BCode);
         }
 
     }
