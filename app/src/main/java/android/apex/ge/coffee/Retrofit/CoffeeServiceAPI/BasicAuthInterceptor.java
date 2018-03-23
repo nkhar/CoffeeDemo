@@ -1,4 +1,4 @@
-package android.apex.ge.coffee.Retrofit;
+package android.apex.ge.coffee.Retrofit.CoffeeServiceAPI;
 
 import java.io.IOException;
 import okhttp3.Credentials;

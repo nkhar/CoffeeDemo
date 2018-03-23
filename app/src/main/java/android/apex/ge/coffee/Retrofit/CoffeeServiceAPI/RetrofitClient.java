@@ -1,4 +1,6 @@
-package android.apex.ge.coffee.Retrofit;
+package android.apex.ge.coffee.Retrofit.CoffeeServiceAPI;
+
+import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.BasicAuthInterceptor;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

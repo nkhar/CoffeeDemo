@@ -1,7 +1,19 @@
-package android.apex.ge.coffee.Retrofit;
+package android.apex.ge.coffee.Retrofit.CoffeeServiceAPI;
 
+import android.apex.ge.coffee.Retrofit.CoffeeDocList;
+import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
+import android.apex.ge.coffee.Retrofit.DocGoods;
+import android.apex.ge.coffee.Retrofit.LastCoffeeCupsCount;
 import android.apex.ge.coffee.Retrofit.Model.SaveCoffeePreOrder;
 import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
+import android.apex.ge.coffee.Retrofit.PreOrderAccounts;
+import android.apex.ge.coffee.Retrofit.PreorderGoods;
+import android.apex.ge.coffee.Retrofit.ProducedGoods;
+import android.apex.ge.coffee.Retrofit.RawMaterials;
+import android.apex.ge.coffee.Retrofit.Repo;
+import android.apex.ge.coffee.Retrofit.SaleGoods;
+import android.apex.ge.coffee.Retrofit.SaveCoffeePreOrderResponse;
+import android.apex.ge.coffee.Retrofit.SaveCoffeeStatsResponse;
 
 import java.util.Date;
 import java.util.List;
