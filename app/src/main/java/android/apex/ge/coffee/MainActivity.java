@@ -1,5 +1,6 @@
 package android.apex.ge.coffee;
 
+import android.apex.ge.coffee.Fragments.DocumentFragment;
 import android.apex.ge.coffee.Fragments.MachineFragment;
 import android.apex.ge.coffee.Fragments.PreOrderFragment;
 import android.support.annotation.NonNull;
@@ -71,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, preOrderFragment, "PREORDER_TAG").commit();
         } else if (id == R.id.nav_third) {
             Log.d(LOG_TAG, "third item was clicked");
+
+            // Insert the fragment by replacing FrameLayout.
+            DocumentFragment documentFragment = new DocumentFragment();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container_main, documentFragment, "Document_TAG").commit();
         } else if (id == R.id.nav_share) {
             Log.d(LOG_TAG, "share item was clicked");
         } else if (id == R.id.nav_send) {
