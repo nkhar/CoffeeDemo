@@ -1,7 +1,7 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
-import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
+import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,11 +18,11 @@ import java.util.List;
  * CoffeeMachineDetailActivity.
  */
 
-public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<MyRawMaterialsRecyclerViewAdapter.ViewHolder, CoffeeMachine> {
+public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<MyRawMaterialsRecyclerViewAdapter.ViewHolder, ProductData> {
 
     protected final String LOG_TAG = "MyRMaterialsRecAdapter";
 
-    public MyRawMaterialsRecyclerViewAdapter(List<CoffeeMachine> items) {
+    public MyRawMaterialsRecyclerViewAdapter(List<ProductData> items) {
         super(items);
         Log.d(LOG_TAG, "We are in MyRawMaterialsRecyclerViewAdapter   constructor   ");
     }
@@ -35,7 +35,7 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final CoffeeMachine value) {
+    public void onBindViewHolder(final ViewHolder holder, final ProductData value) {
 
         if (value == null) {
             return;
@@ -43,9 +43,13 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
 
         holder.rawMaterialsListResult = value;
 
-        holder.mCoffeeMachineAccTextView.setText(value.getAcc());
-        holder.mCoffeeMachineNameTextView.setText("");
-        holder.mCoffeeMachineAddressTextView.setText(value.getAddress());
+        holder.mRawMaterialsProPPIDTextView.setText(value.getProdPPID());
+        holder.mRawMaterialsNameTextView.setText(value.getName());
+        holder.mRawMaterialsBCodeTextView.setText(value.getbCode());
+        holder.mRawMaterialsInCodeTextView.setText(value.getInCode());
+        holder.mRawMaterialsPackCountTextView.setText(String.valueOf(value.getPackCount()));
+        holder.mRawMaterialsRCountTextView.setText(String.valueOf(value.getrCount()));
+        holder.mRawMaterialsVanRCountTextView.setText(String.valueOf(value.getVanRCount()));
         final ILibObjectCrud listener = getmListener();
         if (listener != null) {
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -72,19 +76,27 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public final View mView;
-        public final TextView mCoffeeMachineAccTextView;
-        public final TextView mCoffeeMachineNameTextView;
-        public final TextView mCoffeeMachineAddressTextView;
-        public CoffeeMachine rawMaterialsListResult;
+        public final TextView mRawMaterialsProPPIDTextView;
+        public final TextView mRawMaterialsNameTextView;
+        public final TextView mRawMaterialsBCodeTextView;
+        public final TextView mRawMaterialsInCodeTextView;
+        public final TextView mRawMaterialsPackCountTextView;
+        public final TextView mRawMaterialsRCountTextView;
+        public final TextView mRawMaterialsVanRCountTextView;
+        public ProductData rawMaterialsListResult;
 
         public ViewHolder(View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
             mView = itemView;
-            mCoffeeMachineAccTextView = itemView.findViewById(R.id.page_raw_materials_ProdPPID);
-            mCoffeeMachineNameTextView = itemView.findViewById(R.id.page_raw_materials_Name);
-            mCoffeeMachineAddressTextView = itemView.findViewById(R.id.page_raw_materials_BCode);
+            mRawMaterialsProPPIDTextView = itemView.findViewById(R.id.page_raw_materials_ProdPPID);
+            mRawMaterialsNameTextView = itemView.findViewById(R.id.page_raw_materials_Name);
+            mRawMaterialsBCodeTextView = itemView.findViewById(R.id.page_raw_materials_BCode);
+            mRawMaterialsInCodeTextView = itemView.findViewById(R.id.page_raw_materials_InCode);
+            mRawMaterialsPackCountTextView = itemView.findViewById(R.id.page_raw_materials_PackCount);
+            mRawMaterialsRCountTextView = itemView.findViewById(R.id.page_raw_materials_RCount);
+            mRawMaterialsVanRCountTextView = itemView.findViewById(R.id.page_raw_materials_VanRCount);
         }
 
     }

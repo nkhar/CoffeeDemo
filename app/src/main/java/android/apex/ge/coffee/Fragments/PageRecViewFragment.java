@@ -7,6 +7,7 @@ import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.Retrofit.ProducedGoods;
+import android.apex.ge.coffee.Retrofit.RawMaterials;
 import android.apex.ge.coffee.Retrofit.SaleGoods;
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -114,12 +115,42 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
             adapter = new MyProducedRecyclerViewAdapter(new ArrayList<ProductData>());
             getProducedGoodsListFromAPI();
         } else if (mPage == 3) {
-            adapter = new MyRawMaterialsRecyclerViewAdapter (new ArrayList<CoffeeMachine>());
-            getCoffeeListFromAPI();
+            adapter = new MyRawMaterialsRecyclerViewAdapter (new ArrayList<ProductData>());
+            getRawMaterialsListFromAPI();
         } else {
             adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
             getCoffeeListFromAPI();
         }
+    }
+
+    private void getRawMaterialsListFromAPI() {
+        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+
+        Call <RawMaterials> callRawMaterials = service.listRawMaterials("1610003000","1610007800");
+
+        callRawMaterials.enqueue(new Callback<RawMaterials>() {
+            @Override
+            public void onResponse(Call<RawMaterials> call, Response<RawMaterials> response) {
+                if (response.isSuccessful()) {
+                    Log.d(LOG_TAG, response.code() + "");
+
+                    List<ProductData> rawMaterials = response.body().getResult();
+                    // Here is the real list
+                    adapter.updateList(rawMaterials);
+
+                    textView.setText(textView.getText() + " \n\n " + rawMaterials.size() + "\n\n");
+                } else
+                    textView.setText(response.toString());
+                textView.setMovementMethod(new ScrollingMovementMethod());
+
+            }
+
+            @Override
+            public void onFailure(Call<RawMaterials> call, Throwable t) {
+                call.cancel();
+                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+            }
+        });
     }
 
     private void getProducedGoodsListFromAPI() {
