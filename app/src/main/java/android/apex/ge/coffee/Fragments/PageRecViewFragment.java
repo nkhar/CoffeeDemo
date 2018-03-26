@@ -115,8 +115,9 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
             adapter = new MyRawMaterialsRecyclerViewAdapter (new ArrayList<ProductData>());
             getRawMaterialsListFromAPI(coffeeService);
         } else {
-            adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
-            getCoffeeListFromAPI(coffeeService);
+            return;
+           /* adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
+            getCoffeeListFromAPI(coffeeService);*/
         }
     }
 

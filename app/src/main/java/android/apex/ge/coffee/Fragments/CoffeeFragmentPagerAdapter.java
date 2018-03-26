@@ -8,13 +8,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 /**
  * Created by Nika on 23/03/2018.
  * This is a FragmentPagerAdapter for the various tabs in CoffeeMachineDetailActivity
+ *
  * @see android.apex.ge.coffee.CoffeeMachineDetailActivity
  */
 
-public class CoffeeFragmentPagerAdapter extends FragmentPagerAdapter{
+public class CoffeeFragmentPagerAdapter extends FragmentPagerAdapter {
 
     final int PAGE_COUNT = 4;
-    private String tabTitles[] = new String[] { "Sale", "Sale Produced", "Raw Materials", "Money" };
+    private String tabTitles[] = new String[]{"Sale", "Sale Produced", "Raw Materials", "Money"};
     private Context context;
 
     public CoffeeFragmentPagerAdapter(FragmentManager fm, Context context) {
@@ -24,7 +25,19 @@ public class CoffeeFragmentPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        return PageRecViewFragment.newInstance(position+1);
+        switch (position) {
+            case 0:
+                return  PageRecViewFragment.newInstance(position + 1);
+            case 1:
+                return PageRecViewFragment.newInstance(position + 1);
+            case 2:
+                return PageRecViewFragment.newInstance(position + 1);
+            case 3:
+                return PageMoneyFragment.newInstance(position + 1);
+            default:
+                break;
+        }
+        return null;
     }
 
     @Override
