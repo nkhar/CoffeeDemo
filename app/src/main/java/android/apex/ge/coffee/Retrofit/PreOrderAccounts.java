@@ -1,5 +1,6 @@
 package android.apex.ge.coffee.Retrofit;
 
+import android.apex.ge.coffee.Retrofit.Model.AccountInfo;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.Retrofit.Model.ResponseStatus;
 
@@ -20,7 +21,7 @@ public class PreOrderAccounts {
     private ResponseStatus responseStatus;
     @SerializedName("Result")
     @Expose
-    private List<ProductData> result = null;
+    private List<AccountInfo> result = null;
 
     public ResponseStatus getResponseStatus() {
         return responseStatus;
@@ -30,11 +31,11 @@ public class PreOrderAccounts {
         this.responseStatus = responseStatus;
     }
 
-    public List<ProductData> getResult() {
+    public List<AccountInfo> getResult() {
         return result;
     }
 
-    public void setResult(List<ProductData> result) {
+    public void setResult(List<AccountInfo> result) {
         this.result = result;
     }
 
