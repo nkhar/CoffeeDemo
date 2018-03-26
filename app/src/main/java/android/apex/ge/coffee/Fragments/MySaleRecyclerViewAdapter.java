@@ -1,7 +1,6 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
-import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -44,9 +43,13 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
 
         holder.saleListResult = value;
 
-        holder.mCoffeeMachineAccTextView.setText(value.getProdPPID());
-        holder.mCoffeeMachineNameTextView.setText(value.getName());
-        holder.mCoffeeMachineAddressTextView.setText(value.getbCode());
+        holder.mSaleProPPIDTextView.setText(value.getProdPPID());
+        holder.mSaleNameTextView.setText(value.getName());
+        holder.mSaleBCodeTextView.setText(value.getbCode());
+        holder.mSaleInCodeTextView.setText(value.getInCode());
+        holder.mSalePackCountTextView.setText(String.valueOf(value.getPackCount()));
+        holder.mSaleRCountTextView.setText(String.valueOf(value.getrCount()));
+        holder.mSaleVanRCountTextView.setText(String.valueOf(value.getVanRCount()));
         final ILibObjectCrud listener = getmListener();
         if (listener != null) {
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -74,9 +77,13 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public final View mView;
-        public final TextView mCoffeeMachineAccTextView;
-        public final TextView mCoffeeMachineNameTextView;
-        public final TextView mCoffeeMachineAddressTextView;
+        public final TextView mSaleProPPIDTextView;
+        public final TextView mSaleNameTextView;
+        public final TextView mSaleBCodeTextView;
+        public final TextView mSaleInCodeTextView;
+        public final TextView mSalePackCountTextView;
+        public final TextView mSaleRCountTextView;
+        public final TextView mSaleVanRCountTextView;
         public ProductData saleListResult;
 
         public ViewHolder(View itemView) {
@@ -84,9 +91,13 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
             // to access the context from any ViewHolder instance.
             super(itemView);
             mView = itemView;
-            mCoffeeMachineAccTextView = itemView.findViewById(R.id.page_sale_ProdPPID);
-            mCoffeeMachineNameTextView = itemView.findViewById(R.id.page_sale_Name);
-            mCoffeeMachineAddressTextView = itemView.findViewById(R.id.page_sale_BCode);
+            mSaleProPPIDTextView = itemView.findViewById(R.id.page_sale_ProdPPID);
+            mSaleNameTextView = itemView.findViewById(R.id.page_sale_Name);
+            mSaleBCodeTextView = itemView.findViewById(R.id.page_sale_BCode);
+            mSaleInCodeTextView = itemView.findViewById(R.id.page_sale_InCode);
+            mSalePackCountTextView = itemView.findViewById(R.id.page_sale_PackCount);
+            mSaleRCountTextView = itemView.findViewById(R.id.page_sale_RCount);
+            mSaleVanRCountTextView = itemView.findViewById(R.id.page_sale_VanRCount);
         }
 
     }

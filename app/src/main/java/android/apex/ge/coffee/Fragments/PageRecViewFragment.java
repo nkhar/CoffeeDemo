@@ -6,6 +6,7 @@ import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
+import android.apex.ge.coffee.Retrofit.ProducedGoods;
 import android.apex.ge.coffee.Retrofit.SaleGoods;
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -110,8 +111,8 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
             adapter = new MySaleRecyclerViewAdapter(new ArrayList<ProductData>());
             getSaleGoodsListFromAPI();
         } else if (mPage == 2) {
-            adapter = new MyProducedRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
-            getCoffeeListFromAPI();
+            adapter = new MyProducedRecyclerViewAdapter(new ArrayList<ProductData>());
+            getProducedGoodsListFromAPI();
         } else if (mPage == 3) {
             adapter = new MyRawMaterialsRecyclerViewAdapter (new ArrayList<CoffeeMachine>());
             getCoffeeListFromAPI();
@@ -119,6 +120,37 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
             adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
             getCoffeeListFromAPI();
         }
+    }
+
+    private void getProducedGoodsListFromAPI() {
+        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+
+        Call <ProducedGoods> callProducedGoods = service.listProducedGoods("1610003000","1610007800");
+
+        callProducedGoods.enqueue(new Callback<ProducedGoods>() {
+            @Override
+            public void onResponse(Call<ProducedGoods> call, Response<ProducedGoods> response) {
+                if (response.isSuccessful()) {
+                    Log.d(LOG_TAG, response.code() + "");
+
+                    List<ProductData> produced = response.body().getResult();
+                    // Here is the real list
+                    adapter.updateList(produced);
+
+                    textView.setText(textView.getText() + " \n\n " + produced.size() + "\n\n");
+                } else
+                    textView.setText(response.toString());
+                textView.setMovementMethod(new ScrollingMovementMethod());
+            }
+
+            @Override
+            public void onFailure(Call<ProducedGoods> call, Throwable t) {
+
+                call.cancel();
+                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+
+            }
+        });
     }
 
     private void getSaleGoodsListFromAPI() {
