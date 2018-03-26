@@ -91,11 +91,8 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
 
-        setUpCorrectAdapter();
-
-        //adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
-        // Method to get a list of CoffeeMachines
-       // getCoffeeListFromAPI();
+        CoffeeService coffeeService = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        setUpCorrectAdapter(coffeeService);
 
 
         adapter.setmListener(PageRecViewFragment.this);
@@ -107,25 +104,23 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
         return view;
     }
 
-    private void setUpCorrectAdapter() {
+    private void setUpCorrectAdapter(CoffeeService coffeeService) {
         if (mPage == 1) {
             adapter = new MySaleRecyclerViewAdapter(new ArrayList<ProductData>());
-            getSaleGoodsListFromAPI();
+            getSaleGoodsListFromAPI(coffeeService);
         } else if (mPage == 2) {
             adapter = new MyProducedRecyclerViewAdapter(new ArrayList<ProductData>());
-            getProducedGoodsListFromAPI();
+            getProducedGoodsListFromAPI(coffeeService);
         } else if (mPage == 3) {
             adapter = new MyRawMaterialsRecyclerViewAdapter (new ArrayList<ProductData>());
-            getRawMaterialsListFromAPI();
+            getRawMaterialsListFromAPI(coffeeService);
         } else {
             adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
-            getCoffeeListFromAPI();
+            getCoffeeListFromAPI(coffeeService);
         }
     }
 
-    private void getRawMaterialsListFromAPI() {
-        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
-
+    private void getRawMaterialsListFromAPI(CoffeeService service) {
         Call <RawMaterials> callRawMaterials = service.listRawMaterials("1610003000","1610007800");
 
         callRawMaterials.enqueue(new Callback<RawMaterials>() {
@@ -153,9 +148,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
         });
     }
 
-    private void getProducedGoodsListFromAPI() {
-        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
-
+    private void getProducedGoodsListFromAPI(CoffeeService service) {
         Call <ProducedGoods> callProducedGoods = service.listProducedGoods("1610003000","1610007800");
 
         callProducedGoods.enqueue(new Callback<ProducedGoods>() {
@@ -184,9 +177,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
         });
     }
 
-    private void getSaleGoodsListFromAPI() {
-        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
-
+    private void getSaleGoodsListFromAPI(CoffeeService service) {
         Call <SaleGoods> callSaleGoods = service.listSaleGoods("1610003000","1610007800");
 
         callSaleGoods.enqueue(new Callback<SaleGoods>() {
@@ -217,10 +208,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
 
 
 
-    private void getCoffeeListFromAPI() {
-
-        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
-
+    private void getCoffeeListFromAPI(CoffeeService service) {
         Call<CoffeeMachineList> callCoffees = service.listCoffeeMachines(null);
 
         callCoffees.enqueue(new Callback<CoffeeMachineList>() {
