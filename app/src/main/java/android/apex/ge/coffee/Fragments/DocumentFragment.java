@@ -94,30 +94,40 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+                getPreOrderGoodsFromAPI();
+            }
+        });
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
-                Calendar calendar = new GregorianCalendar(2018, 02, 26);
-                System.out.println(sdf.format(calendar.getTime()));
+        return view;
 
-                //Log.d(LOG_TAG, sdf.format(calendar.getTime()));
+    }
+
+    private void getPreOrderGoodsFromAPI() {
+        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
+        Calendar calendar = new GregorianCalendar(2018, 02, 26);
+        System.out.println(sdf.format(calendar.getTime()));
+
+        //Log.d(LOG_TAG, sdf.format(calendar.getTime()));
 
                 /*
-                1610000100
-                1610007800
+                WarehouseAcc: 1610000100
+                CoffeeAcc: 1610007800
+                VanAcc: 1610007800
                  */
-                Call<PreorderGoods> preOrderGoods = service.listPreorderGoods("1610000100", "1610007800", sdf.format(calendar.getTime()));
-                //System.out.println(calendar.getTime().toString());
+        Call<PreorderGoods> preOrderGoods = service.listPreorderGoods("1610000100", "1610007800", sdf.format(calendar.getTime()));
+        //System.out.println(calendar.getTime().toString());
 
 
-                preOrderGoods.enqueue(new Callback<PreorderGoods>() {
-                    @Override
-                    public void onResponse(Call<PreorderGoods> call, Response<PreorderGoods> response) {
-                        if (response.isSuccessful()) {
-                            Log.d(LOG_TAG, response.code() + "");
+        preOrderGoods.enqueue(new Callback<PreorderGoods>() {
+            @Override
+            public void onResponse(Call<PreorderGoods> call, Response<PreorderGoods> response) {
+                if (response.isSuccessful()) {
+                    Log.d(LOG_TAG, response.code() + "");
 
                            /* String displayCoffeeResponse = "";*/
-                            List<ProductData> goods = response.body().getResult();
+                    List<ProductData> goods = response.body().getResult();
                             /*
                             This is just for TESTING
                             DON'T FORGET
@@ -125,31 +135,27 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
                             DELETE THIS
                             AND USE CORRECT ADAPTER
                              */
-                            adapter = new MyProducedRecyclerViewAdapter(goods);
-                            adapter.setmListener(DocumentFragment.this);
-                            DocumentFragment.this.recyclerView.setAdapter(adapter);
+                    adapter = new MyProducedRecyclerViewAdapter(goods);
+                    adapter.setmListener(DocumentFragment.this);
+                    DocumentFragment.this.recyclerView.setAdapter(adapter);
                            /* displayCoffeeResponse += "\n    " + kofe.size() + " \n";*/
 
                            /* for (CoffeeMachineList.Result coffeeResult : kofe) {
                                 displayCoffeeResponse += coffeeResult.toString();
 //                                Log.d(LOG_TAG, coffeeResult.getAcc().toString());
                             }*/
-                            textView.setText(adapter.getItemCount() + " \n\n " + goods.size() + "\n\n");
-                        } else
-                            textView.setText(response.toString());
-                        textView.setMovementMethod(new ScrollingMovementMethod());
-                    }
+                    textView.setText(adapter.getItemCount() + " \n\n " + goods.size() + "\n\n");
+                } else
+                    textView.setText(response.toString());
+                textView.setMovementMethod(new ScrollingMovementMethod());
+            }
 
-                    @Override
-                    public void onFailure(Call<PreorderGoods> call, Throwable t) {
-                        call.cancel();
-                        textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
-                    }
-                });
+            @Override
+            public void onFailure(Call<PreorderGoods> call, Throwable t) {
+                call.cancel();
+                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
             }
         });
-
-        return view;
 
     }
 
