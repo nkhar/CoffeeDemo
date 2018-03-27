@@ -53,7 +53,7 @@ public interface CoffeeService {
     Call <RawMaterials> listRawMaterials(@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
 
     @GET("CoffeeService/GetPreorderGoods.json")
-    Call <PreorderGoods> listPreorderGoods(@Query("WarehouseAcc") String warehouseAcc, @Query("VanAcc") String vanAcc, @Query("BDate") Date bDate); //Not sure about Date type.
+    Call <PreorderGoods> listPreorderGoods(@Query("WarehouseAcc") String warehouseAcc, @Query("VanAcc") String vanAcc, @Query("BDate") String bDate); //Not sure about Date type.
 
     @GET("CoffeeService/GetPreOrderAccounts.json")
     Call <PreOrderAccounts> listPreOrderAccounts();

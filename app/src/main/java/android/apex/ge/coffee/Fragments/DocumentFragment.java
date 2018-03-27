@@ -23,7 +23,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,7 +39,7 @@ import retrofit2.Response;
  * This class is used to display Documents item from NavigationDrawer
  */
 
-public class DocumentFragment extends Fragment implements ILibObjectCrud{
+public class DocumentFragment extends Fragment implements ILibObjectCrud {
 
     protected final String LOG_TAG = "DocumentFragment";
 
@@ -92,14 +96,24 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud{
             public void onClick(View v) {
                 CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
-                Call<PreorderGoods> preOrderGoods = service.listPreorderGoods("1610007800", "1610007800", new Date(18, 03, 18));
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
+                Calendar calendar = new GregorianCalendar(2018, 02, 26);
+                System.out.println(sdf.format(calendar.getTime()));
 
+                //Log.d(LOG_TAG, sdf.format(calendar.getTime()));
+
+                /*
+                1610000100
+                1610007800
+                 */
+                Call<PreorderGoods> preOrderGoods = service.listPreorderGoods("1610000100", "1610007800", sdf.format(calendar.getTime()));
+                //System.out.println(calendar.getTime().toString());
 
 
                 preOrderGoods.enqueue(new Callback<PreorderGoods>() {
                     @Override
                     public void onResponse(Call<PreorderGoods> call, Response<PreorderGoods> response) {
-                        if(response.isSuccessful()) {
+                        if (response.isSuccessful()) {
                             Log.d(LOG_TAG, response.code() + "");
 
                            /* String displayCoffeeResponse = "";*/
@@ -121,7 +135,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud{
 //                                Log.d(LOG_TAG, coffeeResult.getAcc().toString());
                             }*/
                             textView.setText(adapter.getItemCount() + " \n\n " + goods.size() + "\n\n");
-                        }else
+                        } else
                             textView.setText(response.toString());
                         textView.setMovementMethod(new ScrollingMovementMethod());
                     }
@@ -138,8 +152,6 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud{
         return view;
 
     }
-
-
 
 
     @Override
