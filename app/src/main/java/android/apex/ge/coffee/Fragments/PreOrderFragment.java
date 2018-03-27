@@ -1,11 +1,9 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
-import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.Model.AccountInfo;
-import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.Retrofit.PreOrderAccounts;
 import android.apex.ge.coffee.Retrofit.PreorderGoods;
@@ -26,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -148,9 +145,6 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud{
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
         Calendar calendar = new GregorianCalendar(2018, 02, 26);
-        System.out.println(sdf.format(calendar.getTime()));
-
-        //Log.d(LOG_TAG, sdf.format(calendar.getTime()));
 
                 /*
                 WarehouseAcc: 1610000100
@@ -158,7 +152,6 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud{
                 VanAcc: 1610007800
                  */
         Call<PreorderGoods> preOrderGoods = service.listPreorderGoods("1610000100", "1610007800", sdf.format(calendar.getTime()));
-        //System.out.println(calendar.getTime().toString());
 
 
         preOrderGoods.enqueue(new Callback<PreorderGoods>() {
@@ -167,7 +160,6 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud{
                 if (response.isSuccessful()) {
                     Log.d(LOG_TAG, response.code() + "");
 
-                           /* String displayCoffeeResponse = "";*/
                     List<ProductData> goods = response.body().getResult();
                             /*
                             This is just for TESTING
@@ -179,12 +171,6 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud{
                     adapter = new MyProducedRecyclerViewAdapter(goods);
                     adapter.setmListener(PreOrderFragment.this);
                     PreOrderFragment.this.recyclerView.setAdapter(adapter);
-                           /* displayCoffeeResponse += "\n    " + kofe.size() + " \n";*/
-
-                           /* for (CoffeeMachineList.Result coffeeResult : kofe) {
-                                displayCoffeeResponse += coffeeResult.toString();
-//                                Log.d(LOG_TAG, coffeeResult.getAcc().toString());
-                            }*/
                     textView.setText(adapter.getItemCount() + " \n\n " + goods.size() + "\n\n");
                 } else
                     textView.setText(response.toString());
