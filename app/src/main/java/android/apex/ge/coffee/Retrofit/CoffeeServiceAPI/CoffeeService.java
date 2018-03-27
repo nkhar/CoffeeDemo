@@ -59,7 +59,7 @@ public interface CoffeeService {
     Call <PreOrderAccounts> listPreOrderAccounts();
 
     @GET("CoffeeService/GetCoffeeDocs.json")
-    Call<CoffeeDocList> listCoffeeDocs(@Query("DDate") Date dDate, @Query("VanAcc") String vanAcc); //Not sure about Date type.
+    Call<CoffeeDocList> listCoffeeDocs(@Query("DDate") String dDate, @Query("VanAcc") String vanAcc); //Not sure about Date type.
 
     @GET("CoffeeService/GetDocGoods.json")
     Call<DocGoods> listDocGoods(@Query("DocsID") String docsID);

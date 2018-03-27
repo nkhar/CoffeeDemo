@@ -44,6 +44,69 @@ public class CoffeeDoc {
     @Expose
     private String waybillNum;
 
+    public String getDocsID() {
+        return docsID;
+    }
+
+    public void setDocsID(String docsID) {
+        this.docsID = docsID;
+    }
+
+    public int getDocType() {
+        return docType;
+    }
+
+    public void setDocType(int docType) {
+        this.docType = docType;
+    }
+
+    public Date getdDate() {
+        return dDate;
+    }
+
+    public void setdDate(Date dDate) {
+        this.dDate = dDate;
+    }
+
+    public String getNumberIn() {
+        return numberIn;
+    }
+
+    public void setNumberIn(String numberIn) {
+        this.numberIn = numberIn;
+    }
+
+    public String getCorespondAcc() {
+        return corespondAcc;
+    }
+
+    public void setCorespondAcc(String corespondAcc) {
+        this.corespondAcc = corespondAcc;
+    }
+
+    public String getCorespondName() {
+        return corespondName;
+    }
+
+    public void setCorespondName(String corespondName) {
+        this.corespondName = corespondName;
+    }
+
+    public float getvG() {
+        return vG;
+    }
+
+    public void setvG(float vG) {
+        this.vG = vG;
+    }
+
+    public String getWaybillNum() {
+        return waybillNum;
+    }
+
+    public void setWaybillNum(String waybillNum) {
+        this.waybillNum = waybillNum;
+    }
 
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
