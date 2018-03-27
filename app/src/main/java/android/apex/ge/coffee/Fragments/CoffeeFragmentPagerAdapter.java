@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentPagerAdapter;
  * This is a FragmentPagerAdapter for the various tabs in CoffeeMachineDetailActivity
  *
  * @see android.apex.ge.coffee.CoffeeMachineDetailActivity
+ * @see PageRecViewFragment
+ * @see PageMoneyFragment
  */
 
 public class CoffeeFragmentPagerAdapter extends FragmentPagerAdapter {
