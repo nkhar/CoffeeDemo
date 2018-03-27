@@ -90,47 +90,51 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+                getPreOrderAccountsFromAPI();
+            }
+        });
 
-                Call<PreOrderAccounts> preOrderAccounts = service.listPreOrderAccounts();
+        return view;
+
+    }
+
+    private void getPreOrderAccountsFromAPI() {
+        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+
+        Call<PreOrderAccounts> preOrderAccounts = service.listPreOrderAccounts();
 
 
 
 
-                preOrderAccounts.enqueue(new Callback<PreOrderAccounts>() {
-                    @Override
-                    public void onResponse(Call<PreOrderAccounts> call, Response<PreOrderAccounts> response) {
-                        if(response.isSuccessful()) {
-                            Log.d(LOG_TAG, response.code() + "");
+        preOrderAccounts.enqueue(new Callback<PreOrderAccounts>() {
+            @Override
+            public void onResponse(Call<PreOrderAccounts> call, Response<PreOrderAccounts> response) {
+                if(response.isSuccessful()) {
+                    Log.d(LOG_TAG, response.code() + "");
 
                            /* String displayCoffeeResponse = "";*/
-                            List<AccountInfo> accounts = response.body().getResult();
-                            adapter = new MyPreOrderAccountsRecyclerViewAdapter(accounts);
-                            adapter.setmListener(PreOrderFragment.this);
-                            PreOrderFragment.this.recyclerView.setAdapter(adapter);
+                    List<AccountInfo> accounts = response.body().getResult();
+                    adapter = new MyPreOrderAccountsRecyclerViewAdapter(accounts);
+                    adapter.setmListener(PreOrderFragment.this);
+                    PreOrderFragment.this.recyclerView.setAdapter(adapter);
                            /* displayCoffeeResponse += "\n    " + kofe.size() + " \n";*/
 
                            /* for (CoffeeMachineList.Result coffeeResult : kofe) {
                                 displayCoffeeResponse += coffeeResult.toString();
 //                                Log.d(LOG_TAG, coffeeResult.getAcc().toString());
                             }*/
-                            textView.setText(adapter.getItemCount() + " \n\n " + accounts.size() + "\n\n");
-                        }else
-                            textView.setText(response.toString());
-                        textView.setMovementMethod(new ScrollingMovementMethod());
-                    }
+                    textView.setText(adapter.getItemCount() + " \n\n " + accounts.size() + "\n\n");
+                }else
+                    textView.setText(response.toString());
+                textView.setMovementMethod(new ScrollingMovementMethod());
+            }
 
-                    @Override
-                    public void onFailure(Call<PreOrderAccounts> call, Throwable t) {
-                        call.cancel();
-                        textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
-                    }
-                });
+            @Override
+            public void onFailure(Call<PreOrderAccounts> call, Throwable t) {
+                call.cancel();
+                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
             }
         });
-
-        return view;
-
     }
 
 
