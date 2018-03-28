@@ -1,6 +1,9 @@
 package android.apex.ge.coffee.Fragments;
 
-
+/**
+ * Created by Nika on 16/03/2018.
+ * This i abstract class that speific recyclerview adapters will use
+ */
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,16 +13,12 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * Created by Nika on 16/03/2018.
- * This is abstract class that specific RecyclerView adapters will use
- */
-/**
  * {@link RecyclerView.Adapter} that can display a {@link List of coffee machibnes} and makes a call to the
  * specified {@link MachineFragment}.
  */
 
 
-public abstract class RecyclerViewListAdapter<T extends RecyclerView.ViewHolder, E> extends RecyclerView.Adapter<T> {
+public  abstract class RecyclerViewListAdapter<T extends RecyclerView.ViewHolder, E> extends RecyclerView.Adapter<T> {
     private List<E> mValues;
     private View.OnClickListener mViewClick;
     private ILibObjectCrud<E> mListener;
@@ -42,7 +41,7 @@ public abstract class RecyclerViewListAdapter<T extends RecyclerView.ViewHolder,
 
     @Override
     public void onBindViewHolder(@NonNull final T holder, int position) {
-        if (mValues != null)
+        if(mValues != null)
             onBindViewHolder(holder, mValues.get(position));
         else
             onBindViewHolder(holder, null);
@@ -50,7 +49,7 @@ public abstract class RecyclerViewListAdapter<T extends RecyclerView.ViewHolder,
 
     @Override
     public int getItemCount() {
-        if (mValues == null)
+        if(mValues == null)
             return 0;
         return mValues.size();
     }
@@ -74,14 +73,14 @@ public abstract class RecyclerViewListAdapter<T extends RecyclerView.ViewHolder,
     }
 
 
-}
 
+
+}
 /**
  * This is an interface that classes should implement if they react to clicks or longClicks.
  */
 interface ILibObjectCrud<E> {
     void onClick(E value);
-
     void onLongClick(E value);
 }
 
