@@ -4,6 +4,7 @@ import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeDocList;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
+import android.apex.ge.coffee.Retrofit.DocGoods;
 import android.apex.ge.coffee.Retrofit.Model.CoffeeDoc;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.Retrofit.PreorderGoods;
@@ -92,7 +93,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getCoffeeDocsFromAPI();
+                getDocGoodsFromAPI();
             }
         });
 
@@ -100,7 +101,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
 
     }
 
-    private void getCoffeeDocsFromAPI(){
+    private void getCoffeeDocsFromAPI() {
 
         CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
@@ -108,7 +109,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         Calendar calendar = new GregorianCalendar(2018, 02, 26);
         System.out.println(sdf.format(calendar.getTime()));
 
-        Call <CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs(sdf.format(calendar.getTime()), "1610007800");
+        Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs(sdf.format(calendar.getTime()), "1610007800");
 
         callCoffeeDocs.enqueue(new Callback<CoffeeDocList>() {
             @Override
@@ -135,10 +136,37 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
 
     }
 
+    private void getDocGoodsFromAPI() {
+        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
+        Call<DocGoods> callGoodsDocs = service.listDocGoods("1610007800");
 
+        callGoodsDocs.enqueue(new Callback<DocGoods>() {
+            @Override
+            public void onResponse(Call<DocGoods> call, Response<DocGoods> response) {
+                if(response.isSuccessful()){
+                    Log.d(LOG_TAG, response.code() + "");
+                    List<ProductData> goodsDocs = response.body().getResult();
 
+                    adapter = new MyProducedRecyclerViewAdapter(goodsDocs);
+                    adapter.setmListener(DocumentFragment.this);
+                    DocumentFragment.this.recyclerView.setAdapter(adapter);
+                    textView.setText(adapter.getItemCount() + " \n\n " + goodsDocs.size() + "\n\n");
 
+                }else {
+                    Log.d(LOG_TAG, response.code() + "");
+                    textView.setText(response.toString());
+                    textView.setMovementMethod(new ScrollingMovementMethod());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DocGoods> call, Throwable t) {
+                call.cancel();
+                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+            }
+        });
+    }
 
 
     private void getPreOrderGoodsFromAPI() {
@@ -169,9 +197,10 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
                     adapter.setmListener(DocumentFragment.this);
                     DocumentFragment.this.recyclerView.setAdapter(adapter);
                     textView.setText(adapter.getItemCount() + " \n\n " + goods.size() + "\n\n");
-                } else
+                } else {
                     textView.setText(response.toString());
-                textView.setMovementMethod(new ScrollingMovementMethod());
+                    textView.setMovementMethod(new ScrollingMovementMethod());
+                }
             }
 
             @Override
