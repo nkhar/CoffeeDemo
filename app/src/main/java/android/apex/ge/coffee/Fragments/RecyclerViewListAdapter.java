@@ -1,9 +1,6 @@
 package android.apex.ge.coffee.Fragments;
 
-/**
- * Created by Nika on 16/03/2018.
- * This i abstract class that specific RecyclerView adapters will use
- */
+
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +9,10 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+/**
+ * Created by Nika on 16/03/2018.
+ * This is abstract class that specific RecyclerView adapters will use
+ */
 /**
  * {@link RecyclerView.Adapter} that can display a {@link List of coffee machibnes} and makes a call to the
  * specified {@link MachineFragment}.

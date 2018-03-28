@@ -1,7 +1,6 @@
 package android.apex.ge.coffee.Retrofit;
 
 import android.apex.ge.coffee.Retrofit.Model.AccountInfo;
-import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.Retrofit.Model.ResponseStatus;
 
 import com.google.gson.annotations.Expose;

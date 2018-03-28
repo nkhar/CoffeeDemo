@@ -105,7 +105,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
-        Calendar calendar = new GregorianCalendar(2018, 02, 26);
+        Calendar calendar = new GregorianCalendar(2018, 2, 26);
         System.out.println(sdf.format(calendar.getTime()));
 
         Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs(sdf.format(calendar.getTime()), "1610007800");

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ყავა</string>
+
+    <string name="title_activity_coffee_machine_detail">შეიყვანეთ დეტალური ინფორმაცია</string>
+
     <string name="navigation_drawer_open">გახსენი გვერდული ნავიგაცია</string>
     <string name="navigation_drawer_close">დახურე გვერდული ნავიგაცია</string>
     <string name="nav_drawer_menu_item_1">აპარატები</string>

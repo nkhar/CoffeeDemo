@@ -23,7 +23,7 @@ public class MyCoffeeDocRecyclerViewAdapter extends RecyclerViewListAdapter<MyCo
 
     public MyCoffeeDocRecyclerViewAdapter(List<CoffeeDoc> items) {
         super(items);
-        Log.d(LOG_TAG, "We are in MyCoffeeDocRecyclerViewAdapter   constructor   ");
+        Log.d(LOG_TAG, "We are in MyCofDocRecViewAdapter   constructor   ");
     }
 
     @NonNull
