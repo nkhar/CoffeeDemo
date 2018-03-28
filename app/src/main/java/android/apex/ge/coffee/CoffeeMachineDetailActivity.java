@@ -23,7 +23,6 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
     protected final String LOG_TAG = "CoffeeMachDetAct";
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +30,6 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_coffee_machine_detail);
         Toolbar toolbar = findViewById(R.id.toolbar_coffee_detail);
         setSupportActionBar(toolbar);
-
 
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items

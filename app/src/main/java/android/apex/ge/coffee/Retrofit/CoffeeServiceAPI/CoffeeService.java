@@ -15,7 +15,6 @@ import android.apex.ge.coffee.Retrofit.SaleGoods;
 import android.apex.ge.coffee.Retrofit.SaveCoffeePreOrderResponse;
 import android.apex.ge.coffee.Retrofit.SaveCoffeeStatsResponse;
 
-import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,22 +40,22 @@ public interface CoffeeService {
     /*GET methods*/
 
     @GET("CoffeeService/GetCoffeeList.json")
-    Call <CoffeeMachineList> listCoffeeMachines(@Query("VanAcc") String vanAcc);
+    Call<CoffeeMachineList> listCoffeeMachines(@Query("VanAcc") String vanAcc);
 
     @GET("CoffeeService/GetSaleGoods.json")
-    Call<SaleGoods> listSaleGoods (@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
+    Call<SaleGoods> listSaleGoods(@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
 
     @GET("CoffeeService/GetProducedGoods.json")
-    Call <ProducedGoods> listProducedGoods(@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
+    Call<ProducedGoods> listProducedGoods(@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
 
     @GET("CoffeeService/GetRawMaterials.json")
-    Call <RawMaterials> listRawMaterials(@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
+    Call<RawMaterials> listRawMaterials(@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
 
     @GET("CoffeeService/GetPreorderGoods.json")
-    Call <PreorderGoods> listPreorderGoods(@Query("WarehouseAcc") String warehouseAcc, @Query("VanAcc") String vanAcc, @Query("BDate") String bDate); //Not sure about Date type.
+    Call<PreorderGoods> listPreorderGoods(@Query("WarehouseAcc") String warehouseAcc, @Query("VanAcc") String vanAcc, @Query("BDate") String bDate); //Not sure about Date type.
 
     @GET("CoffeeService/GetPreOrderAccounts.json")
-    Call <PreOrderAccounts> listPreOrderAccounts();
+    Call<PreOrderAccounts> listPreOrderAccounts();
 
     @GET("CoffeeService/GetCoffeeDocs.json")
     Call<CoffeeDocList> listCoffeeDocs(@Query("DDate") String dDate, @Query("VanAcc") String vanAcc); //Not sure about Date type.
@@ -76,7 +75,6 @@ public interface CoffeeService {
     @POST("CoffeeService/SavePreorder")
     @FormUrlEncoded
     Call<SaveCoffeePreOrderResponse> listSaveCoffeePreOrderResponse(@Body SaveCoffeePreOrder saveCoffeePreOrder);
-
 
 
 }

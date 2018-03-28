@@ -18,7 +18,7 @@ import java.util.List;
  * CoffeeMachineDetailActivity.
  */
 
-public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRecyclerViewAdapter.ViewHolder, ProductData>{
+public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRecyclerViewAdapter.ViewHolder, ProductData> {
 
     protected final String LOG_TAG = "MySaleRecyclerVAdapter";
 
@@ -37,7 +37,7 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
     @Override
     public void onBindViewHolder(final ViewHolder holder, final ProductData value) {
 
-        if(value == null) {
+        if (value == null) {
             return;
         }
 
@@ -68,7 +68,6 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
         }
 
     }
-
 
 
     // Provide a direct reference to each of the views within a data item

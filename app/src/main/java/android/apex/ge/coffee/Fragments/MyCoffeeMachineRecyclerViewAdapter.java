@@ -39,8 +39,8 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
     }
 
     @Override
-    public void onBindViewHolder( final ViewHolder holder, final CoffeeMachine value) {
-        if(value == null) {
+    public void onBindViewHolder(final ViewHolder holder, final CoffeeMachine value) {
+        if (value == null) {
             return;
         }
 

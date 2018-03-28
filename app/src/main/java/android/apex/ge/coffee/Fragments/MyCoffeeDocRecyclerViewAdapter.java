@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Tis class is adapter for the list of CoffeeDocs
  */
-public class MyCoffeeDocRecyclerViewAdapter extends RecyclerViewListAdapter<MyCoffeeDocRecyclerViewAdapter.ViewHolder, CoffeeDoc>{
+public class MyCoffeeDocRecyclerViewAdapter extends RecyclerViewListAdapter<MyCoffeeDocRecyclerViewAdapter.ViewHolder, CoffeeDoc> {
 
     protected final String LOG_TAG = "MyCofDocRecyclerVAdapter";
 
@@ -35,7 +35,7 @@ public class MyCoffeeDocRecyclerViewAdapter extends RecyclerViewListAdapter<MyCo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final CoffeeDoc value) {
-        if(value == null) {
+        if (value == null) {
             return;
         }
 

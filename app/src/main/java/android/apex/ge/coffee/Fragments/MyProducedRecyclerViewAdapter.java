@@ -1,7 +1,6 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
-
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -84,7 +83,7 @@ public class MyProducedRecyclerViewAdapter extends RecyclerViewListAdapter<MyPro
         public final TextView mProducedPackCountTextView;
         public final TextView mProducedRCountTextView;
         public final TextView mProducedVanRCountTextView;
-        
+
         public ProductData producedListResult;
 
         public ViewHolder(View itemView) {

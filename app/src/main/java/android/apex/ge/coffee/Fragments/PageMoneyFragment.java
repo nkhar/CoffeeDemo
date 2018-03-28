@@ -15,7 +15,7 @@ import android.widget.TextView;
  * This class is responsible for displaying fragment in the Money tab of the coffee machine.
  */
 
-public class PageMoneyFragment extends Fragment implements ILibObjectCrud{
+public class PageMoneyFragment extends Fragment implements ILibObjectCrud {
 
     protected final String LOG_TAG = "PageMoneyFragment";
     public static final String ARG_PAGE = "ARG_PAGE";
@@ -41,13 +41,11 @@ public class PageMoneyFragment extends Fragment implements ILibObjectCrud{
     }
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARG_PAGE);
     }
-
 
 
     @Nullable
@@ -63,12 +61,6 @@ public class PageMoneyFragment extends Fragment implements ILibObjectCrud{
 
         return view;
     }
-
-
-
-
-
-
 
 
     @Override

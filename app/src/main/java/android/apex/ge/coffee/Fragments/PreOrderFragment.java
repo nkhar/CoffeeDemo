@@ -37,7 +37,7 @@ import retrofit2.Response;
  * This class should display one of the fragments chosen from navigation drawer.
  */
 
-public class PreOrderFragment extends Fragment implements ILibObjectCrud{
+public class PreOrderFragment extends Fragment implements ILibObjectCrud {
 
     protected final String LOG_TAG = "PreOrderFragment";
 
@@ -107,27 +107,25 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud{
         Call<PreOrderAccounts> preOrderAccounts = service.listPreOrderAccounts();
 
 
-
-
         preOrderAccounts.enqueue(new Callback<PreOrderAccounts>() {
             @Override
             public void onResponse(Call<PreOrderAccounts> call, Response<PreOrderAccounts> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     Log.d(LOG_TAG, response.code() + "");
 
-                           /* String displayCoffeeResponse = "";*/
+                    /* String displayCoffeeResponse = "";*/
                     List<AccountInfo> accounts = response.body().getResult();
                     adapter = new MyPreOrderAccountsRecyclerViewAdapter(accounts);
                     adapter.setmListener(PreOrderFragment.this);
                     PreOrderFragment.this.recyclerView.setAdapter(adapter);
-                           /* displayCoffeeResponse += "\n    " + kofe.size() + " \n";*/
+                    /* displayCoffeeResponse += "\n    " + kofe.size() + " \n";*/
 
                            /* for (CoffeeMachineList.Result coffeeResult : kofe) {
                                 displayCoffeeResponse += coffeeResult.toString();
 //                                Log.d(LOG_TAG, coffeeResult.getAcc().toString());
                             }*/
                     textView.setText(adapter.getItemCount() + " \n\n " + accounts.size() + "\n\n");
-                }else
+                } else
                     textView.setText(response.toString());
                 textView.setMovementMethod(new ScrollingMovementMethod());
             }
@@ -185,7 +183,6 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud{
         });
 
     }
-
 
 
     @Override

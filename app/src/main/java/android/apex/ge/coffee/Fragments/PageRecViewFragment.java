@@ -1,8 +1,6 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
-import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
-import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
@@ -10,8 +8,8 @@ import android.apex.ge.coffee.Retrofit.ProducedGoods;
 import android.apex.ge.coffee.Retrofit.RawMaterials;
 import android.apex.ge.coffee.Retrofit.SaleGoods;
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -112,17 +110,16 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
             adapter = new MyProducedRecyclerViewAdapter(new ArrayList<ProductData>());
             getProducedGoodsListFromAPI(coffeeService);
         } else if (mPage == 3) {
-            adapter = new MyRawMaterialsRecyclerViewAdapter (new ArrayList<ProductData>());
+            adapter = new MyRawMaterialsRecyclerViewAdapter(new ArrayList<ProductData>());
             getRawMaterialsListFromAPI(coffeeService);
         } else {
             return;
-           /* adapter = new MyCoffeeMachineRecyclerViewAdapter(new ArrayList<CoffeeMachine>());
-            getCoffeeListFromAPI(coffeeService);*/
+
         }
     }
 
     private void getRawMaterialsListFromAPI(CoffeeService service) {
-        Call <RawMaterials> callRawMaterials = service.listRawMaterials("1610003000","1610007800");
+        Call<RawMaterials> callRawMaterials = service.listRawMaterials("1610003000", "1610007800");
 
         callRawMaterials.enqueue(new Callback<RawMaterials>() {
             @Override
@@ -150,7 +147,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
     }
 
     private void getProducedGoodsListFromAPI(CoffeeService service) {
-        Call <ProducedGoods> callProducedGoods = service.listProducedGoods("1610003000","1610007800");
+        Call<ProducedGoods> callProducedGoods = service.listProducedGoods("1610003000", "1610007800");
 
         callProducedGoods.enqueue(new Callback<ProducedGoods>() {
             @Override
@@ -179,7 +176,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
     }
 
     private void getSaleGoodsListFromAPI(CoffeeService service) {
-        Call <SaleGoods> callSaleGoods = service.listSaleGoods("1610003000","1610007800");
+        Call<SaleGoods> callSaleGoods = service.listSaleGoods("1610003000", "1610007800");
 
         callSaleGoods.enqueue(new Callback<SaleGoods>() {
             @Override
@@ -207,37 +204,6 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
         });
     }
 
-
-
-    private void getCoffeeListFromAPI(CoffeeService service) {
-        Call<CoffeeMachineList> callCoffees = service.listCoffeeMachines(null);
-
-        callCoffees.enqueue(new Callback<CoffeeMachineList>() {
-
-
-            @Override
-            public void onResponse(Call<CoffeeMachineList> call, Response<CoffeeMachineList> response) {
-                if (response.isSuccessful()) {
-                    Log.d(LOG_TAG, response.code() + "");
-
-                    List<CoffeeMachine> coffee = response.body().getResult();
-                    // Here is the real list
-                    adapter.updateList(coffee);
-
-                    textView.setText(textView.getText() + " \n\n " + coffee.size() + "\n\n");
-                } else
-                    textView.setText(response.toString());
-                textView.setMovementMethod(new ScrollingMovementMethod());
-            }
-
-
-            @Override
-            public void onFailure(Call<CoffeeMachineList> call, Throwable t) {
-                call.cancel();
-                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
-            }
-        });
-    }
 
     @Override
     public void onClick(Object value) {

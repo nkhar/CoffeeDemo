@@ -7,7 +7,6 @@ import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.DocGoods;
 import android.apex.ge.coffee.Retrofit.Model.CoffeeDoc;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
-import android.apex.ge.coffee.Retrofit.PreorderGoods;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -144,7 +143,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         callGoodsDocs.enqueue(new Callback<DocGoods>() {
             @Override
             public void onResponse(Call<DocGoods> call, Response<DocGoods> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.d(LOG_TAG, response.code() + "");
                     List<ProductData> goodsDocs = response.body().getResult();
 
@@ -153,7 +152,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
                     DocumentFragment.this.recyclerView.setAdapter(adapter);
                     textView.setText(adapter.getItemCount() + " \n\n " + goodsDocs.size() + "\n\n");
 
-                }else {
+                } else {
                     Log.d(LOG_TAG, response.code() + "");
                     textView.setText(response.toString());
                     textView.setMovementMethod(new ScrollingMovementMethod());

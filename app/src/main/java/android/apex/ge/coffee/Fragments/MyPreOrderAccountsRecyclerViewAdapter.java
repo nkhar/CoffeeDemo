@@ -17,7 +17,7 @@ import java.util.List;
  * This class is an adapter to display list of PreOrderAccounts
  */
 
-public class MyPreOrderAccountsRecyclerViewAdapter extends RecyclerViewListAdapter<MyPreOrderAccountsRecyclerViewAdapter.ViewHolder, AccountInfo>{
+public class MyPreOrderAccountsRecyclerViewAdapter extends RecyclerViewListAdapter<MyPreOrderAccountsRecyclerViewAdapter.ViewHolder, AccountInfo> {
 
     protected final String LOG_TAG = "MyPreOrderAccRecAdapter";
 
@@ -77,10 +77,10 @@ public class MyPreOrderAccountsRecyclerViewAdapter extends RecyclerViewListAdapt
         public final TextView mPreOrderAccountsAccTextView;
         public final TextView mPreOrderAccountsNameTextView;
         public final TextView mPreOrderAccountsVatTypeTextView;
-       /* public final TextView mRawMaterialsInCodeTextView;
-        public final TextView mRawMaterialsPackCountTextView;
-        public final TextView mRawMaterialsRCountTextView;
-        public final TextView mRawMaterialsVanRCountTextView;*/
+        /* public final TextView mRawMaterialsInCodeTextView;
+         public final TextView mRawMaterialsPackCountTextView;
+         public final TextView mRawMaterialsRCountTextView;
+         public final TextView mRawMaterialsVanRCountTextView;*/
         public AccountInfo mAcccountInfoResult;
 
         public ViewHolder(View itemView) {

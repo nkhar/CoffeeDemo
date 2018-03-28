@@ -3,10 +3,10 @@ package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.CoffeeMachineDetailActivity;
 import android.apex.ge.coffee.R;
-import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
 import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
-import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
+import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
+import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +26,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,7 +37,7 @@ import retrofit2.Response;
  * clicked in the menu.
  */
 
-public class MachineFragment extends Fragment implements ILibObjectCrud{
+public class MachineFragment extends Fragment implements ILibObjectCrud {
 
     protected final String LOG_TAG = "MachineFragment";
 
@@ -77,9 +76,6 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        /*adapter = new MyCoffeeMachineRecyclerViewAdapter();
-        adapter.setmListener(this);
-        recyclerView.setAdapter(adapter);*/
 
 
         RecyclerView.ItemDecoration localItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
@@ -93,42 +89,26 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*OkHttpClient client = new OkHttpClient.Builder()
-                        .addInterceptor(new BasicAuthInterceptor("rpl", "9"))
-                        .build();
-
-                Retrofit retrofit = new Retrofit.Builder()
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl("http://support.apex.ge:83")
-                        .client(client)
-                        .build();*/
 
                 CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
-                Call <CoffeeMachineList> coffees = service.listCoffeeMachines("1610003000");
-
-
+                Call<CoffeeMachineList> coffees = service.listCoffeeMachines("1610003000");
 
 
                 coffees.enqueue(new Callback<CoffeeMachineList>() {
                     @Override
                     public void onResponse(Call<CoffeeMachineList> call, Response<CoffeeMachineList> response) {
-                        if(response.isSuccessful()) {
+                        if (response.isSuccessful()) {
                             Log.d(LOG_TAG, response.code() + "");
 
-                           /* String displayCoffeeResponse = "";*/
+
                             List<CoffeeMachine> kofe = response.body().getResult();
                             adapter = new MyCoffeeMachineRecyclerViewAdapter(kofe);
                             adapter.setmListener(MachineFragment.this);
                             MachineFragment.this.recyclerView.setAdapter(adapter);
-                           /* displayCoffeeResponse += "\n    " + kofe.size() + " \n";*/
 
-                           /* for (CoffeeMachineList.Result coffeeResult : kofe) {
-                                displayCoffeeResponse += coffeeResult.toString();
-//                                Log.d(LOG_TAG, coffeeResult.getAcc().toString());
-                            }*/
                             textView.setText(adapter.getItemCount() + " \n\n " + kofe.size() + "\n\n");
-                        }else
+                        } else
                             textView.setText(response.toString());
                         textView.setMovementMethod(new ScrollingMovementMethod());
                     }
@@ -140,34 +120,6 @@ public class MachineFragment extends Fragment implements ILibObjectCrud{
                     }
                 });
 
-/*
-                Call<List<Repo>> repos = service.listRepos("nkhar");
-
-
-                repos.enqueue(new Callback<List<Repo>>() {
-                    @Override
-                    public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
-                        Log.d(LOG_TAG, response.code() + "");
-
-                        String displayResponse = "";
-
-                        List<Repo> repo = response.body();
-                        displayResponse += "\n    " + repo.size() + " \n";
-                        for (Repo rep : repo) {
-                            displayResponse += rep.toString();
-                            Log.d(LOG_TAG, rep.getDefaultBranch().toString());
-
-                        }
-                        textView.setText(displayResponse);
-                        textView.setMovementMethod(new ScrollingMovementMethod());
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Repo>> call, Throwable t) {
-                        call.cancel();
-                    }
-                });*/
             }
         });
 
