@@ -169,50 +169,6 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
     }
 
 
-    private void getPreOrderGoodsFromAPI() {
-        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
-        Calendar calendar = new GregorianCalendar(2018, 02, 26);
-        System.out.println(sdf.format(calendar.getTime()));
-
-
-        Call<PreorderGoods> preOrderGoods = service.listPreorderGoods("1610000100", "1610007800", sdf.format(calendar.getTime()));
-
-
-        preOrderGoods.enqueue(new Callback<PreorderGoods>() {
-            @Override
-            public void onResponse(Call<PreorderGoods> call, Response<PreorderGoods> response) {
-                if (response.isSuccessful()) {
-                    Log.d(LOG_TAG, response.code() + "");
-                    List<ProductData> goods = response.body().getResult();
-                            /*
-                            This is just for TESTING
-                            DON'T FORGET
-                            TO
-                            DELETE THIS
-                            AND USE CORRECT ADAPTER
-                             */
-                    adapter = new MyProducedRecyclerViewAdapter(goods);
-                    adapter.setmListener(DocumentFragment.this);
-                    DocumentFragment.this.recyclerView.setAdapter(adapter);
-                    textView.setText(adapter.getItemCount() + " \n\n " + goods.size() + "\n\n");
-                } else {
-                    textView.setText(response.toString());
-                    textView.setMovementMethod(new ScrollingMovementMethod());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PreorderGoods> call, Throwable t) {
-                call.cancel();
-                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
-            }
-        });
-
-    }
-
-
     @Override
     public void onClick(Object value) {
         Log.d(LOG_TAG, "Something was clicked" + value.toString());
