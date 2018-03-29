@@ -18,8 +18,13 @@ public class EditNumberDialogFragment extends DialogFragment{
 
     protected final String LOG_TAG = "EditNDialogFragment";
 
-    private EditText editNumberText1;
-    private EditText editNumberText2;
+    private EditText mEditNumberText1;
+    private EditText mEditNumberText2;
+
+    // Defines the listener interface
+    public interface EditNumberDialogListener {
+        void onFinishEditDialog(String inputNumber1, String inputNumber2);
+    }
 
     public EditNumberDialogFragment() {
         Log.d(LOG_TAG, "we are in constructor of EditNumberDialogFragment class");
@@ -48,15 +53,25 @@ public class EditNumberDialogFragment extends DialogFragment{
         super.onViewCreated(view, savedInstanceState);
 
         // Get field from view
-        editNumberText1 =  view.findViewById(R.id.fragment_dialog_number_editText);
-        editNumberText2 =  view.findViewById(R.id.fragment_dialog_number_editText2);
+        mEditNumberText1 =  view.findViewById(R.id.fragment_dialog_number_editText);
+        mEditNumberText2 =  view.findViewById(R.id.fragment_dialog_number_editText2);
         // Fetch arguments from bundle and set title
         String title = getArguments().getString("title", "Enter Name");
         getDialog().setTitle(title);
         // Show soft keyboard automatically and request focus to field
-        editNumberText1.requestFocus();
+        /*mEditNumberText1.requestFocus();
         getDialog().getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);*/
 
+    }
+
+
+
+    // Call this method to send the data back to the parent fragment
+    public void sendBackResult() {
+        // Notice the use of `getTargetFragment` which will be set when the dialog is displayed
+        EditNumberDialogListener listener = (EditNumberDialogListener) getTargetFragment();
+        listener.onFinishEditDialog(mEditNumberText1.getText().toString(), mEditNumberText2.getText().toString());
+        dismiss();
     }
 }

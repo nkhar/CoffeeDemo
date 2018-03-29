@@ -36,7 +36,7 @@ import retrofit2.Response;
  * @see android.apex.ge.coffee.CoffeeMachineDetailActivity
  */
 
-public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
+public class PageRecViewFragment extends Fragment implements ILibObjectCrud, EditNumberDialogFragment.EditNumberDialogListener {
 
     protected final String LOG_TAG = "PageRecViewFragment";
     RecyclerView recyclerView;
@@ -45,6 +45,8 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
     private final int mColumnCount = 1;
 
     public static final String ARG_PAGE = "ARG_PAGE";
+
+    private final int REQUEST_CODE_DIALOG_FRAGMENT = 300;
 
     private int mPage;
     private TextView textView;
@@ -209,14 +211,25 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
     @Override
     public void onClick(Object value) {
         Log.d(LOG_TAG, "Something was Clicked" + value.toString());
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        EditNumberDialogFragment editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title");
-        editNumberDialogFragment.show(fm, "fragment_edit_name");
-
+        showEditNumberDialog();
     }
 
     @Override
     public void onLongClick(Object value) {
         Log.d(LOG_TAG, "Something was longClicked" + value.toString());
+    }
+
+    // Call this method to launch the edit dialog
+    private void showEditNumberDialog() {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        EditNumberDialogFragment editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title");
+        // SETS the target fragment for use later when sending results
+        editNumberDialogFragment.setTargetFragment(PageRecViewFragment.this, REQUEST_CODE_DIALOG_FRAGMENT);
+        editNumberDialogFragment.show(fm, "fragment_edit_name");
+    }
+    @Override
+    public void onFinishEditDialog(String inputNumber1, String inputNumber2) {
+        Log.d(LOG_TAG, "Numbers entered were: \n" + Integer.parseInt(inputNumber1) + "\n" + Integer.parseInt(inputNumber2));
+
     }
 }
