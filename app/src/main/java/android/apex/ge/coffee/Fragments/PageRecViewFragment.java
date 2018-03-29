@@ -10,6 +10,7 @@ import android.apex.ge.coffee.Retrofit.SaleGoods;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -208,6 +209,9 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud {
     @Override
     public void onClick(Object value) {
         Log.d(LOG_TAG, "Something was Clicked" + value.toString());
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        EditNumberDialogFragment editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title");
+        editNumberDialogFragment.show(fm, "fragment_edit_name");
 
     }
 
