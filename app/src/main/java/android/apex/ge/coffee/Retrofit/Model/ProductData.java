@@ -105,3 +105,11 @@ public class ProductData {
     }
 
 }
+
+
+/*
+public class ProdDataInput extends ProductData {
+
+    public double AfterQuantity;
+    public double BeforeQuantity;
+}*/
