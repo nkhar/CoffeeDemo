@@ -11,6 +11,7 @@
     <string name="nav_drawer_menu_item_2">PreOrders</string>
     <string name="nav_drawer_menu_item_3">Documents</string>
     <string name="nav_drawer_menu_item_4">Login</string>
+    <string name="nav_drawer_menu_item_5">Logout</string>
 
 
 </resources>

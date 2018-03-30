@@ -4,6 +4,7 @@ import android.apex.ge.coffee.Fragments.DocumentFragment;
 import android.apex.ge.coffee.Fragments.MachineFragment;
 import android.apex.ge.coffee.Fragments.PreOrderFragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     protected final String LOG_TAG = "MainActivity";
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -77,17 +81,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Insert the fragment by replacing FrameLayout.
             DocumentFragment documentFragment = new DocumentFragment();
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, documentFragment, "Document_TAG").commit();
-        } else if (id == R.id.nav_share) {
-            Log.d(LOG_TAG, "share item was clicked");
+        } else if (id == R.id.nav_login) {
+            Log.d(LOG_TAG, "login item was clicked");
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_send) {
+            MainActivity.this.finish();
+        } else if (id == R.id.nav_logout) {
             Log.d(LOG_TAG, "send item was clicked");
+            logOut();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         setTitle(item.getTitle());
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkIfLoggedIn();
+    }
+
+    private void checkIfLoggedIn() {
+        SharedPreferences settings = getSharedPreferences(LoginActivity.PREFERENCES_NAME, 0);
+        //Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
+        boolean hasLoggedIn = settings.getBoolean(LoginActivity.IS_USER_LOGGED_IN, false);
+        if(hasLoggedIn) {
+            onNavigationItemSelected(navigationView.getMenu().getItem(0));
+        }else {
+            onNavigationItemSelected(navigationView.getMenu().getItem(3).getSubMenu().getItem(0));
+        }
+    }
+
+    private void logOut() {
+        Log.d(LOG_TAG,"We are Logging the user out from MainActivity method logOut");
+        SharedPreferences settings = getSharedPreferences(LoginActivity.PREFERENCES_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+
+        //Set "hasLoggedIn" to true
+        editor.putBoolean(LoginActivity.IS_USER_LOGGED_IN, false);
+
+        // Commit the edits!
+        editor.commit();
+        checkIfLoggedIn();
     }
 
 
