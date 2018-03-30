@@ -45,10 +45,6 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
 
         holder.mSaleProPPIDTextView.setText(value.getProdPPID());
         holder.mSaleNameTextView.setText(value.getName());
-        holder.mSaleBCodeTextView.setText(value.getbCode());
-        holder.mSaleInCodeTextView.setText(value.getInCode());
-        holder.mSalePackCountTextView.setText(String.valueOf(value.getPackCount()));
-        holder.mSaleRCountTextView.setText(String.valueOf(value.getrCount()));
         holder.mSaleVanRCountTextView.setText(String.valueOf(value.getVanRCount()));
         final ILibObjectCrud listener = getmListener();
         if (listener != null) {
@@ -78,10 +74,6 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
         public final View mView;
         public final TextView mSaleProPPIDTextView;
         public final TextView mSaleNameTextView;
-        public final TextView mSaleBCodeTextView;
-        public final TextView mSaleInCodeTextView;
-        public final TextView mSalePackCountTextView;
-        public final TextView mSaleRCountTextView;
         public final TextView mSaleVanRCountTextView;
         public ProductData saleListResult;
 
@@ -92,10 +84,6 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
             mView = itemView;
             mSaleProPPIDTextView = itemView.findViewById(R.id.page_sale_ProdPPID);
             mSaleNameTextView = itemView.findViewById(R.id.page_sale_Name);
-            mSaleBCodeTextView = itemView.findViewById(R.id.page_sale_BCode);
-            mSaleInCodeTextView = itemView.findViewById(R.id.page_sale_InCode);
-            mSalePackCountTextView = itemView.findViewById(R.id.page_sale_PackCount);
-            mSaleRCountTextView = itemView.findViewById(R.id.page_sale_RCount);
             mSaleVanRCountTextView = itemView.findViewById(R.id.page_sale_VanRCount);
         }
 
