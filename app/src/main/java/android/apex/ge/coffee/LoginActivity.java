@@ -1,5 +1,6 @@
 package android.apex.ge.coffee;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(mLoginUsernameEditText.getText().toString().equals("apex") && mLoginPasswordEditText.getText().toString().equals("coffee")) {
                     checkLoginCredentials();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
                     LoginActivity.this.finish();
                 }else{
                     Toast.makeText(LoginActivity.this, "The login credentials are invalid", Toast.LENGTH_SHORT).show();

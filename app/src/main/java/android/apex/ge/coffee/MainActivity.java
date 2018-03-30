@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, documentFragment, "Document_TAG").commit();
         } else if (id == R.id.nav_login) {
             Log.d(LOG_TAG, "login item was clicked");
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+           /* Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
-            MainActivity.this.finish();
+            MainActivity.this.finish();*/
         } else if (id == R.id.nav_logout) {
             Log.d(LOG_TAG, "send item was clicked");
             logOut();
@@ -109,7 +109,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(hasLoggedIn) {
             onNavigationItemSelected(navigationView.getMenu().getItem(0));
         }else {
-            onNavigationItemSelected(navigationView.getMenu().getItem(3).getSubMenu().getItem(0));
+            /*
+            onNavigationItemSelected(navigationView.getMenu().getItem(3).getSubMenu().getItem(0));*/
+
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            MainActivity.this.finish();
         }
     }
 
