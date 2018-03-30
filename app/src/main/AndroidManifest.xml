@@ -24,6 +24,10 @@
         <activity
             android:name=".CoffeeMachineDetailActivity"
             android:label="@string/title_activity_coffee_machine_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -3,6 +3,7 @@ package android.apex.ge.coffee;
 import android.apex.ge.coffee.Fragments.DocumentFragment;
 import android.apex.ge.coffee.Fragments.MachineFragment;
 import android.apex.ge.coffee.Fragments.PreOrderFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, documentFragment, "Document_TAG").commit();
         } else if (id == R.id.nav_share) {
             Log.d(LOG_TAG, "share item was clicked");
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_send) {
             Log.d(LOG_TAG, "send item was clicked");
         }
