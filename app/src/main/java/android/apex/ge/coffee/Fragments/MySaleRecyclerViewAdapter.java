@@ -75,6 +75,7 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
         public final TextView mSaleProPPIDTextView;
         public final TextView mSaleNameTextView;
         public final TextView mSaleVanRCountTextView;
+        public final TextView mSaleQuantity2TextView;
         public ProductData saleListResult;
 
         public ViewHolder(View itemView) {
@@ -85,6 +86,7 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
             mSaleProPPIDTextView = itemView.findViewById(R.id.page_sale_ProdPPID);
             mSaleNameTextView = itemView.findViewById(R.id.page_sale_Name);
             mSaleVanRCountTextView = itemView.findViewById(R.id.page_sale_VanRCount);
+            mSaleQuantity2TextView = itemView.findViewById(R.id.page_sale_quantity2);
         }
 
     }

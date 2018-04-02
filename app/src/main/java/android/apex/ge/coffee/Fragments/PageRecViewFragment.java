@@ -36,7 +36,7 @@ import retrofit2.Response;
  * @see android.apex.ge.coffee.CoffeeMachineDetailActivity
  */
 
-public class PageRecViewFragment extends Fragment implements ILibObjectCrud, EditNumberDialogFragment.EditNumberDialogListener {
+public class PageRecViewFragment extends Fragment implements ILibObjectCrud<ProductData>, EditNumberDialogFragment.EditNumberDialogListener {
 
     protected final String LOG_TAG = "PageRecViewFragment";
     RecyclerView recyclerView;
@@ -210,13 +210,13 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud, Edi
 
 
     @Override
-    public void onClick(Object value) {
+    public void onClick(ProductData value) {
         Log.d(LOG_TAG, "Something was Clicked" + value.toString());
         showEditNumberDialog();
     }
 
     @Override
-    public void onLongClick(Object value) {
+    public void onLongClick(ProductData value) {
         Log.d(LOG_TAG, "Something was longClicked" + value.toString());
     }
 
