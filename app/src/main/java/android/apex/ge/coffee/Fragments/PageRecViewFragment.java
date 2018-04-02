@@ -100,6 +100,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud, Edi
         recyclerView.setAdapter(adapter);
 
         RecyclerView.ItemDecoration localItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+
         recyclerView.addItemDecoration(localItemDecoration);
 
         return view;

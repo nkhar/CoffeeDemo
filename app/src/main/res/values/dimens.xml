@@ -7,4 +7,8 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="text_margin_8">8dp</dimen>
+    <dimen name="text_margin_12">12dp</dimen>
+    <dimen name="text_margin_16">16dp</dimen>
+    <dimen name="text_margin_24">24dp</dimen>
 </resources>
