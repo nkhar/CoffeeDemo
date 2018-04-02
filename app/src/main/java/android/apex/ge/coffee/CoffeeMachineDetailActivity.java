@@ -1,6 +1,7 @@
 package android.apex.ge.coffee;
 
 import android.apex.ge.coffee.Fragments.CoffeeFragmentPagerAdapter;
+import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -40,6 +41,13 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        /*
+        Creating SaveCoffeeStats object
+         */
+        SaveCoffeeStats saveCoffeeStats = new SaveCoffeeStats();
+        saveCoffeeStats.setCoffeeAcc("1610003000");
+        saveCoffeeStats.setVanAcc("1610007800");
 
     }
 
