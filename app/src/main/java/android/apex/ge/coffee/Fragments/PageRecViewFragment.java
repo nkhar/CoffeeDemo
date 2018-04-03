@@ -121,10 +121,9 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
             listProdTransactionData should hold different lists depending on the viewpager tab,
              which is indicated by variable mPage in this example.
              */
-            listProdTransactionData = ((CoffeeMachineDetailActivity)getActivity()).getSaveCoffeeStats().getSaleAndTransit();
-           // ((MySaleRecyclerViewAdapter) adapter).updateHashMap();
-
-
+            listProdTransactionData = ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().getSaleAndTransit();
+            populateSaleHashMap();
+            // ((MySaleRecyclerViewAdapter) adapter).updateHashMap();
 
 
         } else if (mPage == 2) {
@@ -138,6 +137,8 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
 
         }
     }
+
+
 
     private void getRawMaterialsListFromAPI(CoffeeService service) {
         Call<RawMaterials> callRawMaterials = service.listRawMaterials("1610003000", "1610007800");
@@ -249,13 +250,31 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
     @Override
     public void onFinishEditDialog(String inputNumber1, String inputNumber2, String prodPPID) {
         Log.d(LOG_TAG, "Numbers entered were: \n" + Integer.parseInt(inputNumber1) + "\n" + Integer.parseInt(inputNumber2));
+
+        createAndAddProdTransactionData(inputNumber1, inputNumber2, prodPPID);
+
+        ((MySaleRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
+
+    }
+
+
+    private void createAndAddProdTransactionData(String inputNumber1, String inputNumber2, String prodPPID) {
+
         ProdTransactionData prodTransData = new ProdTransactionData();
         prodTransData.setProdPPID(prodPPID);
         prodTransData.setCurICount(Float.parseFloat(inputNumber1));
         prodTransData.setCurSCount(Float.parseFloat(inputNumber2));
         listProdTransactionData.add(prodTransData);
+        ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
         prodPPIDProdTransactionDataHashMap.put(prodPPID, prodTransData);
-        ((MySaleRecyclerViewAdapter)adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
+        Log.d(LOG_TAG, "\nwe are in createAndAddProdTransactionData the size of hashMap is: " + prodPPIDProdTransactionDataHashMap.size() + "\n");
+    }
+
+    private void populateSaleHashMap() {
+        for (ProdTransactionData prodData : listProdTransactionData) {
+            prodPPIDProdTransactionDataHashMap.put(prodData.getProdPPID(), prodData);
+        }
+        ((MySaleRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
 
     }
 }
