@@ -1,6 +1,7 @@
 package android.apex.ge.coffee;
 
 import android.apex.ge.coffee.Fragments.CoffeeFragmentPagerAdapter;
+import android.apex.ge.coffee.Retrofit.Model.ProdTransactionData;
 import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * This class represents Activity, which starts when an Item is selected in RecyclerView of
@@ -22,6 +25,8 @@ import android.util.Log;
 public class CoffeeMachineDetailActivity extends AppCompatActivity {
 
     protected final String LOG_TAG = "CoffeeMachDetAct";
+
+    private SaveCoffeeStats saveCoffeeStats;
 
 
     @Override
@@ -45,10 +50,17 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         /*
         Creating SaveCoffeeStats object
          */
-        SaveCoffeeStats saveCoffeeStats = new SaveCoffeeStats();
+        saveCoffeeStats = new SaveCoffeeStats();
         saveCoffeeStats.setCoffeeAcc("1610003000");
         saveCoffeeStats.setVanAcc("1610007800");
 
+        saveCoffeeStats.setSaleAndTransit(new ArrayList<ProdTransactionData>());
+
     }
 
+
+
+    public SaveCoffeeStats getSaveCoffeeStats() {
+        return saveCoffeeStats;
+    }
 }

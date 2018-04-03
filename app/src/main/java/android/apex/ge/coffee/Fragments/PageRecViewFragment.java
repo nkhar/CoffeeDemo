@@ -1,8 +1,10 @@
 package android.apex.ge.coffee.Fragments;
 
+import android.apex.ge.coffee.CoffeeMachineDetailActivity;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
+import android.apex.ge.coffee.Retrofit.Model.ProdTransactionData;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.Retrofit.ProducedGoods;
 import android.apex.ge.coffee.Retrofit.RawMaterials;
@@ -23,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,6 +44,9 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
     protected final String LOG_TAG = "PageRecViewFragment";
     RecyclerView recyclerView;
     RecyclerViewListAdapter adapter;
+
+    List<ProdTransactionData> listProdTransactionData;
+    HashMap<String, ProdTransactionData> prodPPIDProdTransactionDataHashMap = new HashMap<>();
 
     private final int mColumnCount = 1;
 
@@ -66,6 +72,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,6 +117,16 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         if (mPage == 1) {
             adapter = new MySaleRecyclerViewAdapter(new ArrayList<ProductData>());
             getSaleGoodsListFromAPI(coffeeService);
+            /*
+            listProdTransactionData should hold different lists depending on the viewpager tab,
+             which is indicated by variable mPage in this example.
+             */
+            listProdTransactionData = ((CoffeeMachineDetailActivity)getActivity()).getSaveCoffeeStats().getSaleAndTransit();
+           // ((MySaleRecyclerViewAdapter) adapter).updateHashMap();
+
+
+
+
         } else if (mPage == 2) {
             adapter = new MyProducedRecyclerViewAdapter(new ArrayList<ProductData>());
             getProducedGoodsListFromAPI(coffeeService);
@@ -212,7 +229,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
     @Override
     public void onClick(ProductData value) {
         Log.d(LOG_TAG, "Something was Clicked" + value.toString());
-        showEditNumberDialog();
+        showEditNumberDialog(value.getProdPPID());
     }
 
     @Override
@@ -221,16 +238,24 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
     }
 
     // Call this method to launch the edit dialog
-    private void showEditNumberDialog() {
+    private void showEditNumberDialog(String prodPPID) {
         FragmentManager fm = getActivity().getSupportFragmentManager();
-        EditNumberDialogFragment editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title");
+        EditNumberDialogFragment editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title", prodPPID);
         // SETS the target fragment for use later when sending results
         editNumberDialogFragment.setTargetFragment(PageRecViewFragment.this, REQUEST_CODE_DIALOG_FRAGMENT);
         editNumberDialogFragment.show(fm, "fragment_edit_name");
     }
+
     @Override
-    public void onFinishEditDialog(String inputNumber1, String inputNumber2) {
+    public void onFinishEditDialog(String inputNumber1, String inputNumber2, String prodPPID) {
         Log.d(LOG_TAG, "Numbers entered were: \n" + Integer.parseInt(inputNumber1) + "\n" + Integer.parseInt(inputNumber2));
+        ProdTransactionData prodTransData = new ProdTransactionData();
+        prodTransData.setProdPPID(prodPPID);
+        prodTransData.setCurICount(Float.parseFloat(inputNumber1));
+        prodTransData.setCurSCount(Float.parseFloat(inputNumber2));
+        listProdTransactionData.add(prodTransData);
+        prodPPIDProdTransactionDataHashMap.put(prodPPID, prodTransData);
+        ((MySaleRecyclerViewAdapter)adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
 
     }
 }

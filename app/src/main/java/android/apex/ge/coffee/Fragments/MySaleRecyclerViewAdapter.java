@@ -1,6 +1,7 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
+import android.apex.ge.coffee.Retrofit.Model.ProdTransactionData;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Nika on 23/03/2018.
@@ -21,10 +24,16 @@ import java.util.List;
 public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRecyclerViewAdapter.ViewHolder, ProductData> {
 
     protected final String LOG_TAG = "MySaleRecyclerVAdapter";
+    private Map <String, ProdTransactionData>prodTransactionDataHashMap = new HashMap<>();
 
     public MySaleRecyclerViewAdapter(List<ProductData> items) {
         super(items);
         Log.d(LOG_TAG, "We are in MySaleRecyclerViewAdapter   constructor   ");
+    }
+
+    public void updateHashMap(HashMap<String, ProdTransactionData> hashMapData) {
+        prodTransactionDataHashMap = hashMapData;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -43,9 +52,15 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
 
         holder.saleListResult = value;
 
+
+        if (prodTransactionDataHashMap.get(value.getProdPPID())!= null) {
+            holder.mSaleVanRCountTextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getProdPPID()));
+            holder.mSaleQuantity2TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurICount()));
+        }
+
         holder.mSaleProPPIDTextView.setText(value.getProdPPID());
         holder.mSaleNameTextView.setText(value.getName());
-        holder.mSaleVanRCountTextView.setText(String.valueOf(value.getVanRCount()));
+        //holder.mSaleVanRCountTextView.setText(String.valueOf(value.getVanRCount()));
         final ILibObjectCrud listener = getmListener();
         if (listener != null) {
             holder.mView.setOnClickListener(new View.OnClickListener() {

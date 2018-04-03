@@ -31,7 +31,7 @@ public class EditNumberDialogFragment extends DialogFragment {
 
     // Defines the listener interface
     public interface EditNumberDialogListener {
-        void onFinishEditDialog(String inputNumber1, String inputNumber2);
+        void onFinishEditDialog(String inputNumber1, String inputNumber2, String prodPPID);
     }
 
     public EditNumberDialogFragment() {
@@ -41,11 +41,12 @@ public class EditNumberDialogFragment extends DialogFragment {
         // Use `newInstance` instead as shown below
     }
 
-    public static EditNumberDialogFragment newInstance(String title) {
+    public static EditNumberDialogFragment newInstance(String title, String prodPPID) {
 
         EditNumberDialogFragment frag = new EditNumberDialogFragment();
         Bundle args = new Bundle();
         args.putString("title", title);
+        args.putString("prodPPID", prodPPID);
         frag.setArguments(args);
         return frag;
     }
@@ -138,7 +139,8 @@ public class EditNumberDialogFragment extends DialogFragment {
     public void sendBackResult() {
         // Notice the use of `getTargetFragment` which will be set when the dialog is displayed
         EditNumberDialogListener listener = (EditNumberDialogListener) getTargetFragment();
-        listener.onFinishEditDialog(mEditNumberText1.getText().toString(), mEditNumberText2.getText().toString());
+
+        listener.onFinishEditDialog(mEditNumberText1.getText().toString(), mEditNumberText2.getText().toString(), getArguments().getString("prodPPID"));
         dismiss();
     }
 }
