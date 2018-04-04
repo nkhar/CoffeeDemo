@@ -1,5 +1,6 @@
 package android.apex.ge.coffee;
 
+import android.apex.ge.coffee.DataBase.DatabaseHelper;
 import android.apex.ge.coffee.Fragments.CoffeeFragmentPagerAdapter;
 import android.apex.ge.coffee.Retrofit.Model.ProdTransactionData;
 import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
@@ -9,6 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+
+import com.j256.ormlite.android.apptools.OpenHelperManager;
 
 import java.util.ArrayList;
 
@@ -27,6 +30,9 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
     protected final String LOG_TAG = "CoffeeMachDetAct";
 
     private SaveCoffeeStats saveCoffeeStats;
+
+    // Reference of DatabaseHelper class to access its DAOs and other components pushing a
+    protected DatabaseHelper databaseHelper = null;
 
 
     @Override
@@ -78,4 +84,30 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
     public SaveCoffeeStats getSaveCoffeeStats() {
         return saveCoffeeStats;
     }
+
+
+    /**
+     * getDatabaseHelper returns instance of DatabaseHelper class
+     */
+    public DatabaseHelper getDatabaseHelper() {
+        if(databaseHelper == null ) {
+            databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /*
+         *  You'll need this in your class to release the helper when done.
+         */
+        if (databaseHelper != null) {
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
+    }
 }
+

@@ -4,6 +4,8 @@ import android.apex.ge.coffee.Retrofit.Model.ProdTransactionData;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.List;
 
@@ -13,10 +15,13 @@ import java.util.List;
  * SaveCoffeeStats web service
  */
 
+
+@DatabaseTable(tableName = "saveCoffeeStats")
 public class SaveCoffeeStats {
 
     @SerializedName("CoffeeAcc")
     @Expose
+    @DatabaseField
     private String coffeeAcc;
 
     @SerializedName("VanAcc")
