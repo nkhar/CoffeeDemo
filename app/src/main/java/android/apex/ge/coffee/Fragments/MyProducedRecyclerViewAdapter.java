@@ -43,7 +43,7 @@ public class MyProducedRecyclerViewAdapter extends RecyclerViewListAdapter<MyPro
 
         holder.producedListResult = value;
 
-        holder.mProducedProPPIDTextView.setText(value.getProdPPID());
+        holder.mProducedProdPPIDTextView.setText(value.getProdPPID());
         holder.mProducedNameTextView.setText(value.getName());
         holder.mProducedBCodeTextView.setText(value.getbCode());
         holder.mProducedInCodeTextView.setText(value.getInCode());
@@ -76,7 +76,7 @@ public class MyProducedRecyclerViewAdapter extends RecyclerViewListAdapter<MyPro
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public final View mView;
-        public final TextView mProducedProPPIDTextView;
+        public final TextView mProducedProdPPIDTextView;
         public final TextView mProducedNameTextView;
         public final TextView mProducedBCodeTextView;
         public final TextView mProducedInCodeTextView;
@@ -91,7 +91,7 @@ public class MyProducedRecyclerViewAdapter extends RecyclerViewListAdapter<MyPro
             // to access the context from any ViewHolder instance.
             super(itemView);
             mView = itemView;
-            mProducedProPPIDTextView = itemView.findViewById(R.id.page_produced_ProdPPID);
+            mProducedProdPPIDTextView = itemView.findViewById(R.id.page_produced_ProdPPID);
             mProducedNameTextView = itemView.findViewById(R.id.page_produced_Name);
             mProducedBCodeTextView = itemView.findViewById(R.id.page_produced_BCode);
             mProducedInCodeTextView = itemView.findViewById(R.id.page_produced_InCode);

@@ -62,7 +62,7 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
             holder.mSaleQuantity2TextView.setText("");
         }
 
-        holder.mSaleProPPIDTextView.setText(value.getProdPPID());
+        holder.mSaleProdPPIDTextView.setText(value.getProdPPID());
         holder.mSaleNameTextView.setText(value.getName());
         //holder.mSaleVanRCountTextView.setText(String.valueOf(value.getVanRCount()));
         final ILibObjectCrud listener = getmListener();
@@ -91,7 +91,7 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public final View mView;
-        public final TextView mSaleProPPIDTextView;
+        public final TextView mSaleProdPPIDTextView;
         public final TextView mSaleNameTextView;
         public final TextView mSaleVanRCountTextView;
         public final TextView mSaleQuantity2TextView;
@@ -102,7 +102,7 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
             // to access the context from any ViewHolder instance.
             super(itemView);
             mView = itemView;
-            mSaleProPPIDTextView = itemView.findViewById(R.id.page_sale_ProdPPID);
+            mSaleProdPPIDTextView = itemView.findViewById(R.id.page_sale_ProdPPID);
             mSaleNameTextView = itemView.findViewById(R.id.page_sale_Name);
             mSaleVanRCountTextView = itemView.findViewById(R.id.page_sale_VanRCount);
             mSaleQuantity2TextView = itemView.findViewById(R.id.page_sale_quantity2);

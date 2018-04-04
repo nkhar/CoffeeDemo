@@ -43,7 +43,7 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
 
         holder.rawMaterialsListResult = value;
 
-        holder.mRawMaterialsProPPIDTextView.setText(value.getProdPPID());
+        holder.mRawMaterialsProdPPIDTextView.setText(value.getProdPPID());
         holder.mRawMaterialsNameTextView.setText(value.getName());
         holder.mRawMaterialsBCodeTextView.setText(value.getbCode());
         holder.mRawMaterialsInCodeTextView.setText(value.getInCode());
@@ -76,7 +76,7 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public final View mView;
-        public final TextView mRawMaterialsProPPIDTextView;
+        public final TextView mRawMaterialsProdPPIDTextView;
         public final TextView mRawMaterialsNameTextView;
         public final TextView mRawMaterialsBCodeTextView;
         public final TextView mRawMaterialsInCodeTextView;
@@ -90,7 +90,7 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
             // to access the context from any ViewHolder instance.
             super(itemView);
             mView = itemView;
-            mRawMaterialsProPPIDTextView = itemView.findViewById(R.id.page_raw_materials_ProdPPID);
+            mRawMaterialsProdPPIDTextView = itemView.findViewById(R.id.page_raw_materials_ProdPPID);
             mRawMaterialsNameTextView = itemView.findViewById(R.id.page_raw_materials_Name);
             mRawMaterialsBCodeTextView = itemView.findViewById(R.id.page_raw_materials_BCode);
             mRawMaterialsInCodeTextView = itemView.findViewById(R.id.page_raw_materials_InCode);
