@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -15,7 +14,6 @@
         android:layout_marginStart="@dimen/text_margin_8"
         android:layout_marginTop="@dimen/text_margin_8"
         android:maxLines="1"
-        android:text="alpen gold თხილით da peanut 90გ შოკოლადის ფილა 28ც/ყ"
         app:layout_constraintEnd_toStartOf="@+id/page_sale_VanRCount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

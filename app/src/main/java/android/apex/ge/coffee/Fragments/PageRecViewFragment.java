@@ -45,13 +45,12 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
     RecyclerView recyclerView;
     RecyclerViewListAdapter adapter;
 
-    List<ProdTransactionData> listProdTransactionData;
-    HashMap<String, ProdTransactionData> prodPPIDProdTransactionDataHashMap = new HashMap<>();
+    private List<ProdTransactionData> listProdTransactionData;
+    private HashMap<String, ProdTransactionData> prodPPIDProdTransactionDataHashMap = new HashMap<>();
 
     private final int mColumnCount = 1;
 
-    public static final String ARG_PAGE = "ARG_PAGE";
-
+    private static final String ARG_PAGE = "ARG_PAGE";
     private final int REQUEST_CODE_DIALOG_FRAGMENT = 300;
 
     private int mPage;
@@ -133,7 +132,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
             adapter = new MyRawMaterialsRecyclerViewAdapter(new ArrayList<ProductData>());
             getRawMaterialsListFromAPI(coffeeService);
         } else {
-            return;
+           /* return;*/
 
         }
     }
@@ -265,7 +264,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         prodTransData.setCurICount(Float.parseFloat(inputNumber1));
         prodTransData.setCurSCount(Float.parseFloat(inputNumber2));
         listProdTransactionData.add(prodTransData);
-        ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
+        setSaveCoffeeStatsSaleAndTransit();
         prodPPIDProdTransactionDataHashMap.put(prodPPID, prodTransData);
         Log.d(LOG_TAG, "\nwe are in createAndAddProdTransactionData the size of hashMap is: " + prodPPIDProdTransactionDataHashMap.size() + "\n");
     }
@@ -276,5 +275,10 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         }
         ((MySaleRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
 
+    }
+
+   private void setSaveCoffeeStatsSaleAndTransit() {
+       ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
+       /* ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(new ArrayList<ProdTransactionData>(prodPPIDProdTransactionDataHashMap.values()));*/
     }
 }
