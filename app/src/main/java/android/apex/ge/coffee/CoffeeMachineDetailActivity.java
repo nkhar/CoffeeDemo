@@ -54,7 +54,11 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         saveCoffeeStats.setCoffeeAcc("1610003000");
         saveCoffeeStats.setVanAcc("1610007800");
 
+        /*setting the ArrayLists*/
+        // Sale list
         saveCoffeeStats.setSaleAndTransit(new ArrayList<ProdTransactionData>());
+        // Produced list
+        saveCoffeeStats.setSaleProduced(new ArrayList<ProdTransactionData>());
 
     }
 

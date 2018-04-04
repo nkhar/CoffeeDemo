@@ -122,12 +122,14 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
              */
             listProdTransactionData = ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().getSaleAndTransit();
             populateSaleHashMap();
-            // ((MySaleRecyclerViewAdapter) adapter).updateHashMap();
-
 
         } else if (mPage == 2) {
             adapter = new MyProducedRecyclerViewAdapter(new ArrayList<ProductData>());
             getProducedGoodsListFromAPI(coffeeService);
+
+            listProdTransactionData = ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().getSaleProduced();
+            populateSaleHashMap();
+
         } else if (mPage == 3) {
             adapter = new MyRawMaterialsRecyclerViewAdapter(new ArrayList<ProductData>());
             getRawMaterialsListFromAPI(coffeeService);
@@ -252,7 +254,8 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
 
         createAndAddProdTransactionData(inputNumber1, inputNumber2, prodPPID);
 
-        ((MySaleRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
+        updateHashMapOfCorrectAdapter();
+        //((MySaleRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
 
     }
 
@@ -264,7 +267,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         prodTransData.setCurICount(Float.parseFloat(inputNumber1));
         prodTransData.setCurSCount(Float.parseFloat(inputNumber2));
         listProdTransactionData.add(prodTransData);
-        setSaveCoffeeStatsSaleAndTransit();
+        setCorrectSaveCoffeeStatsProdTransactionDataArrayList();
         prodPPIDProdTransactionDataHashMap.put(prodPPID, prodTransData);
         Log.d(LOG_TAG, "\nwe are in createAndAddProdTransactionData the size of hashMap is: " + prodPPIDProdTransactionDataHashMap.size() + "\n");
     }
@@ -273,12 +276,41 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         for (ProdTransactionData prodData : listProdTransactionData) {
             prodPPIDProdTransactionDataHashMap.put(prodData.getProdPPID(), prodData);
         }
-        ((MySaleRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
+
+        updateHashMapOfCorrectAdapter();
 
     }
 
-   private void setSaveCoffeeStatsSaleAndTransit() {
-       ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
+   private void setCorrectSaveCoffeeStatsProdTransactionDataArrayList() {
+
+       switch (mPage) {
+           case 1:((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
+               break;
+           case 2: ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleProduced(listProdTransactionData);
+               break;
+           case 3: Log.d(LOG_TAG, "This is one strange arrayList setter 3rd case statement");
+               break;
+           default: Log.d(LOG_TAG, "This is one strange arrayList setter switch statement");
+               break;
+       }
+
+
        /* ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(new ArrayList<ProdTransactionData>(prodPPIDProdTransactionDataHashMap.values()));*/
     }
+
+    private void updateHashMapOfCorrectAdapter() {
+        switch (mPage) {
+            case 1:((MySaleRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
+                break;
+            case 2: ((MyProducedRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
+                break;
+            case 3: Log.d(LOG_TAG, "This is one strange 3rd case statement");
+                break;
+            default: Log.d(LOG_TAG, "This is one strange switch statement");
+                break;
+        }
+
+    }
+
+
 }
