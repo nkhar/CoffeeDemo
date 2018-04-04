@@ -50,18 +50,29 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         /*
         Creating SaveCoffeeStats object
          */
+
+        createSaveCoffeeStatsObject();
+
+
+    }
+
+    private void createSaveCoffeeStatsObject() {
         saveCoffeeStats = new SaveCoffeeStats();
         saveCoffeeStats.setCoffeeAcc("1610003000");
         saveCoffeeStats.setVanAcc("1610007800");
 
+        // set Primitive values
+        saveCoffeeStats.setCoffeeCupsMade(1001);
+        saveCoffeeStats.setMoneyTaken(231.5f);
+
         /*setting the ArrayLists*/
         // Sale list
         saveCoffeeStats.setSaleAndTransit(new ArrayList<ProdTransactionData>());
-        // Produced list
+        // Sale Produced list
         saveCoffeeStats.setSaleProduced(new ArrayList<ProdTransactionData>());
-
+        // Raw Materials list
+        saveCoffeeStats.setTransitRawMaterials(new ArrayList<ProdTransactionData>());
     }
-
 
 
     public SaveCoffeeStats getSaveCoffeeStats() {
