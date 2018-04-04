@@ -133,6 +133,9 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         } else if (mPage == 3) {
             adapter = new MyRawMaterialsRecyclerViewAdapter(new ArrayList<ProductData>());
             getRawMaterialsListFromAPI(coffeeService);
+
+            listProdTransactionData = ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().getTransitRawMaterials();
+            populateSaleHashMap();
         } else {
            /* return;*/
 
@@ -267,7 +270,10 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         prodTransData.setCurICount(Float.parseFloat(inputNumber1));
         prodTransData.setCurSCount(Float.parseFloat(inputNumber2));
         listProdTransactionData.add(prodTransData);
+
         setCorrectSaveCoffeeStatsProdTransactionDataArrayList();
+
+
         prodPPIDProdTransactionDataHashMap.put(prodPPID, prodTransData);
         Log.d(LOG_TAG, "\nwe are in createAndAddProdTransactionData the size of hashMap is: " + prodPPIDProdTransactionDataHashMap.size() + "\n");
     }
@@ -288,7 +294,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
                break;
            case 2: ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleProduced(listProdTransactionData);
                break;
-           case 3: Log.d(LOG_TAG, "This is one strange arrayList setter 3rd case statement");
+           case 3: ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setTransitRawMaterials(listProdTransactionData);
                break;
            default: Log.d(LOG_TAG, "This is one strange arrayList setter switch statement");
                break;
@@ -304,7 +310,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
                 break;
             case 2: ((MyProducedRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
                 break;
-            case 3: Log.d(LOG_TAG, "This is one strange 3rd case statement");
+            case 3: ((MyRawMaterialsRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
                 break;
             default: Log.d(LOG_TAG, "This is one strange switch statement");
                 break;

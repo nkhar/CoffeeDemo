@@ -1,6 +1,7 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
+import android.apex.ge.coffee.Retrofit.Model.ProdTransactionData;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Nika on 23/03/2018.
@@ -21,10 +24,16 @@ import java.util.List;
 public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<MyRawMaterialsRecyclerViewAdapter.ViewHolder, ProductData> {
 
     protected final String LOG_TAG = "MyRMaterialsRecAdapter";
+    private Map<String, ProdTransactionData> prodTransactionDataHashMap = new HashMap<>();
 
     public MyRawMaterialsRecyclerViewAdapter(List<ProductData> items) {
         super(items);
         Log.d(LOG_TAG, "We are in MyRawMaterialsRecyclerViewAdapter   constructor   ");
+    }
+
+    public void updateHashMap(HashMap<String, ProdTransactionData> hashMapData) {
+        prodTransactionDataHashMap = hashMapData;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -43,13 +52,20 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
 
         holder.rawMaterialsListResult = value;
 
+
+        if (prodTransactionDataHashMap.get(value.getProdPPID()) != null) {
+            Log.d(LOG_TAG, prodTransactionDataHashMap.get(value.getProdPPID()).getProdPPID());
+            holder.mRawMaterialsVanRCountTextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getProdPPID()));
+            holder.mRawMaterialsQuantity2TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurICount()));
+        } else {
+            holder.mRawMaterialsVanRCountTextView.setText("");
+            holder.mRawMaterialsQuantity2TextView.setText("");
+        }
+
+
         holder.mRawMaterialsProdPPIDTextView.setText(value.getProdPPID());
         holder.mRawMaterialsNameTextView.setText(value.getName());
-        holder.mRawMaterialsBCodeTextView.setText(value.getbCode());
-        holder.mRawMaterialsInCodeTextView.setText(value.getInCode());
-        holder.mRawMaterialsPackCountTextView.setText(String.valueOf(value.getPackCount()));
-        holder.mRawMaterialsRCountTextView.setText(String.valueOf(value.getrCount()));
-        holder.mRawMaterialsVanRCountTextView.setText(String.valueOf(value.getVanRCount()));
+
         final ILibObjectCrud listener = getmListener();
         if (listener != null) {
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -78,11 +94,9 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
         public final View mView;
         public final TextView mRawMaterialsProdPPIDTextView;
         public final TextView mRawMaterialsNameTextView;
-        public final TextView mRawMaterialsBCodeTextView;
-        public final TextView mRawMaterialsInCodeTextView;
-        public final TextView mRawMaterialsPackCountTextView;
-        public final TextView mRawMaterialsRCountTextView;
         public final TextView mRawMaterialsVanRCountTextView;
+        public final TextView mRawMaterialsQuantity2TextView;
+
         public ProductData rawMaterialsListResult;
 
         public ViewHolder(View itemView) {
@@ -92,11 +106,8 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
             mView = itemView;
             mRawMaterialsProdPPIDTextView = itemView.findViewById(R.id.page_raw_materials_ProdPPID);
             mRawMaterialsNameTextView = itemView.findViewById(R.id.page_raw_materials_Name);
-            mRawMaterialsBCodeTextView = itemView.findViewById(R.id.page_raw_materials_BCode);
-            mRawMaterialsInCodeTextView = itemView.findViewById(R.id.page_raw_materials_InCode);
-            mRawMaterialsPackCountTextView = itemView.findViewById(R.id.page_raw_materials_PackCount);
-            mRawMaterialsRCountTextView = itemView.findViewById(R.id.page_raw_materials_RCount);
             mRawMaterialsVanRCountTextView = itemView.findViewById(R.id.page_raw_materials_VanRCount);
+            mRawMaterialsQuantity2TextView = itemView.findViewById(R.id.page_raw_materials_quantity2);
         }
 
     }
