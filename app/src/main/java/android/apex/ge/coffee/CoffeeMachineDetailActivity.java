@@ -193,7 +193,8 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         super.onPause();
         //Check if activity is finishing.
         if(isFinishing()){
-            saveToDatabase();
+            Log.d(LOG_TAG, "\n\n is Finishing \n\n");
+            //saveToDatabase();
         }
 
     }
