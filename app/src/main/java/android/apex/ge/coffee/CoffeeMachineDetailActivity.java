@@ -113,6 +113,8 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         saveCoffeeStats.setSaleProduced(new ArrayList<ProdTransactionData>());
         // Raw Materials list
         saveCoffeeStats.setTransitRawMaterials(new ArrayList<ProdTransactionData>());
+
+        Log.d(LOG_TAG, "\n\n We have created a new SaveCoffeeStats object");
     }
 
 
@@ -126,6 +128,7 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         }
 
         saveCoffeeStats =  convertFromJSON(saveCoffeeStatsJSON.getSaveCoffeeStatsString());
+        Log.d(LOG_TAG, "\n\n We have created from DATABASE a SaveCoffeeStats object");
     }
 
 
@@ -135,6 +138,7 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
 
 
     private void saveToDatabase() {
+        Log.d(LOG_TAG, "\n\n We are saving to DATABASE");
         String convertedString = convertToJSON();
 
         createSaveCoffeeStatsJSONObject(convertedString);
@@ -143,6 +147,7 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
             saveCoffeeStatsJSONDao = getDatabaseHelper().getSaveCoffeeStatsJSONDao();
             Log.d(LOG_TAG, "WE got saveCoffeeStatsJSONDao");
             saveCoffeeStatsJSONDao.queryForAll().size();
+            saveCoffeeStatsJSONDao.create(saveCoffeeStatsJSON);
 
 
 
@@ -194,7 +199,7 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         //Check if activity is finishing.
         if(isFinishing()){
             Log.d(LOG_TAG, "\n\n is Finishing \n\n");
-            //saveToDatabase();
+            saveToDatabase();
         }
 
     }
