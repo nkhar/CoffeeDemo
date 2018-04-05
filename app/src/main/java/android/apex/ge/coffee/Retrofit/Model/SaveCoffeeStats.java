@@ -16,12 +16,11 @@ import java.util.List;
  */
 
 
-@DatabaseTable(tableName = "saveCoffeeStats")
+
 public class SaveCoffeeStats {
 
     @SerializedName("CoffeeAcc")
     @Expose
-    @DatabaseField
     private String coffeeAcc;
 
     @SerializedName("VanAcc")

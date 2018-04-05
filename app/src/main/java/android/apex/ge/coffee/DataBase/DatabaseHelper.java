@@ -1,7 +1,7 @@
 package android.apex.ge.coffee.DataBase;
 
 
-import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
+import android.apex.ge.coffee.JavaToJSON.SaveCoffeeStatsJSON;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -12,6 +12,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
+import java.util.UUID;
 
 /**
  * Database helper class used to manage the creation and upgrading of your database. This class also usually provides
@@ -25,7 +26,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // the DAO object we use to access the various data tables
-    private Dao<SaveCoffeeStats, Integer> saveCoffeeStatsDao = null;
+    private Dao<SaveCoffeeStatsJSON, UUID> saveCoffeeStatsJSONDao = null;
 
 
 
@@ -43,7 +44,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
         try {
             Log.i(DatabaseHelper.class.getName(), "onCreateDatabaseHelper");
-            TableUtils.createTable(connectionSource, SaveCoffeeStats.class);
+            TableUtils.createTable(connectionSource, SaveCoffeeStatsJSON.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             // throw new RuntimeException(e);
@@ -68,7 +69,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             Log.i(DatabaseHelper.class.getName(), "onUpgrade");
-            TableUtils.dropTable(connectionSource, SaveCoffeeStats.class, true);
+            TableUtils.dropTable(connectionSource, SaveCoffeeStatsJSON.class, true);
             // after we drop the old databases, we create the new ones
             onCreate(sqLiteDatabase, connectionSource);
         } catch (SQLException e) {
@@ -81,11 +82,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * Create the getDao methods of all database tables to access those from android code.
      * Insert, delete, read, update everything will be happening through DAOs
      */
-    public Dao<SaveCoffeeStats, Integer> getSaveCoffeeStatsDao() throws SQLException {
-        if (saveCoffeeStatsDao == null) {
-            saveCoffeeStatsDao = getDao(SaveCoffeeStats.class);
+    public Dao<SaveCoffeeStatsJSON, UUID> getSaveCoffeeStatsJSONDao() throws SQLException {
+        if (saveCoffeeStatsJSONDao == null) {
+            saveCoffeeStatsJSONDao = getDao(SaveCoffeeStatsJSON.class);
         }
-        return saveCoffeeStatsDao;
+        return saveCoffeeStatsJSONDao;
     }
 
 
@@ -95,7 +96,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void close() {
         super.close();
-        saveCoffeeStatsDao = null;
+        saveCoffeeStatsJSONDao = null;
 
     }
 }

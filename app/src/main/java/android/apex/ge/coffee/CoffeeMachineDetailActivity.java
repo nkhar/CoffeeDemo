@@ -2,6 +2,7 @@ package android.apex.ge.coffee;
 
 import android.apex.ge.coffee.DataBase.DatabaseHelper;
 import android.apex.ge.coffee.Fragments.CoffeeFragmentPagerAdapter;
+import android.apex.ge.coffee.JavaToJSON.SaveCoffeeStatsJSON;
 import android.apex.ge.coffee.Retrofit.Model.ProdTransactionData;
 import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
 import android.os.Bundle;
@@ -11,9 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * This class represents Activity, which starts when an Item is selected in RecyclerView of
@@ -30,9 +35,13 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
     protected final String LOG_TAG = "CoffeeMachDetAct";
 
     private SaveCoffeeStats saveCoffeeStats;
+    private SaveCoffeeStatsJSON saveCoffeeStatsJSON;
 
     // Reference of DatabaseHelper class to access its DAOs and other components pushing a
     protected DatabaseHelper databaseHelper = null;
+
+    // Declaration of DAO to interact with corresponding Author table
+    protected Dao<SaveCoffeeStatsJSON, UUID> saveCoffeeStatsJSONDao;
 
 
     @Override
@@ -80,6 +89,38 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         saveCoffeeStats.setTransitRawMaterials(new ArrayList<ProdTransactionData>());
     }
 
+    private void saveToDatabase() {
+        String convertedString = convertToJSON();
+
+        createSaveCoffeeStatsJSONObject(convertedString);
+
+        try {
+            saveCoffeeStatsJSONDao = getDatabaseHelper().getSaveCoffeeStatsJSONDao();
+            Log.d(LOG_TAG, "WE got saveCoffeeStatsJSONDao");
+            saveCoffeeStatsJSONDao.queryForAll().size();
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Log.i(LOG_TAG, "Done with saveCoffeeStatsJSONDao " + System.currentTimeMillis());
+
+    }
+
+    private String convertToJSON() {
+        Gson gson = new Gson();
+        return  gson.toJson(saveCoffeeStats);
+    }
+
+    private void createSaveCoffeeStatsJSONObject(String conString) {
+        saveCoffeeStatsJSON = new SaveCoffeeStatsJSON();
+        saveCoffeeStatsJSON.setSaveCoffeeStatsId(UUID.randomUUID());
+        saveCoffeeStatsJSON.setSaveCoffeeStatsString(conString);
+    }
+
+
 
     public SaveCoffeeStats getSaveCoffeeStats() {
         return saveCoffeeStats;
@@ -90,13 +131,23 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
      * getDatabaseHelper returns instance of DatabaseHelper class
      */
     public DatabaseHelper getDatabaseHelper() {
-        if(databaseHelper == null ) {
+        if (databaseHelper == null) {
             databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
         }
         return databaseHelper;
     }
 
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //Check if activity is finishing.
+        if(isFinishing()){
+            saveToDatabase();
+        }
+
+    }
 
     @Override
     protected void onDestroy() {
