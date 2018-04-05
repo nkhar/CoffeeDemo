@@ -123,6 +123,7 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
     private void createFromDatabaseSaveCoffeeStatsObject() {
         try {
             saveCoffeeStatsJSON = saveCoffeeStatsJSONDao.queryForAll().get(0);
+            saveCoffeeStatsJSONDao.delete(saveCoffeeStatsJSON);
         } catch (SQLException e) {
             e.printStackTrace();
         }
