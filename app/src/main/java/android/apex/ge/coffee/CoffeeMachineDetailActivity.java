@@ -66,9 +66,35 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         Creating SaveCoffeeStats object
          */
 
-        createSaveCoffeeStatsObject();
+        if(checkIfSaveCoffeeStatsObjectHasToBeCreated()){
+            createSaveCoffeeStatsObject();
+        }
+        else{
+            createFromDatabaseSaveCoffeeStatsObject();
+        }
 
 
+
+    }
+
+
+
+    private boolean checkIfSaveCoffeeStatsObjectHasToBeCreated() {
+
+        boolean flag = true;
+
+        try {
+            saveCoffeeStatsJSONDao = getDatabaseHelper().getSaveCoffeeStatsJSONDao();
+            Log.d(LOG_TAG, "WE got saveCoffeeStatsJSONDao");
+            if(saveCoffeeStatsJSONDao.queryForAll().size() == 1){
+                flag = false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return flag;
     }
 
     private void createSaveCoffeeStatsObject() {
@@ -88,6 +114,25 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         // Raw Materials list
         saveCoffeeStats.setTransitRawMaterials(new ArrayList<ProdTransactionData>());
     }
+
+
+
+
+    private void createFromDatabaseSaveCoffeeStatsObject() {
+        try {
+            saveCoffeeStatsJSON = saveCoffeeStatsJSONDao.queryForAll().get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        saveCoffeeStats =  convertFromJSON(saveCoffeeStatsJSON.getSaveCoffeeStatsString());
+    }
+
+
+
+
+
+
 
     private void saveToDatabase() {
         String convertedString = convertToJSON();
@@ -112,6 +157,10 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
     private String convertToJSON() {
         Gson gson = new Gson();
         return  gson.toJson(saveCoffeeStats);
+    }
+    private SaveCoffeeStats convertFromJSON( String jsonString) {
+        Gson gson = new Gson();
+        return gson.fromJson(jsonString, SaveCoffeeStats.class);
     }
 
     private void createSaveCoffeeStatsJSONObject(String conString) {
