@@ -89,42 +89,45 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
-
-                Call<CoffeeMachineList> coffees = service.listCoffeeMachines("1610003000");
-
-
-                coffees.enqueue(new Callback<CoffeeMachineList>() {
-                    @Override
-                    public void onResponse(Call<CoffeeMachineList> call, Response<CoffeeMachineList> response) {
-                        if (response.isSuccessful()) {
-                            Log.d(LOG_TAG, response.code() + "");
-
-
-                            List<CoffeeMachine> kofe = response.body().getResult();
-                            adapter = new MyCoffeeMachineRecyclerViewAdapter(kofe);
-                            adapter.setmListener(MachineFragment.this);
-                            MachineFragment.this.recyclerView.setAdapter(adapter);
-
-                            textView.setText(adapter.getItemCount() + " \n\n " + kofe.size() + "\n\n");
-                        } else
-                            textView.setText(response.toString());
-                        textView.setMovementMethod(new ScrollingMovementMethod());
-                    }
-
-                    @Override
-                    public void onFailure(Call<CoffeeMachineList> call, Throwable t) {
-                        call.cancel();
-                        textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
-                    }
-                });
+                displayCoffeeMachineList();
 
             }
         });
 
 
         return view;
+    }
+
+    private void displayCoffeeMachineList() {
+        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+
+        Call<CoffeeMachineList> coffees = service.listCoffeeMachines("1610003000");
+
+
+        coffees.enqueue(new Callback<CoffeeMachineList>() {
+            @Override
+            public void onResponse(Call<CoffeeMachineList> call, Response<CoffeeMachineList> response) {
+                if (response.isSuccessful()) {
+                    Log.d(LOG_TAG, response.code() + "");
+
+
+                    List<CoffeeMachine> kofe = response.body().getResult();
+                    adapter = new MyCoffeeMachineRecyclerViewAdapter(kofe);
+                    adapter.setmListener(MachineFragment.this);
+                    MachineFragment.this.recyclerView.setAdapter(adapter);
+
+                    textView.setText(adapter.getItemCount() + " \n\n " + kofe.size() + "\n\n");
+                } else
+                    textView.setText(response.toString());
+                textView.setMovementMethod(new ScrollingMovementMethod());
+            }
+
+            @Override
+            public void onFailure(Call<CoffeeMachineList> call, Throwable t) {
+                call.cancel();
+                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+            }
+        });
     }
 
     @Override
