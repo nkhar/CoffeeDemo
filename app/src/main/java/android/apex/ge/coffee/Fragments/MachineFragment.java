@@ -89,7 +89,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayCoffeeMachineList();
+                getCoffeeMachineListFromAPI();
 
             }
         });
@@ -98,7 +98,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
         return view;
     }
 
-    private void displayCoffeeMachineList() {
+    private void getCoffeeMachineListFromAPI() {
         CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
         Call<CoffeeMachineList> coffees = service.listCoffeeMachines("1610003000");
