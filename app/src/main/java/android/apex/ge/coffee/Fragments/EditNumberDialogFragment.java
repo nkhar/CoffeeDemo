@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * This class displays a dialog for providing number of items.
@@ -140,7 +141,29 @@ public class EditNumberDialogFragment extends DialogFragment {
         // Notice the use of `getTargetFragment` which will be set when the dialog is displayed
         EditNumberDialogListener listener = (EditNumberDialogListener) getTargetFragment();
 
-        listener.onFinishEditDialog(mEditNumberText1.getText().toString(), mEditNumberText2.getText().toString(), getArguments().getString("prodPPID"));
-        dismiss();
+        if(checkIfNumbersWereEntered(mEditNumberText1.getText().toString(), mEditNumberText2.getText().toString())) {
+            listener.onFinishEditDialog(mEditNumberText1.getText().toString(), mEditNumberText2.getText().toString(), getArguments().getString("prodPPID"));
+            dismiss();
+        }
+        else {
+            mEditNumberText1.getText().clear();
+            mEditNumberText2.getText().clear();
+            Toast.makeText(this.getActivity(), "One of the fields entered was not a numeric", Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+
+    private boolean checkIfNumbersWereEntered(String stringNumber1, String stringNumber2) {
+        boolean flag = true;
+        if(!(isNumeric(stringNumber1)) || !(isNumeric(stringNumber2))) {
+            flag = false;
+        }
+
+        return flag;
+    }
+
+    private boolean isNumeric(String str) {
+        return str !=null && str.matches("\\d*\\.?\\d+");
     }
 }

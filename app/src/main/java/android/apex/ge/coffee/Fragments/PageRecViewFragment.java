@@ -253,7 +253,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
 
     @Override
     public void onFinishEditDialog(String inputNumber1, String inputNumber2, String prodPPID) {
-        Log.d(LOG_TAG, "Numbers entered were: \n" + Integer.parseInt(inputNumber1) + "\n" + Integer.parseInt(inputNumber2));
+        Log.d(LOG_TAG, "Numbers entered were: \n" + Double.parseDouble(inputNumber1) + "\n" + Double.parseDouble(inputNumber2));
 
         createAndAddProdTransactionData(inputNumber1, inputNumber2, prodPPID);
 
