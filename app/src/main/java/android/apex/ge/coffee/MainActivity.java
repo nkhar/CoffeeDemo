@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
             MainActivity.this.finish();*/
         } else if (id == R.id.nav_logout) {
-            Log.d(LOG_TAG, "send item was clicked");
+            Log.d(LOG_TAG, "log out item was clicked");
             logOut();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
