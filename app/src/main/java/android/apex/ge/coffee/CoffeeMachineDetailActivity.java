@@ -197,11 +197,13 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d(LOG_TAG, "\n\n We are in onPause \n\n");
+        saveToDatabase();
         //Check if activity is finishing.
-        if(isFinishing()){
+       /* if(isFinishing()){
             Log.d(LOG_TAG, "\n\n is Finishing \n\n");
             saveToDatabase();
-        }
+        }*/
 
     }
 
