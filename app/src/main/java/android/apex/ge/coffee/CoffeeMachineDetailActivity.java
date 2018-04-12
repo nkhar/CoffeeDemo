@@ -123,7 +123,7 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
     private void createFromDatabaseSaveCoffeeStatsObject() {
         try {
             saveCoffeeStatsJSON = saveCoffeeStatsJSONDao.queryForAll().get(0);
-            saveCoffeeStatsJSONDao.delete(saveCoffeeStatsJSON);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -147,7 +147,9 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         try {
             saveCoffeeStatsJSONDao = getDatabaseHelper().getSaveCoffeeStatsJSONDao();
             Log.d(LOG_TAG, "WE got saveCoffeeStatsJSONDao");
-            saveCoffeeStatsJSONDao.queryForAll().size();
+            if (saveCoffeeStatsJSONDao.queryForAll().size() == 1) {
+                saveCoffeeStatsJSONDao.delete(saveCoffeeStatsJSONDao.queryForAll().get(0));
+            }
             saveCoffeeStatsJSONDao.create(saveCoffeeStatsJSON);
 
 
