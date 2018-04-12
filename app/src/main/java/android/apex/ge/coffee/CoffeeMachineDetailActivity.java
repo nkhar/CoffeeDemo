@@ -85,7 +85,7 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
 
         try {
             saveCoffeeStatsJSONDao = getDatabaseHelper().getSaveCoffeeStatsJSONDao();
-            Log.d(LOG_TAG, "WE got saveCoffeeStatsJSONDao");
+            Log.d(LOG_TAG, "WE got saveCoffeeStatsJSONDao in checkIfSaveCoffeeStatsObjectHasToBeCreated");
             if(saveCoffeeStatsJSONDao.queryForAll().size() == 1){
                 flag = false;
             }
