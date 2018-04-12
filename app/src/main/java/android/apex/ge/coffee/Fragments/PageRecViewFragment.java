@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -154,6 +155,12 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
                     Log.d(LOG_TAG, response.code() + "");
 
                     List<ProductData> rawMaterials = response.body().getResult();
+
+                    /*
+                     sorting the list
+                      */
+                    Collections.sort(rawMaterials);
+
                     // Here is the real list
                     adapter.updateList(rawMaterials);
 
@@ -182,6 +189,12 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
                     Log.d(LOG_TAG, response.code() + "");
 
                     List<ProductData> produced = response.body().getResult();
+
+                    /*
+                     sorting the list
+                      */
+                    Collections.sort(produced);
+
                     // Here is the real list
                     adapter.updateList(produced);
 
@@ -211,6 +224,11 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
                     Log.d(LOG_TAG, response.code() + "");
 
                     List<ProductData> sales = response.body().getResult();
+                    /*
+                     sorting the list
+                      */
+                    Collections.sort(sales);
+
                     // Here is the real list
                     adapter.updateList(sales);
 

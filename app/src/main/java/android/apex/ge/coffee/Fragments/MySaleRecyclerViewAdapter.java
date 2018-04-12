@@ -26,7 +26,7 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
     protected final String LOG_TAG = "MySaleRecyclerVAdapter";
     private Map <String, ProdTransactionData>prodTransactionDataHashMap = new HashMap<>();
 
-    public MySaleRecyclerViewAdapter(List<ProductData> items) {
+     MySaleRecyclerViewAdapter(List<ProductData> items) {
         super(items);
         Log.d(LOG_TAG, "We are in MySaleRecyclerViewAdapter   constructor   ");
     }
@@ -87,17 +87,17 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
-    public class ViewHolder extends RecyclerView.ViewHolder {
+     class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public final View mView;
-        public final TextView mSaleProdPPIDTextView;
-        public final TextView mSaleNameTextView;
-        public final TextView mSaleVanRCountTextView;
-        public final TextView mSaleQuantity2TextView;
-        public ProductData saleListResult;
+         final View mView;
+         final TextView mSaleProdPPIDTextView;
+         final TextView mSaleNameTextView;
+         final TextView mSaleVanRCountTextView;
+         final TextView mSaleQuantity2TextView;
+         ProductData saleListResult;
 
-        public ViewHolder(View itemView) {
+         ViewHolder(View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);

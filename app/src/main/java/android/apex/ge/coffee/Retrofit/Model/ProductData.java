@@ -1,5 +1,7 @@
 package android.apex.ge.coffee.Retrofit.Model;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * This class is used for (de)serialization of ProdData object.
  */
 
-public class ProductData {
+public class ProductData implements Comparable<ProductData> {
 
     @SerializedName("ProdPPID")
     @Expose
@@ -104,6 +106,12 @@ public class ProductData {
                 .toString();
     }
 
+
+    @Override
+    public int compareTo(@NonNull ProductData o) {
+
+        return this.getName().compareTo(o.getName());
+    }
 }
 
 
