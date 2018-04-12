@@ -64,9 +64,9 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
         Here we are using the same layout as with MachineFragment class: fragment_machine
          */
 
-        View view = inflater.inflate(R.layout.fragment_machine, container, false);
+        View view = inflater.inflate(R.layout.fragment_pre_order, container, false);
 
-        textView = view.findViewById(R.id.text_view_for_machine);
+        textView = view.findViewById(R.id.text_view_for_pre_order);
         textView.setText("This is PreOrders");
 
         /*
@@ -74,7 +74,7 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
          */
 
         Context context = view.getContext();
-        recyclerView = view.findViewById(R.id.coffee_machines_recycler_view);
+        recyclerView = view.findViewById(R.id.pre_order_recycler_view);
         if (mColumnCount <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
         } else {
@@ -88,7 +88,7 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
          /*
         Floating Action Button
          */
-        FloatingActionButton fab = view.findViewById(R.id.fab_fragment_machine);
+        FloatingActionButton fab = view.findViewById(R.id.fab_fragment_pre_order);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
