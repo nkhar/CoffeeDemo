@@ -68,7 +68,6 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         View view = inflater.inflate(R.layout.fragment_machine, container, false);
 
         textView = view.findViewById(R.id.text_view_for_machine);
-        textView.setText("This is Documents");
 
         /*
         Recycler View
@@ -120,10 +119,10 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
                     adapter = new MyCoffeeDocRecyclerViewAdapter(coffeeDocs);
                     adapter.setmListener(DocumentFragment.this);
                     DocumentFragment.this.recyclerView.setAdapter(adapter);
-                    textView.setText(adapter.getItemCount() + " \n\n " + coffeeDocs.size() + "\n\n");
-                } else
+                } else {
                     textView.setText(response.toString());
-                textView.setMovementMethod(new ScrollingMovementMethod());
+                    textView.setMovementMethod(new ScrollingMovementMethod());
+                }
             }
 
             @Override
@@ -150,7 +149,6 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
                     adapter = new MyProducedRecyclerViewAdapter(goodsDocs);
                     adapter.setmListener(DocumentFragment.this);
                     DocumentFragment.this.recyclerView.setAdapter(adapter);
-                    textView.setText(adapter.getItemCount() + " \n\n " + goodsDocs.size() + "\n\n");
 
                 } else {
                     Log.d(LOG_TAG, response.code() + "");

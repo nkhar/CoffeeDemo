@@ -88,7 +88,6 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         View view = inflater.inflate(R.layout.fragment_page_sale, container, false);
         // TextView
         textView = view.findViewById(R.id.text_view_page_sale);
-        textView.setText("Fragment #" + mPage);
 
         // RecyclerView
         Context context = view.getContext();
@@ -161,10 +160,10 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
                     // Here is the real list
                     adapter.updateList(rawMaterials);
 
-                    textView.setText(textView.getText() + " \n\n " + rawMaterials.size() + "\n\n");
-                } else
+                } else {
                     textView.setText(response.toString());
-                textView.setMovementMethod(new ScrollingMovementMethod());
+                    textView.setMovementMethod(new ScrollingMovementMethod());
+                }
 
             }
 
@@ -195,10 +194,10 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
                     // Here is the real list
                     adapter.updateList(produced);
 
-                    textView.setText(textView.getText() + " \n\n " + produced.size() + "\n\n");
-                } else
+                } else {
                     textView.setText(response.toString());
-                textView.setMovementMethod(new ScrollingMovementMethod());
+                    textView.setMovementMethod(new ScrollingMovementMethod());
+                }
             }
 
             @Override
@@ -229,10 +228,10 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
                     // Here is the real list
                     adapter.updateList(sales);
 
-                    textView.setText(textView.getText() + " \n\n " + sales.size() + "\n\n");
-                } else
+                } else {
                     textView.setText(response.toString());
-                textView.setMovementMethod(new ScrollingMovementMethod());
+                    textView.setMovementMethod(new ScrollingMovementMethod());
+                }
             }
 
             @Override

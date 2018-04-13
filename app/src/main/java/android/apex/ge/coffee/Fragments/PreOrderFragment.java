@@ -69,7 +69,6 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
         View view = inflater.inflate(R.layout.fragment_pre_order, container, false);
 
         textView = view.findViewById(R.id.text_view_for_pre_order);
-        textView.setText("This is PreOrders");
 
         /*
         Recycler View
@@ -128,10 +127,11 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
                                 displayCoffeeResponse += coffeeResult.toString();
 //                                Log.d(LOG_TAG, coffeeResult.getAcc().toString());
                             }*/
-                    textView.setText(adapter.getItemCount() + " \n\n " + accounts.size() + "\n\n");
-                } else
+
+                } else {
                     textView.setText(response.toString());
-                textView.setMovementMethod(new ScrollingMovementMethod());
+                    textView.setMovementMethod(new ScrollingMovementMethod());
+                }
             }
 
             @Override
@@ -173,10 +173,10 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
                     adapter = new MyProducedRecyclerViewAdapter(goods);
                     adapter.setmListener(PreOrderFragment.this);
                     PreOrderFragment.this.recyclerView.setAdapter(adapter);
-                    textView.setText(adapter.getItemCount() + " \n\n " + goods.size() + "\n\n");
-                } else
+                } else {
                     textView.setText(response.toString());
-                textView.setMovementMethod(new ScrollingMovementMethod());
+                    textView.setMovementMethod(new ScrollingMovementMethod());
+                }
             }
 
             @Override
