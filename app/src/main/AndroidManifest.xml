@@ -26,6 +26,10 @@
             android:label="@string/title_activity_coffee_machine_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".PreOrderActivity"
+            android:label="@string/title_activity_pre_order"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"></activity>
     </application>

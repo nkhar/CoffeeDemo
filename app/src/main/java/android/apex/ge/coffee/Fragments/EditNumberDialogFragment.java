@@ -1,13 +1,9 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -141,11 +137,10 @@ public class EditNumberDialogFragment extends DialogFragment {
         // Notice the use of `getTargetFragment` which will be set when the dialog is displayed
         EditNumberDialogListener listener = (EditNumberDialogListener) getTargetFragment();
 
-        if(checkIfNumbersWereEntered(mEditNumberText1.getText().toString(), mEditNumberText2.getText().toString())) {
+        if (checkIfNumbersWereEntered(mEditNumberText1.getText().toString(), mEditNumberText2.getText().toString())) {
             listener.onFinishEditDialog(mEditNumberText1.getText().toString(), mEditNumberText2.getText().toString(), getArguments().getString("prodPPID"));
             dismiss();
-        }
-        else {
+        } else {
             mEditNumberText1.getText().clear();
             mEditNumberText2.getText().clear();
             Toast.makeText(this.getActivity(), "One of the fields entered was not a numeric", Toast.LENGTH_LONG).show();
@@ -156,7 +151,7 @@ public class EditNumberDialogFragment extends DialogFragment {
 
     private boolean checkIfNumbersWereEntered(String stringNumber1, String stringNumber2) {
         boolean flag = true;
-        if(!(isNumeric(stringNumber1)) || !(isNumeric(stringNumber2))) {
+        if (!(isNumeric(stringNumber1)) || !(isNumeric(stringNumber2))) {
             flag = false;
         }
 
@@ -164,6 +159,6 @@ public class EditNumberDialogFragment extends DialogFragment {
     }
 
     private boolean isNumeric(String str) {
-        return str !=null && str.matches("\\d*\\.?\\d+");
+        return str != null && str.matches("\\d*\\.?\\d+");
     }
 }

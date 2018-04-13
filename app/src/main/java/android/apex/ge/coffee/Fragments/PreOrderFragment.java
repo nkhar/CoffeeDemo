@@ -1,5 +1,6 @@
 package android.apex.ge.coffee.Fragments;
 
+import android.apex.ge.coffee.PreOrderActivity;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
@@ -8,6 +9,7 @@ import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.Retrofit.PreOrderAccounts;
 import android.apex.ge.coffee.Retrofit.PreorderGoods;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -94,7 +96,9 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
             @Override
             public void onClick(View v) {
                 //getPreOrderAccountsFromAPI();
-                getPreOrderGoodsFromAPI();
+                //getPreOrderGoodsFromAPI();
+                Intent intent = new Intent(PreOrderFragment.this.getActivity(), PreOrderActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -2,6 +2,7 @@
     <string name="app_name">Coffee</string>
 
     <string name="title_activity_coffee_machine_detail">CoffeeMachineDetailActivity</string>
+    <string name="title_activity_pre_order">PreOrderActivity</string>
     <string name="title_activity_login">Login Activity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
