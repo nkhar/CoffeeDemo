@@ -64,8 +64,6 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
         View view = inflater.inflate(R.layout.fragment_machine, container, false);
 
         textView = view.findViewById(R.id.text_view_for_machine);
-        textView.setText("This is the machine");
-
 
         /*
         Recycler View
@@ -120,11 +118,10 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
                     adapter = new MyCoffeeMachineRecyclerViewAdapter(kofe);
                     adapter.setmListener(MachineFragment.this);
                     MachineFragment.this.recyclerView.setAdapter(adapter);
-
-                    textView.setText(adapter.getItemCount() + " \n\n " + kofe.size() + "\n\n");
-                } else
+                } else {
                     textView.setText(response.toString());
-                textView.setMovementMethod(new ScrollingMovementMethod());
+                    textView.setMovementMethod(new ScrollingMovementMethod());
+                }
             }
 
             @Override
