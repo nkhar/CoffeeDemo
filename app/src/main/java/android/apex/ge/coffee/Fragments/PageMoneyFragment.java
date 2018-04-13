@@ -57,7 +57,6 @@ public class PageMoneyFragment extends Fragment implements ILibObjectCrud {
 
         // TextView
         textView = view.findViewById(R.id.text_view_page_money);
-        textView.setText("Fragment #" + mPage);
 
         return view;
     }

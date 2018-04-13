@@ -15,8 +15,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="PageSale" />
+        android:layout_marginTop="8dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/page_recycler_view"
