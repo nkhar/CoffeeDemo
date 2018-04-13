@@ -8,13 +8,13 @@ import android.apex.ge.coffee.Retrofit.Model.AccountInfo;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.Retrofit.PreOrderAccounts;
 import android.apex.ge.coffee.Retrofit.PreorderGoods;
+import android.apex.ge.coffee.UserInterface.SimpleDividerItemDecoration;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +23,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -85,8 +84,7 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
         }
 
 
-        RecyclerView.ItemDecoration localItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(localItemDecoration);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
 
          /*
         Floating Action Button

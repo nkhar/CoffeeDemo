@@ -9,11 +9,11 @@ import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.Retrofit.ProducedGoods;
 import android.apex.ge.coffee.Retrofit.RawMaterials;
 import android.apex.ge.coffee.Retrofit.SaleGoods;
+import android.apex.ge.coffee.UserInterface.SimpleDividerItemDecoration;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -106,9 +106,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         adapter.setmListener(PageRecViewFragment.this);
         recyclerView.setAdapter(adapter);
 
-        RecyclerView.ItemDecoration localItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
-
-        recyclerView.addItemDecoration(localItemDecoration);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
 
         return view;
     }
@@ -138,11 +136,10 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
             listProdTransactionData = ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().getTransitRawMaterials();
             populateSaleHashMap();
         } else {
-           /* return;*/
+            /* return;*/
 
         }
     }
-
 
 
     private void getRawMaterialsListFromAPI(CoffeeService service) {
@@ -305,32 +302,40 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
 
     }
 
-   private void setCorrectSaveCoffeeStatsProdTransactionDataArrayList() {
+    private void setCorrectSaveCoffeeStatsProdTransactionDataArrayList() {
 
-       switch (mPage) {
-           case 1:((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
-               break;
-           case 2: ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleProduced(listProdTransactionData);
-               break;
-           case 3: ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setTransitRawMaterials(listProdTransactionData);
-               break;
-           default: Log.d(LOG_TAG, "This is one strange arrayList setter switch statement");
-               break;
-       }
+        switch (mPage) {
+            case 1:
+                ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
+                break;
+            case 2:
+                ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleProduced(listProdTransactionData);
+                break;
+            case 3:
+                ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setTransitRawMaterials(listProdTransactionData);
+                break;
+            default:
+                Log.d(LOG_TAG, "This is one strange arrayList setter switch statement");
+                break;
+        }
 
 
-       /* ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(new ArrayList<ProdTransactionData>(prodPPIDProdTransactionDataHashMap.values()));*/
+        /* ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(new ArrayList<ProdTransactionData>(prodPPIDProdTransactionDataHashMap.values()));*/
     }
 
     private void updateHashMapOfCorrectAdapter() {
         switch (mPage) {
-            case 1:((MySaleRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
+            case 1:
+                ((MySaleRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
                 break;
-            case 2: ((MyProducedRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
+            case 2:
+                ((MyProducedRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
                 break;
-            case 3: ((MyRawMaterialsRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
+            case 3:
+                ((MyRawMaterialsRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
                 break;
-            default: Log.d(LOG_TAG, "This is one strange switch statement");
+            default:
+                Log.d(LOG_TAG, "This is one strange switch statement");
                 break;
         }
 

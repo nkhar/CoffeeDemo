@@ -78,6 +78,9 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
         }
 
 
+        /*
+        Add ItemDecoration Using SimpleDividerItemDecoration class from UserInterface package.
+         */
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
 
 

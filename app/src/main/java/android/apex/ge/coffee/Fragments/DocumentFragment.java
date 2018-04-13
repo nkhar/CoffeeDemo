@@ -7,6 +7,7 @@ import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.DocGoods;
 import android.apex.ge.coffee.Retrofit.Model.CoffeeDoc;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
+import android.apex.ge.coffee.UserInterface.SimpleDividerItemDecoration;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -82,8 +83,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         }
 
 
-        RecyclerView.ItemDecoration localItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(localItemDecoration);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
 
          /*
         Floating Action Button
