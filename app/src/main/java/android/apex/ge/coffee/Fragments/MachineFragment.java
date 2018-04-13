@@ -141,6 +141,6 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
 
     @Override
     public void onLongClick(Object value) {
-        Log.d(LOG_TAG, "Something was longClicked" + value.toString());
+        Log.d(LOG_TAG, "Something was longClicked. so far this is useless" + value.toString());
     }
 }
