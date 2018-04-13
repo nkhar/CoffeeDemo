@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -112,6 +113,10 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
 
 
                     List<CoffeeMachine> kofe = response.body().getResult();
+                    /*
+                    Sorted the CoffeeMachine list.
+                     */
+                    Collections.sort(kofe);
                     adapter = new MyCoffeeMachineRecyclerViewAdapter(kofe);
                     adapter.setmListener(MachineFragment.this);
                     MachineFragment.this.recyclerView.setAdapter(adapter);

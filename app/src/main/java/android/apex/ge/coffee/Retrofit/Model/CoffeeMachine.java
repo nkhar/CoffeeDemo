@@ -1,5 +1,7 @@
 package android.apex.ge.coffee.Retrofit.Model;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * This class is used for (de)serialization of CoffeeMachine object
  */
 
-public class CoffeeMachine {
+public class CoffeeMachine implements Comparable<CoffeeMachine> {
 
         @SerializedName("Acc")
         @Expose
@@ -53,4 +55,8 @@ public class CoffeeMachine {
                     .toString();
         }
 
+    @Override
+    public int compareTo(@NonNull CoffeeMachine o) {
+        return this.getName().compareTo(o.getName());
+    }
 }
