@@ -46,7 +46,6 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
 
         holder.coffeeListResult = value;
 
-        holder.mCoffeeMachineAccTextView.setText(value.getAcc());
         holder.mCoffeeMachineNameTextView.setText(value.getName());
         holder.mCoffeeMachineAddressTextView.setText(value.getAddress());
         final ILibObjectCrud listener = getmListener();
@@ -74,7 +73,6 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public final View mView;
-        public final TextView mCoffeeMachineAccTextView;
         public final TextView mCoffeeMachineNameTextView;
         public final TextView mCoffeeMachineAddressTextView;
         public CoffeeMachine coffeeListResult;
@@ -84,7 +82,6 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
             // to access the context from any ViewHolder instance.
             super(itemView);
             mView = itemView;
-            mCoffeeMachineAccTextView = itemView.findViewById(R.id.coffee_machine_acc);
             mCoffeeMachineNameTextView = itemView.findViewById(R.id.coffee_machine_name);
             mCoffeeMachineAddressTextView = itemView.findViewById(R.id.coffee_machine_address);
         }
