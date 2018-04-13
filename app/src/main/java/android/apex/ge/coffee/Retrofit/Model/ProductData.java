@@ -52,11 +52,11 @@ public class ProductData implements Comparable<ProductData> {
         this.name = name;
     }
 
-    public String getbCode() {
+    public String getBCode() {
         return bCode;
     }
 
-    public void setbCode(String bCode) {
+    public void setBCode(String bCode) {
         this.bCode = bCode;
     }
 
@@ -76,11 +76,11 @@ public class ProductData implements Comparable<ProductData> {
         this.packCount = packCount;
     }
 
-    public float getrCount() {
+    public float getRCount() {
         return rCount;
     }
 
-    public void setrCount(float rCount) {
+    public void setRCount(float rCount) {
         this.rCount = rCount;
     }
 
@@ -100,7 +100,7 @@ public class ProductData implements Comparable<ProductData> {
                 .append("\nname: " + name)
                 .append("\nbCode:" + bCode)
                 .append("\ninCode: " + inCode)
-                .append("\npackCpunt: " + packCount)
+                .append("\npackCount: " + packCount)
                 .append("\nrCount: " + rCount)
                 .append("\nvanRCount: " + vanRCount)
                 .toString();
