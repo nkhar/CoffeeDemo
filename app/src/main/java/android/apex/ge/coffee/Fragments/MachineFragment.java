@@ -7,6 +7,7 @@ import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
+import android.apex.ge.coffee.UserInterface.SimpleDividerItemDecoration;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -77,8 +78,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
         }
 
 
-        RecyclerView.ItemDecoration localItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(localItemDecoration);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
 
 
         /*
