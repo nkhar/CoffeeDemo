@@ -22,8 +22,6 @@ public class EditNumberDialogFragment extends DialogFragment {
 
     private EditText mEditNumberText1;
     private EditText mEditNumberText2;
-    private Button mDialogOKButton;
-    private Button mDialogCancelButton;
 
 
     // Defines the listener interface
@@ -49,45 +47,6 @@ public class EditNumberDialogFragment extends DialogFragment {
     }
 
 
-  /*  @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "We are in onCreateDialog");
-        String title = getArguments().getString("title");
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-
-        alertDialogBuilder.setTitle(title);
-        *//*alertDialogBuilder.setMessage("Are you sure?");*//*
-
-        // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        alertDialogBuilder.setView(inflater.inflate(R.layout.fragment_edit_product_data, null));
-
-        // Add action buttons
-
-        alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // on success
-                sendBackResult();
-            }
-        });
-        alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (dialog != null) {
-                    dialog.dismiss();
-                }
-            }
-
-        });
-
-        return alertDialogBuilder.create();
-    }*/
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -99,18 +58,26 @@ public class EditNumberDialogFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d(LOG_TAG, "We are in onViewCreated");
 
+
         // Get field from view
         mEditNumberText1 = view.findViewById(R.id.fragment_dialog_number_editText);
         mEditNumberText2 = view.findViewById(R.id.fragment_dialog_number_editText2);
-        mDialogOKButton = view.findViewById(R.id.fragment_dialog_ok_button);
-        mDialogCancelButton = view.findViewById(R.id.fragment_dialog_cancel_button);
+        Button mDialogOKButton = view.findViewById(R.id.fragment_dialog_ok_button);
+        Button mDialogCancelButton = view.findViewById(R.id.fragment_dialog_cancel_button);
         // Fetch arguments from bundle and set title
         String title = getArguments().getString("title", "Enter Name");
         getDialog().setTitle(title);
         // Show soft keyboard automatically and request focus to field
         mEditNumberText1.requestFocus();
-        getDialog().getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        // This if statement is used to remove lint warning about NullPointerException.
+        if (getDialog().getWindow() != null) {
+            getDialog().getWindow().setSoftInputMode(
+                    WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        }
+        else {
+            Log.d(LOG_TAG,"However strange it may seem this activity is not visual otherwise it would not have returned null");
+        }
+
 
         mDialogOKButton.setOnClickListener(new View.OnClickListener() {
             @Override
