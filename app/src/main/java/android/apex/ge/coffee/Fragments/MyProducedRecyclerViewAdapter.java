@@ -55,15 +55,15 @@ public class MyProducedRecyclerViewAdapter extends RecyclerViewListAdapter<MyPro
 
         if (prodTransactionDataHashMap.get(value.getProdPPID()) != null) {
             Log.d(LOG_TAG, prodTransactionDataHashMap.get(value.getProdPPID()).getProdPPID());
-            holder.mProducedVanRCountTextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getProdPPID()));
+            holder.mProducedQuantity1TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurSCount()));
             holder.mProducedQuantity2TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurICount()));
         } else {
-            holder.mProducedVanRCountTextView.setText("");
+            holder.mProducedQuantity1TextView.setText("");
             holder.mProducedQuantity2TextView.setText("");
         }
 
 
-        holder.mProducedProdPPIDTextView.setText(value.getProdPPID());
+        holder.mProducedBCodeTextView.setText(value.getBCode());
         holder.mProducedNameTextView.setText(value.getName());
         final ILibObjectCrud listener = getmListener();
         if (listener != null) {
@@ -91,9 +91,9 @@ public class MyProducedRecyclerViewAdapter extends RecyclerViewListAdapter<MyPro
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public final View mView;
-        public final TextView mProducedProdPPIDTextView;
+        public final TextView mProducedBCodeTextView;
         public final TextView mProducedNameTextView;
-        public final TextView mProducedVanRCountTextView;
+        public final TextView mProducedQuantity1TextView;
         public final TextView mProducedQuantity2TextView;
 
 
@@ -104,9 +104,9 @@ public class MyProducedRecyclerViewAdapter extends RecyclerViewListAdapter<MyPro
             // to access the context from any ViewHolder instance.
             super(itemView);
             mView = itemView;
-            mProducedProdPPIDTextView = itemView.findViewById(R.id.page_produced_ProdPPID);
+            mProducedBCodeTextView = itemView.findViewById(R.id.page_produced_BCode);
             mProducedNameTextView = itemView.findViewById(R.id.page_produced_Name);
-            mProducedVanRCountTextView = itemView.findViewById(R.id.page_produced_VanRCount);
+            mProducedQuantity1TextView = itemView.findViewById(R.id.page_produced_quantity1);
             mProducedQuantity2TextView = itemView.findViewById(R.id.page_produced_quantity2);
 
         }
