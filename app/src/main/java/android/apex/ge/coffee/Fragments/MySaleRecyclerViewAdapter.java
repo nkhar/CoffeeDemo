@@ -55,8 +55,8 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
 
         if (prodTransactionDataHashMap.get(value.getProdPPID())!= null) {
             Log.d(LOG_TAG, prodTransactionDataHashMap.get(value.getProdPPID()).getProdPPID());
-            holder.mSaleQuantity1TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurSCount()));
-            holder.mSaleQuantity2TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurICount()));
+            holder.mSaleQuantity1TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurICount()));
+            holder.mSaleQuantity2TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurSCount()));
         } else {
             holder.mSaleQuantity1TextView.setText("");
             holder.mSaleQuantity2TextView.setText("");

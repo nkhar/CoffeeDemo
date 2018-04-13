@@ -55,8 +55,8 @@ public class MyProducedRecyclerViewAdapter extends RecyclerViewListAdapter<MyPro
 
         if (prodTransactionDataHashMap.get(value.getProdPPID()) != null) {
             Log.d(LOG_TAG, prodTransactionDataHashMap.get(value.getProdPPID()).getProdPPID());
-            holder.mProducedQuantity1TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurSCount()));
-            holder.mProducedQuantity2TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurICount()));
+            holder.mProducedQuantity1TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurICount()));
+            holder.mProducedQuantity2TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurSCount()));
         } else {
             holder.mProducedQuantity1TextView.setText("");
             holder.mProducedQuantity2TextView.setText("");

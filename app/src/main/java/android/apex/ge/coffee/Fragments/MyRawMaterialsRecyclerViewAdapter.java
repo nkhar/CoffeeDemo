@@ -55,15 +55,15 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
 
         if (prodTransactionDataHashMap.get(value.getProdPPID()) != null) {
             Log.d(LOG_TAG, prodTransactionDataHashMap.get(value.getProdPPID()).getProdPPID());
-            holder.mRawMaterialsVanRCountTextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getProdPPID()));
-            holder.mRawMaterialsQuantity2TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurICount()));
+            holder.mRawMaterialsQuantity1TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurICount()));
+            holder.mRawMaterialsQuantity2TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurSCount()));
         } else {
-            holder.mRawMaterialsVanRCountTextView.setText("");
+            holder.mRawMaterialsQuantity1TextView.setText("");
             holder.mRawMaterialsQuantity2TextView.setText("");
         }
 
 
-        holder.mRawMaterialsProdPPIDTextView.setText(value.getProdPPID());
+        holder.mRawMaterialsBCodeTextView.setText(value.getBCode());
         holder.mRawMaterialsNameTextView.setText(value.getName());
 
         final ILibObjectCrud listener = getmListener();
@@ -92,9 +92,9 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public final View mView;
-        public final TextView mRawMaterialsProdPPIDTextView;
+        public final TextView mRawMaterialsBCodeTextView;
         public final TextView mRawMaterialsNameTextView;
-        public final TextView mRawMaterialsVanRCountTextView;
+        public final TextView mRawMaterialsQuantity1TextView;
         public final TextView mRawMaterialsQuantity2TextView;
 
         public ProductData rawMaterialsListResult;
@@ -104,9 +104,9 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
             // to access the context from any ViewHolder instance.
             super(itemView);
             mView = itemView;
-            mRawMaterialsProdPPIDTextView = itemView.findViewById(R.id.page_raw_materials_ProdPPID);
+            mRawMaterialsBCodeTextView = itemView.findViewById(R.id.page_raw_materials_BCode);
             mRawMaterialsNameTextView = itemView.findViewById(R.id.page_raw_materials_Name);
-            mRawMaterialsVanRCountTextView = itemView.findViewById(R.id.page_raw_materials_VanRCount);
+            mRawMaterialsQuantity1TextView = itemView.findViewById(R.id.page_raw_materials_quantity1);
             mRawMaterialsQuantity2TextView = itemView.findViewById(R.id.page_raw_materials_quantity2);
         }
 
