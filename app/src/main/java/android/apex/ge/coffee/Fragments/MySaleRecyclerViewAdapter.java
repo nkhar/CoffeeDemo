@@ -55,16 +55,16 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
 
         if (prodTransactionDataHashMap.get(value.getProdPPID())!= null) {
             Log.d(LOG_TAG, prodTransactionDataHashMap.get(value.getProdPPID()).getProdPPID());
-            holder.mSaleVanRCountTextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getProdPPID()));
+            holder.mSaleQuantity1TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurSCount()));
             holder.mSaleQuantity2TextView.setText(String.valueOf(prodTransactionDataHashMap.get(value.getProdPPID()).getCurICount()));
         } else {
-            holder.mSaleVanRCountTextView.setText("");
+            holder.mSaleQuantity1TextView.setText("");
             holder.mSaleQuantity2TextView.setText("");
         }
 
-        holder.mSaleProdPPIDTextView.setText(value.getProdPPID());
+        holder.mSaleBCodeTextView.setText(value.getBCode());
         holder.mSaleNameTextView.setText(value.getName());
-        //holder.mSaleVanRCountTextView.setText(String.valueOf(value.getVanRCount()));
+
         final ILibObjectCrud listener = getmListener();
         if (listener != null) {
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -91,9 +91,9 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
          final View mView;
-         final TextView mSaleProdPPIDTextView;
+         final TextView mSaleBCodeTextView;
          final TextView mSaleNameTextView;
-         final TextView mSaleVanRCountTextView;
+         final TextView mSaleQuantity1TextView;
          final TextView mSaleQuantity2TextView;
          ProductData saleListResult;
 
@@ -102,9 +102,9 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
             // to access the context from any ViewHolder instance.
             super(itemView);
             mView = itemView;
-            mSaleProdPPIDTextView = itemView.findViewById(R.id.page_sale_ProdPPID);
+            mSaleBCodeTextView = itemView.findViewById(R.id.page_sale_BCode);
             mSaleNameTextView = itemView.findViewById(R.id.page_sale_Name);
-            mSaleVanRCountTextView = itemView.findViewById(R.id.page_sale_VanRCount);
+            mSaleQuantity1TextView = itemView.findViewById(R.id.page_sale_quantity1);
             mSaleQuantity2TextView = itemView.findViewById(R.id.page_sale_quantity2);
         }
 
