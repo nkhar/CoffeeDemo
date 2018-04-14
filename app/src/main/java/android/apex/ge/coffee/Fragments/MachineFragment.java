@@ -14,7 +14,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,6 +50,8 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
 
     private TextView textView;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -65,6 +67,10 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
         View view = inflater.inflate(R.layout.fragment_machine, container, false);
 
         textView = view.findViewById(R.id.text_view_for_machine);
+
+        // init SwipeRefreshLayout
+        swipeRefreshLayout = view.findViewById(R.id.cofee_machine_swipe_refresh_layout);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         /*
         Recycler View
@@ -82,17 +88,30 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
         Add ItemDecoration Using SimpleDividerItemDecoration class from UserInterface package.
          */
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
+        getCoffeeMachineListFromAPI();
 
 
         /*
         Floating Action Button
          */
         FloatingActionButton fab = view.findViewById(R.id.fab_fragment_machine);
-        fab.setOnClickListener(new View.OnClickListener() {
+       /* fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getCoffeeMachineListFromAPI();
 
+            }
+        });*/
+
+        // implement setOnRefreshListener event on SwipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                getCoffeeMachineListFromAPI();
+
+
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
