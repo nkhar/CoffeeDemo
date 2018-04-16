@@ -14,5 +14,8 @@
     <string name="nav_drawer_menu_item_4">Login</string>
     <string name="nav_drawer_menu_item_5">Logout</string>
 
+    // actionbar menu
+    <string name="search_title">search</string>
+
 
 </resources>
