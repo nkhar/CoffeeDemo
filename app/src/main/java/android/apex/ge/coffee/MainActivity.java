@@ -23,6 +23,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     protected final String LOG_TAG = "MainActivity";
     private NavigationView navigationView;
+    /*
+    Temporary solution find a better alternative.
+    It is used to make sure returning from child activity won't always display MachineFragment.
+    call in onResume method to method that checks authorization status displayed MachineFragment
+    if user was logged in.
+     */
+    private int counterForCheckingLogIns = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,12 +120,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void checkIfLoggedIn() {
+        counterForCheckingLogIns++;
         SharedPreferences settings = getSharedPreferences(LoginActivity.PREFERENCES_NAME, 0);
         //Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
         boolean hasLoggedIn = settings.getBoolean(LoginActivity.IS_USER_LOGGED_IN, false);
-        if(hasLoggedIn) {
+        if(hasLoggedIn && counterForCheckingLogIns <=1) {
             onNavigationItemSelected(navigationView.getMenu().getItem(0));
-        }else {
+        }else if(hasLoggedIn && counterForCheckingLogIns > 1) {
+
+        }
+        else {
             /*
             onNavigationItemSelected(navigationView.getMenu().getItem(3).getSubMenu().getItem(0));*/
 
