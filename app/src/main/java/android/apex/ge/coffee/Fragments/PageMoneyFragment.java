@@ -1,14 +1,22 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
+import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
+import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
+import android.apex.ge.coffee.Retrofit.LastCoffeeCupsCount;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Nika on 26/03/2018.
@@ -58,7 +66,37 @@ public class PageMoneyFragment extends Fragment implements ILibObjectCrud {
         // TextView
         textView = view.findViewById(R.id.text_view_page_money);
 
+        CoffeeService coffeeService = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        getLastCoffeeCupsCountFromAPI(coffeeService);
+
         return view;
+    }
+
+    private void getLastCoffeeCupsCountFromAPI(CoffeeService service) {
+
+        Call<LastCoffeeCupsCount> callLastCoffeeCups = service.listLastCoffeeCupsCount("1610003000");
+
+        callLastCoffeeCups.enqueue(new Callback<LastCoffeeCupsCount>() {
+            @Override
+            public void onResponse(Call<LastCoffeeCupsCount> call, Response<LastCoffeeCupsCount> response) {
+                if (response.isSuccessful()) {
+                    Log.d(LOG_TAG, response.code() + "");
+
+                   int lastCupsCount = response.body().getResult();
+                   textView.setText("Number of cups is: " + lastCupsCount);
+
+                } else {
+                    textView.setText(response.toString());
+                    textView.setMovementMethod(new ScrollingMovementMethod());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LastCoffeeCupsCount> call, Throwable t) {
+                call.cancel();
+                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+            }
+        });
     }
 
 
