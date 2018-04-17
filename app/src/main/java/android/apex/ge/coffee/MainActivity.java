@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onResume() {
+        Log.d(LOG_TAG, "\n\n We are in onResume \n\n");
         super.onResume();
         checkIfLoggedIn();
     }
