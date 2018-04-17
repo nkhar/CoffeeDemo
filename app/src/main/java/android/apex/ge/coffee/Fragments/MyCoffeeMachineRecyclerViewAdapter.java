@@ -8,8 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,9 +20,11 @@ import java.util.List;
  * adapter for coffee machines recycler view
  */
 
-public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<MyCoffeeMachineRecyclerViewAdapter.ViewHolder, CoffeeMachine> {
+public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<MyCoffeeMachineRecyclerViewAdapter.ViewHolder, CoffeeMachine> implements Filterable{
 
     protected final String LOG_TAG = "MyCofRecyclerVAdapter";
+    private ArrayList<CoffeeMachine> mListHolder;
+    private ArrayList<CoffeeMachine> mFilteredList;
 
     /*private final String accountACC= "ანგ#:";
     private final String accountName= "დასახელება:";
@@ -29,6 +34,7 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
     public MyCoffeeMachineRecyclerViewAdapter(List<CoffeeMachine> items) {
         super(items);
         Log.d(LOG_TAG, "We are in MyCoffeeMachineRecyclerViewAdapter   constructor   ");
+        mListHolder = (ArrayList<CoffeeMachine>) items;
     }
 
     @NonNull
@@ -86,5 +92,57 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
             mCoffeeMachineAddressTextView = itemView.findViewById(R.id.coffee_machine_address);
         }
 
+    }
+
+
+
+
+
+
+
+
+    @Override
+    public Filter getFilter() {
+
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+
+                String charString = charSequence.toString();
+
+                if (charString.isEmpty()) {
+                    mFilteredList = mListHolder;
+
+                } else {
+                    Log.d(LOG_TAG, "\n\nWE are filtering the list for search");
+
+                    ArrayList<CoffeeMachine> filteredList = new ArrayList<>();
+
+                    for (CoffeeMachine coffeeMachine : mListHolder) {
+
+                        if (coffeeMachine.getName().toLowerCase().contains(charString) || coffeeMachine.getAddress().toLowerCase().contains(charString) ) {
+
+
+                            filteredList.add(coffeeMachine);
+                        }
+                    }
+
+                    mFilteredList = filteredList;
+
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mFilteredList;
+                Log.d(LOG_TAG, "Filtered list toString: " + filterResults.values.toString());
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                mFilteredList = (ArrayList<CoffeeMachine>) filterResults.values;
+                setmValues(mFilteredList);
+                notifyDataSetChanged();
+            }
+        };
     }
 }

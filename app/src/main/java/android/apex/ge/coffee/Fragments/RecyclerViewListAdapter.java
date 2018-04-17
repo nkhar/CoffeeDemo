@@ -54,7 +54,14 @@ public  abstract class RecyclerViewListAdapter<T extends RecyclerView.ViewHolder
         return mValues.size();
     }
 
+
+
     public abstract void onBindViewHolder(final T holder, final E value);
+
+    public void setmValues(List<E> mValues) {
+        this.mValues = mValues;
+    }
+
 
     public View.OnClickListener getmViewClick() {
         return mViewClick;

@@ -18,9 +18,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -58,6 +62,49 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
      */
     public MachineFragment() {
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate( R.menu.options_menu, menu);
+
+        MenuItem myActionMenuItem = menu.findItem( R.id.search);
+        SearchView searchView = (SearchView) myActionMenuItem.getActionView();
+        search(searchView);
+
+    }
+
+/*    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem mSearchMenuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) mSearchMenuItem.getActionView();
+        search(searchView);
+    }*/
+
+    private void search(SearchView searchView) {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d(LOG_TAG, "\n\n New text is: " + newText);
+
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+    }
+
 
     @Nullable
     @Override
