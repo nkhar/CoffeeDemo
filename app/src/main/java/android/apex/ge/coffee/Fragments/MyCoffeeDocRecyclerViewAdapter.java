@@ -42,7 +42,8 @@ public class MyCoffeeDocRecyclerViewAdapter extends RecyclerViewListAdapter<MyCo
         holder.coffeeDocListResult = value;
 
 
-        holder.mCoffeeMachineNameTextView.setText(value.getCorespondAcc());
+        holder.mCoffeeMachineNameTextView.setText(value.getDocsID());
+//        holder.mCoffeeMachineNameTextView.setText(value.getCorespondAcc());
         holder.mCoffeeMachineAddressTextView.setText(value.getCorespondName());
         final ILibObjectCrud listener = getmListener();
         if (listener != null) {

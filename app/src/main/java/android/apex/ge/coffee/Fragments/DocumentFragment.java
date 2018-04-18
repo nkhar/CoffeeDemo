@@ -91,7 +91,8 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getDocGoodsFromAPI();
+                getCoffeeDocsFromAPI();
+                //getDocGoodsFromAPI();
             }
         });
 
@@ -104,10 +105,11 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
-        Calendar calendar = new GregorianCalendar(2018, 2, 26);
+        Calendar calendar = new GregorianCalendar(2018, 03, 18);
         System.out.println(sdf.format(calendar.getTime()));
 
-        Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs(sdf.format(calendar.getTime()), "1610007800");
+        Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs("2018-04-18", "1610007800");
+        Log.d(LOG_TAG, "\n\nThis is call docs list \n"+callCoffeeDocs.toString());
 
         callCoffeeDocs.enqueue(new Callback<CoffeeDocList>() {
             @Override
@@ -128,6 +130,8 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
             @Override
             public void onFailure(Call<CoffeeDocList> call, Throwable t) {
                 call.cancel();
+                Log.d(LOG_TAG, "Call url is " +call.request().url());
+                Log.d(LOG_TAG, "The cause for error" +t.getCause());
                 textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
             }
         });
@@ -137,7 +141,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
     private void getDocGoodsFromAPI() {
         CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
 
-        Call<DocGoods> callGoodsDocs = service.listDocGoods("1610007800");
+        Call<DocGoods> callGoodsDocs = service.listDocGoods("AE4683504F");
 
         callGoodsDocs.enqueue(new Callback<DocGoods>() {
             @Override
