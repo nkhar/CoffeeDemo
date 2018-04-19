@@ -13,7 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +49,8 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
 
     private TextView textView;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -68,6 +70,11 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         View view = inflater.inflate(R.layout.fragment_machine, container, false);
 
         textView = view.findViewById(R.id.text_view_for_machine);
+
+
+        // init SwipeRefreshLayout
+        swipeRefreshLayout = view.findViewById(R.id.cofee_machine_swipe_refresh_layout);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         /*
         Recycler View
@@ -96,6 +103,18 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
             }
         });
 
+        // implement setOnRefreshListener event on SwipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                getCoffeeDocsFromAPI();
+
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         return view;
 
     }
@@ -109,7 +128,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         System.out.println(sdf.format(calendar.getTime()));
 
         Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs("2018-04-19", "1610007800", "dh:iso8601");
-        Log.d(LOG_TAG, "\n\nThis is call docs list \n"+callCoffeeDocs.toString());
+        Log.d(LOG_TAG, "\n\nThis is call docs list \n" + callCoffeeDocs.toString());
 
         callCoffeeDocs.enqueue(new Callback<CoffeeDocList>() {
             @Override
@@ -130,8 +149,8 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
             @Override
             public void onFailure(Call<CoffeeDocList> call, Throwable t) {
                 call.cancel();
-                Log.d(LOG_TAG, "Call url is " +call.request().url());
-                Log.d(LOG_TAG, "The cause for error" +t.getCause());
+                Log.d(LOG_TAG, "Call url is " + call.request().url());
+                Log.d(LOG_TAG, "The cause for error" + t.getCause());
                 textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
             }
         });
