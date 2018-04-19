@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         boolean hasLoggedIn = settings.getBoolean(LoginActivity.IS_USER_LOGGED_IN, false);
         if(hasLoggedIn && counterForCheckingLogIns <=1) {
             onNavigationItemSelected(navigationView.getMenu().getItem(0));
+            navigationView.getMenu().getItem(0).setChecked(true);
         }else if(hasLoggedIn && counterForCheckingLogIns > 1) {
 
         }
