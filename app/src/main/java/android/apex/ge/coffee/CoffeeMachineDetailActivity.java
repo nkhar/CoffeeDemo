@@ -8,6 +8,7 @@ import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -51,6 +52,11 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_coffee_machine_detail);
         Toolbar toolbar = findViewById(R.id.toolbar_coffee_detail);
         setSupportActionBar(toolbar);
+
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
 
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
