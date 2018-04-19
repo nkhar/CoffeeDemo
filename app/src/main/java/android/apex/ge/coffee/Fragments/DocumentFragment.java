@@ -38,7 +38,7 @@ import retrofit2.Response;
  * This class is used to display Documents item from NavigationDrawer
  */
 
-public class DocumentFragment extends Fragment implements ILibObjectCrud {
+public class DocumentFragment extends Fragment implements ILibObjectCrud<CoffeeDoc> {
 
     protected final String LOG_TAG = "DocumentFragment";
 
@@ -190,12 +190,12 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
 
 
     @Override
-    public void onClick(Object value) {
+    public void onClick(CoffeeDoc value) {
         Log.d(LOG_TAG, "Something was clicked" + value.toString());
     }
 
     @Override
-    public void onLongClick(Object value) {
+    public void onLongClick(CoffeeDoc value) {
         Log.d(LOG_TAG, "Something was longClicked" + value.toString());
     }
 
