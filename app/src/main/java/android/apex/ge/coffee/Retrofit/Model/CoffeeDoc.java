@@ -22,7 +22,7 @@ public class CoffeeDoc {
 
     @SerializedName("DDate")
     @Expose
-    private String dDate;
+    private Date dDate;
 
     @SerializedName("NumberIn")
     @Expose
@@ -60,11 +60,11 @@ public class CoffeeDoc {
         this.docType = docType;
     }
 
-    public String getdDate() {
+    public Date getdDate() {
         return dDate;
     }
 
-    public void setdDate(String dDate) {
+    public void setdDate(Date dDate) {
         this.dDate = dDate;
     }
 

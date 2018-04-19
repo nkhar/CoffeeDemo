@@ -108,7 +108,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud {
         Calendar calendar = new GregorianCalendar(2018, 03, 18);
         System.out.println(sdf.format(calendar.getTime()));
 
-        Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs("2018-04-18", "1610007800");
+        Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs("2018-04-19", "1610007800", "dh:iso8601");
         Log.d(LOG_TAG, "\n\nThis is call docs list \n"+callCoffeeDocs.toString());
 
         callCoffeeDocs.enqueue(new Callback<CoffeeDocList>() {

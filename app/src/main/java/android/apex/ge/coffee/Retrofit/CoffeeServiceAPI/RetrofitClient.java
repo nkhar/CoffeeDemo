@@ -1,5 +1,8 @@
 package android.apex.ge.coffee.Retrofit.CoffeeServiceAPI;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -23,8 +26,12 @@ public class RetrofitClient {
                 .addInterceptor(new BasicAuthInterceptor("sa", "client"))
                 .build();
 
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .create();
+
         retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl("http://92.241.94.50:8181/")
                 .client(client)
                 .build();
