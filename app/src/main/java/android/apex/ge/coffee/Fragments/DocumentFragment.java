@@ -1,5 +1,6 @@
 package android.apex.ge.coffee.Fragments;
 
+import android.apex.ge.coffee.DocGoodsActivity;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeDocList;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
@@ -9,6 +10,7 @@ import android.apex.ge.coffee.Retrofit.Model.CoffeeDoc;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.UserInterface.SimpleDividerItemDecoration;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +28,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -41,6 +44,8 @@ import retrofit2.Response;
 public class DocumentFragment extends Fragment implements ILibObjectCrud<CoffeeDoc> {
 
     protected final String LOG_TAG = "DocumentFragment";
+
+    public static final String DOCUMENT_ID = "DOCUMENT_ID";
 
     RecyclerView recyclerView;
     RecyclerViewListAdapter adapter;
@@ -99,7 +104,6 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud<CoffeeD
             @Override
             public void onClick(View v) {
                 getCoffeeDocsFromAPI();
-                //getDocGoodsFromAPI();
             }
         });
 
@@ -137,6 +141,7 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud<CoffeeD
                     Log.d(LOG_TAG, response.code() + "");
                     List<CoffeeDoc> coffeeDocs = response.body().getResult();
 
+                    Collections.sort(coffeeDocs);
                     adapter = new MyCoffeeDocRecyclerViewAdapter(coffeeDocs);
                     adapter.setmListener(DocumentFragment.this);
                     DocumentFragment.this.recyclerView.setAdapter(adapter);
@@ -157,41 +162,13 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud<CoffeeD
 
     }
 
-    private void getDocGoodsFromAPI() {
-        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
-
-        Call<DocGoods> callGoodsDocs = service.listDocGoods("AE4683504F");
-
-        callGoodsDocs.enqueue(new Callback<DocGoods>() {
-            @Override
-            public void onResponse(Call<DocGoods> call, Response<DocGoods> response) {
-                if (response.isSuccessful()) {
-                    Log.d(LOG_TAG, response.code() + "");
-                    List<ProductData> goodsDocs = response.body().getResult();
-
-                    adapter = new MyProducedRecyclerViewAdapter(goodsDocs);
-                    adapter.setmListener(DocumentFragment.this);
-                    DocumentFragment.this.recyclerView.setAdapter(adapter);
-
-                } else {
-                    Log.d(LOG_TAG, response.code() + "");
-                    textView.setText(response.toString());
-                    textView.setMovementMethod(new ScrollingMovementMethod());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<DocGoods> call, Throwable t) {
-                call.cancel();
-                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
-            }
-        });
-    }
-
 
     @Override
     public void onClick(CoffeeDoc value) {
         Log.d(LOG_TAG, "Something was clicked" + value.toString());
+        Intent intent = new Intent(this.getActivity(), DocGoodsActivity.class);
+        intent.putExtra(DOCUMENT_ID, value.getDocsID());
+        startActivity(intent);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package android.apex.ge.coffee.Retrofit.Model;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,7 +12,7 @@ import java.util.Date;
  * This class is used for (de)serialization of CoffeeDoc object.
  */
 
-public class CoffeeDoc {
+public class CoffeeDoc implements Comparable<CoffeeDoc> {
 
     @SerializedName("DocsID")
     @Expose
@@ -122,4 +124,10 @@ public class CoffeeDoc {
                 .toString();
     }
 
+
+    @Override
+    public int compareTo(@NonNull CoffeeDoc o) {
+
+        return this.getCorespondName().compareTo(o.corespondName);
+    }
 }
