@@ -29,6 +29,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      */
     private int counterForCheckingLogIns = 0;
 
+    private final static String SELECTED_NAV_ITEM = "SELECTED_NAV_ITEM";
+    private int selectedNavDrawerItemIndex;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        /*
+        Saving activity state
+         */
+        outState.putInt(SELECTED_NAV_ITEM, selectedNavDrawerItemIndex);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(LOG_TAG, "we are in the onCreate method of main activity");
@@ -45,6 +57,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState != null) {
+            selectedNavDrawerItemIndex = savedInstanceState.getInt(SELECTED_NAV_ITEM, 0);
+        }
+        checkIfLoggedIn();
     }
 
 
@@ -65,11 +82,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation drawer item clicks here.
         int id = item.getItemId();
 
+
         // get support fragment manager.
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.nav_first) {
             Log.d(LOG_TAG, "First item was clicked");
+            selectedNavDrawerItemIndex=0;
 
             // Insert the fragment by replacing FrameLayout.
             MachineFragment machineFragment = new MachineFragment();
@@ -77,12 +96,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_second) {
             Log.d(LOG_TAG, "second item was clicked");
+            selectedNavDrawerItemIndex=1;
 
             // Insert the fragment by replacing FrameLayout.
             PreOrderFragment preOrderFragment = new PreOrderFragment();
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, preOrderFragment, "PREORDER_TAG").commit();
         } else if (id == R.id.nav_third) {
             Log.d(LOG_TAG, "third item was clicked");
+            selectedNavDrawerItemIndex=2;
 
             // Insert the fragment by replacing FrameLayout.
             DocumentFragment documentFragment = new DocumentFragment();
@@ -102,25 +123,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+
     @Override
     protected void onResume() {
         Log.d(LOG_TAG, "\n\n We are in onResume \n\n");
         super.onResume();
-        checkIfLoggedIn();
+        /* checkIfLoggedIn();*/
     }
 
     private void checkIfLoggedIn() {
+/*
         counterForCheckingLogIns++;
+*/
         SharedPreferences settings = getSharedPreferences(LoginActivity.PREFERENCES_NAME, 0);
         //Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
         boolean hasLoggedIn = settings.getBoolean(LoginActivity.IS_USER_LOGGED_IN, false);
-        if(hasLoggedIn && counterForCheckingLogIns <=1) {
-            onNavigationItemSelected(navigationView.getMenu().getItem(0));
-            navigationView.getMenu().getItem(0).setChecked(true);
-        }else if(hasLoggedIn && counterForCheckingLogIns > 1) {
-
-        }
-        else {
+        if (hasLoggedIn) {
+            onNavigationItemSelected(navigationView.getMenu().getItem(selectedNavDrawerItemIndex));
+            navigationView.getMenu().getItem(selectedNavDrawerItemIndex).setChecked(true);
+        } else {
             /*
             onNavigationItemSelected(navigationView.getMenu().getItem(3).getSubMenu().getItem(0));*/
 
@@ -131,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void logOut() {
-        Log.d(LOG_TAG,"We are Logging the user out from MainActivity method logOut");
+        Log.d(LOG_TAG, "We are Logging the user out from MainActivity method logOut");
         SharedPreferences settings = getSharedPreferences(LoginActivity.PREFERENCES_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
 
