@@ -21,16 +21,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     protected final String LOG_TAG = "MainActivity";
     private NavigationView navigationView;
-    /*
-    Temporary solution find a better alternative.
-    It is used to make sure returning from child activity won't always display MachineFragment.
-    call in onResume method to method that checks authorization status displayed MachineFragment
-    if user was logged in.
-     */
-    private int counterForCheckingLogIns = 0;
 
-    private final static String SELECTED_NAV_ITEM = "SELECTED_NAV_ITEM";
+    private final String SELECTED_NAV_ITEM = "SELECTED_NAV_ITEM";
     private int selectedNavDrawerItemIndex;
+
+
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -40,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          */
         outState.putInt(SELECTED_NAV_ITEM, selectedNavDrawerItemIndex);
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_first) {
             Log.d(LOG_TAG, "First item was clicked");
-            selectedNavDrawerItemIndex=0;
+            selectedNavDrawerItemIndex = 0;
 
             // Insert the fragment by replacing FrameLayout.
             MachineFragment machineFragment = new MachineFragment();
@@ -96,14 +94,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_second) {
             Log.d(LOG_TAG, "second item was clicked");
-            selectedNavDrawerItemIndex=1;
+            selectedNavDrawerItemIndex = 1;
 
             // Insert the fragment by replacing FrameLayout.
             PreOrderFragment preOrderFragment = new PreOrderFragment();
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, preOrderFragment, "PREORDER_TAG").commit();
         } else if (id == R.id.nav_third) {
             Log.d(LOG_TAG, "third item was clicked");
-            selectedNavDrawerItemIndex=2;
+            selectedNavDrawerItemIndex = 2;
 
             // Insert the fragment by replacing FrameLayout.
             DocumentFragment documentFragment = new DocumentFragment();
@@ -132,9 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void checkIfLoggedIn() {
-/*
-        counterForCheckingLogIns++;
-*/
+
         SharedPreferences settings = getSharedPreferences(LoginActivity.PREFERENCES_NAME, 0);
         //Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
         boolean hasLoggedIn = settings.getBoolean(LoginActivity.IS_USER_LOGGED_IN, false);
