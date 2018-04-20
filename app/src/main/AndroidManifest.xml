@@ -25,21 +25,18 @@
             android:name=".CoffeeMachineDetailActivity"
             android:label="@string/title_activity_coffee_machine_detail"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="android.apex.ge.coffee.MainActivity" >
+            android:parentActivityName=".MainActivity" />
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="android.apex.ge.coffee.MainActivity" />
-        </activity>
         <activity
             android:name=".PreOrderActivity"
             android:label="@string/title_activity_pre_order"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".DocGoodsActivity"
             android:label="@string/title_activity_doc_goods"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"></activity>
