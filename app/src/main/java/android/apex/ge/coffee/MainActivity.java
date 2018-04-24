@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         if (savedInstanceState != null) {
+            Log.d(LOG_TAG, "savedInstanceState is not null");
             selectedNavDrawerItemIndex = savedInstanceState.getInt(SELECTED_NAV_ITEM, 0);
         }
         checkIfLoggedIn();
