@@ -43,9 +43,9 @@ import retrofit2.Response;
  * clicked in the menu.
  */
 
-public class MachineFragment extends Fragment implements ILibObjectCrud {
+public class DrawerMachineFragment extends Fragment implements ILibObjectCrud {
 
-    protected final String LOG_TAG = "MachineFragment";
+    protected final String LOG_TAG = "DrawerMachineFragment";
 
     RecyclerView recyclerView;
     MyCoffeeMachineRecyclerViewAdapter adapter;
@@ -60,7 +60,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public MachineFragment() {
+    public DrawerMachineFragment() {
     }
 
     @Override
@@ -109,7 +109,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "We are in onCreateView method of the MachineFragment class");
+        Log.d(LOG_TAG, "We are in onCreateView method of the DrawerMachineFragment class");
 
         View view = inflater.inflate(R.layout.fragment_nav_drawer_machine, container, false);
 
@@ -180,8 +180,8 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
                      */
                     Collections.sort(kofe);
                     adapter = new MyCoffeeMachineRecyclerViewAdapter(kofe);
-                    adapter.setmListener(MachineFragment.this);
-                    MachineFragment.this.recyclerView.setAdapter(adapter);
+                    adapter.setmListener(DrawerMachineFragment.this);
+                    DrawerMachineFragment.this.recyclerView.setAdapter(adapter);
                 } else {
                     textView.setText(response.toString());
                     textView.setMovementMethod(new ScrollingMovementMethod());

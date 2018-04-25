@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link List of coffee machibnes} and makes a call to the
- * specified {@link MachineFragment}.
+ * specified {@link DrawerMachineFragment}.
  */
 
 

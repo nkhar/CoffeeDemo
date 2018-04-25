@@ -39,9 +39,9 @@ import retrofit2.Response;
  * This class should display one of the fragments chosen from navigation drawer.
  */
 
-public class PreOrderFragment extends Fragment implements ILibObjectCrud {
+public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
 
-    protected final String LOG_TAG = "PreOrderFragment";
+    protected final String LOG_TAG = "DrawerPreOrderFragment";
 
     RecyclerView recyclerView;
     RecyclerViewListAdapter adapter;
@@ -55,15 +55,15 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public PreOrderFragment() {
+    public DrawerPreOrderFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "We are in onCreateView method of the PreOrderFragment class");
+        Log.d(LOG_TAG, "We are in onCreateView method of the DrawerPreOrderFragment class");
         /*
-        Here we are using the same layout as with MachineFragment class: fragment_nav_drawer_machine
+        Here we are using the same layout as with DrawerMachineFragment class: fragment_nav_drawer_machine
          */
 
         View view = inflater.inflate(R.layout.fragment_nav_drawer_pre_order, container, false);
@@ -94,7 +94,7 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
             public void onClick(View v) {
                 //getPreOrderAccountsFromAPI();
                 //getPreOrderGoodsFromAPI();
-                Intent intent = new Intent(PreOrderFragment.this.getActivity(), PreOrderActivity.class);
+                Intent intent = new Intent(DrawerPreOrderFragment.this.getActivity(), PreOrderActivity.class);
                 startActivity(intent);
             }
         });
@@ -119,8 +119,8 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
                     /* String displayCoffeeResponse = "";*/
                     List<AccountInfo> accounts = response.body().getResult();
                     adapter = new MyPreOrderAccountsRecyclerViewAdapter(accounts);
-                    adapter.setmListener(PreOrderFragment.this);
-                    PreOrderFragment.this.recyclerView.setAdapter(adapter);
+                    adapter.setmListener(DrawerPreOrderFragment.this);
+                    DrawerPreOrderFragment.this.recyclerView.setAdapter(adapter);
                     /* displayCoffeeResponse += "\n    " + kofe.size() + " \n";*/
 
                            /* for (CoffeeMachineList.Result coffeeResult : kofe) {
@@ -171,8 +171,8 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
                             AND USE CORRECT ADAPTER
                              */
                     adapter = new MyProducedRecyclerViewAdapter(goods);
-                    adapter.setmListener(PreOrderFragment.this);
-                    PreOrderFragment.this.recyclerView.setAdapter(adapter);
+                    adapter.setmListener(DrawerPreOrderFragment.this);
+                    DrawerPreOrderFragment.this.recyclerView.setAdapter(adapter);
                 } else {
                     textView.setText(response.toString());
                     textView.setMovementMethod(new ScrollingMovementMethod());

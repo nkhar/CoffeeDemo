@@ -1,11 +1,11 @@
 package android.apex.ge.coffee;
 
 /*
-This class should display items of chosen CoffeeDoc item, which was chosen in DocumentFragment class
+This class should display items of chosen CoffeeDoc item, which was chosen in DrawerDocumentFragment class
 of MainActivity.
  */
 
-import android.apex.ge.coffee.Fragments.DocumentFragment;
+import android.apex.ge.coffee.Fragments.DrawerDocumentFragment;
 import android.apex.ge.coffee.Fragments.MyProducedRecyclerViewAdapter;
 import android.apex.ge.coffee.Fragments.RecyclerViewListAdapter;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
@@ -52,11 +52,11 @@ public class DocGoodsActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "we are in the onCreate method of DocGoodsActivity activity");
         super.onCreate(savedInstanceState);
            /*
-        Here we are using the same layout as with MachineFragment class: fragment_nav_drawer_machine
+        Here we are using the same layout as with DrawerMachineFragment class: fragment_nav_drawer_machine
          */
         setContentView(R.layout.fragment_nav_drawer_machine);
 
-        docId = getIntent().getStringExtra(DocumentFragment.DOCUMENT_ID);
+        docId = getIntent().getStringExtra(DrawerDocumentFragment.DOCUMENT_ID);
 
         // init SwipeRefreshLayout
         swipeRefreshLayout = findViewById(R.id.cofee_machine_swipe_refresh_layout);

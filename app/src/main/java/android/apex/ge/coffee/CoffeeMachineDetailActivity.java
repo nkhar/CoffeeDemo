@@ -2,6 +2,7 @@ package android.apex.ge.coffee;
 
 import android.apex.ge.coffee.DataBase.DatabaseHelper;
 import android.apex.ge.coffee.Fragments.CoffeeFragmentPagerAdapter;
+import android.apex.ge.coffee.Fragments.DrawerMachineFragment;
 import android.apex.ge.coffee.JavaToJSON.SaveCoffeeStatsJSON;
 import android.apex.ge.coffee.Retrofit.Model.ProdTransactionData;
 import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
@@ -23,11 +24,11 @@ import java.util.UUID;
 
 /**
  * This class represents Activity, which starts when an Item is selected in RecyclerView of
- * MachineFragment. MachineFragment is fragment displayed when one of Navigation drawer items is
+ * DrawerMachineFragment. DrawerMachineFragment is fragment displayed when one of Navigation drawer items is
  * selected.
  * This class itself is responsible for viewpager and various fragments it contains.
  *
- * @see android.apex.ge.coffee.Fragments.MachineFragment
+ * @see DrawerMachineFragment
  * @see CoffeeFragmentPagerAdapter
  */
 

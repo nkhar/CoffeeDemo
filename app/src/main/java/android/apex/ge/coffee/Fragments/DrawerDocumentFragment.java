@@ -39,9 +39,9 @@ import retrofit2.Response;
  * This class is used to display Documents item from NavigationDrawer
  */
 
-public class DocumentFragment extends Fragment implements ILibObjectCrud<CoffeeDoc> {
+public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<CoffeeDoc> {
 
-    protected final String LOG_TAG = "DocumentFragment";
+    protected final String LOG_TAG = "DrawerDocumentFragment";
 
     public static final String DOCUMENT_ID = "DOCUMENT_ID";
 
@@ -59,16 +59,16 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud<CoffeeD
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public DocumentFragment() {
+    public DrawerDocumentFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "We are in onCreateView method of the DocumentFragment class");
+        Log.d(LOG_TAG, "We are in onCreateView method of the DrawerDocumentFragment class");
 
         /*
-        Here we are using the same layout as with MachineFragment class: fragment_nav_drawer_machine
+        Here we are using the same layout as with DrawerMachineFragment class: fragment_nav_drawer_machine
          */
         View view = inflater.inflate(R.layout.fragment_nav_drawer_machine, container, false);
 
@@ -141,8 +141,8 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud<CoffeeD
 
                     Collections.sort(coffeeDocs);
                     adapter = new MyCoffeeDocRecyclerViewAdapter(coffeeDocs);
-                    adapter.setmListener(DocumentFragment.this);
-                    DocumentFragment.this.recyclerView.setAdapter(adapter);
+                    adapter.setmListener(DrawerDocumentFragment.this);
+                    DrawerDocumentFragment.this.recyclerView.setAdapter(adapter);
                 } else {
                     textView.setText(response.toString());
                     textView.setMovementMethod(new ScrollingMovementMethod());

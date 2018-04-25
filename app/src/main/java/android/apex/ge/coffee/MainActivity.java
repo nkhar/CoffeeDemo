@@ -1,8 +1,8 @@
 package android.apex.ge.coffee;
 
-import android.apex.ge.coffee.Fragments.DocumentFragment;
-import android.apex.ge.coffee.Fragments.MachineFragment;
-import android.apex.ge.coffee.Fragments.PreOrderFragment;
+import android.apex.ge.coffee.Fragments.DrawerDocumentFragment;
+import android.apex.ge.coffee.Fragments.DrawerMachineFragment;
+import android.apex.ge.coffee.Fragments.DrawerPreOrderFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             selectedNavDrawerItemIndex = 0;
 
             // Insert the fragment by replacing FrameLayout.
-            MachineFragment machineFragment = new MachineFragment();
+            DrawerMachineFragment machineFragment = new DrawerMachineFragment();
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, machineFragment, "MACHINE_TAG").commit();
 
         } else if (id == R.id.nav_second) {
@@ -95,14 +95,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             selectedNavDrawerItemIndex = 1;
 
             // Insert the fragment by replacing FrameLayout.
-            PreOrderFragment preOrderFragment = new PreOrderFragment();
+            DrawerPreOrderFragment preOrderFragment = new DrawerPreOrderFragment();
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, preOrderFragment, "PRE_ORDER_TAG").commit();
         } else if (id == R.id.nav_third) {
             Log.d(LOG_TAG, "third item was clicked");
             selectedNavDrawerItemIndex = 2;
 
             // Insert the fragment by replacing FrameLayout.
-            DocumentFragment documentFragment = new DocumentFragment();
+            DrawerDocumentFragment documentFragment = new DrawerDocumentFragment();
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, documentFragment, "Document_TAG").commit();
         } else if (id == R.id.nav_login) {
             Log.d(LOG_TAG, "login item was clicked");
