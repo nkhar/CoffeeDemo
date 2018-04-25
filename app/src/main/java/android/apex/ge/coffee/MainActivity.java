@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             // Insert the fragment by replacing FrameLayout.
             PreOrderFragment preOrderFragment = new PreOrderFragment();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container_main, preOrderFragment, "PREORDER_TAG").commit();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container_main, preOrderFragment, "PRE_ORDER_TAG").commit();
         } else if (id == R.id.nav_third) {
             Log.d(LOG_TAG, "third item was clicked");
             selectedNavDrawerItemIndex = 2;
