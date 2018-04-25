@@ -111,7 +111,7 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d(LOG_TAG, "We are in onCreateView method of the MachineFragment class");
 
-        View view = inflater.inflate(R.layout.fragment_machine, container, false);
+        View view = inflater.inflate(R.layout.fragment_nav_drawer_machine, container, false);
 
         textView = view.findViewById(R.id.text_view_for_machine);
 

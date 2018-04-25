@@ -29,7 +29,7 @@ public class MyPreOrderAccountsRecyclerViewAdapter extends RecyclerViewListAdapt
     @NonNull
     @Override
     public MyPreOrderAccountsRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_pre_order_account_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item_pre_order_account_item, parent, false);
         return new ViewHolder(view);
     }
 

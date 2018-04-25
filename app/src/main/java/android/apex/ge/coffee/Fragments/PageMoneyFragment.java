@@ -61,7 +61,7 @@ public class PageMoneyFragment extends Fragment implements ILibObjectCrud {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d(LOG_TAG, "We are in onCreateView method of the PageRecViewFragment class");
 
-        View view = inflater.inflate(R.layout.fragment_page_money, container, false);
+        View view = inflater.inflate(R.layout.fragment_vp_page_money, container, false);
 
         // TextView
         textView = view.findViewById(R.id.text_view_page_money);

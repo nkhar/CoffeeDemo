@@ -52,9 +52,9 @@ public class DocGoodsActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "we are in the onCreate method of DocGoodsActivity activity");
         super.onCreate(savedInstanceState);
            /*
-        Here we are using the same layout as with MachineFragment class: fragment_machine
+        Here we are using the same layout as with MachineFragment class: fragment_nav_drawer_machine
          */
-        setContentView(R.layout.fragment_machine);
+        setContentView(R.layout.fragment_nav_drawer_machine);
 
         docId = getIntent().getStringExtra(DocumentFragment.DOCUMENT_ID);
 

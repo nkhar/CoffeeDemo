@@ -39,7 +39,7 @@ public class MySaleRecyclerViewAdapter extends RecyclerViewListAdapter<MySaleRec
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_coffee_sale_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item_coffee_sale_item, parent, false);
         return new ViewHolder(view);
     }
 

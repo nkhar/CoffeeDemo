@@ -63,10 +63,10 @@ public class PreOrderFragment extends Fragment implements ILibObjectCrud {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d(LOG_TAG, "We are in onCreateView method of the PreOrderFragment class");
         /*
-        Here we are using the same layout as with MachineFragment class: fragment_machine
+        Here we are using the same layout as with MachineFragment class: fragment_nav_drawer_machine
          */
 
-        View view = inflater.inflate(R.layout.fragment_pre_order, container, false);
+        View view = inflater.inflate(R.layout.fragment_nav_drawer_pre_order, container, false);
 
         textView = view.findViewById(R.id.text_view_for_pre_order);
 

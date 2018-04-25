@@ -85,7 +85,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
                              Bundle savedInstanceState) {
         Log.d(LOG_TAG, "We are in onCreateView method of the PageRecViewFragment class");
 
-        View view = inflater.inflate(R.layout.fragment_page_sale, container, false);
+        View view = inflater.inflate(R.layout.fragment_vp_page_general, container, false);
         // TextView
         textView = view.findViewById(R.id.text_view_page_sale);
 

@@ -29,7 +29,7 @@ public class MyCoffeeDocRecyclerViewAdapter extends RecyclerViewListAdapter<MyCo
     @NonNull
     @Override
     public MyCoffeeDocRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_coffee_machine_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item_coffee_machine_item, parent, false);
         return new ViewHolder(view);
     }
 

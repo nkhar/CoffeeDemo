@@ -50,7 +50,7 @@ public class EditNumberDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_edit_product_data, container);
+        return inflater.inflate(R.layout.fragment_dialog_edit_product_data, container);
     }
 
     @Override

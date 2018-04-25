@@ -5,9 +5,7 @@ import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeDocList;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
-import android.apex.ge.coffee.Retrofit.DocGoods;
 import android.apex.ge.coffee.Retrofit.Model.CoffeeDoc;
-import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.UserInterface.SimpleDividerItemDecoration;
 import android.content.Context;
 import android.content.Intent;
@@ -70,9 +68,9 @@ public class DocumentFragment extends Fragment implements ILibObjectCrud<CoffeeD
         Log.d(LOG_TAG, "We are in onCreateView method of the DocumentFragment class");
 
         /*
-        Here we are using the same layout as with MachineFragment class: fragment_machine
+        Here we are using the same layout as with MachineFragment class: fragment_nav_drawer_machine
          */
-        View view = inflater.inflate(R.layout.fragment_machine, container, false);
+        View view = inflater.inflate(R.layout.fragment_nav_drawer_machine, container, false);
 
         textView = view.findViewById(R.id.text_view_for_machine);
 

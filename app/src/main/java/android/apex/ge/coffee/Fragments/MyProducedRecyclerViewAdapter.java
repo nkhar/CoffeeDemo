@@ -39,7 +39,7 @@ public class MyProducedRecyclerViewAdapter extends RecyclerViewListAdapter<MyPro
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_coffee_produced_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item_coffee_produced_item, parent, false);
         return new ViewHolder(view);
     }
 
