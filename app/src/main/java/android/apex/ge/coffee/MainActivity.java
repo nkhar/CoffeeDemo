@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private int selectedNavDrawerItemIndex;
 
 
-
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -36,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          */
         outState.putInt(SELECTED_NAV_ITEM, selectedNavDrawerItemIndex);
     }
-
 
 
     @Override
