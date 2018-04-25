@@ -8,14 +8,14 @@
         android:id="@+id/coffee_machine_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_margin="@dimen/text_margin_8"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
         android:id="@+id/coffee_machine_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_margin="@dimen/text_margin_8"
         android:textAppearance="?attr/textAppearanceListItem" />
 
 

@@ -142,13 +142,8 @@ public class MachineFragment extends Fragment implements ILibObjectCrud {
         Floating Action Button
          */
         FloatingActionButton fab = view.findViewById(R.id.fab_fragment_machine);
-       /* fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getCoffeeMachineListFromAPI();
+        fab.hide();
 
-            }
-        });*/
 
         // implement setOnRefreshListener event on SwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
