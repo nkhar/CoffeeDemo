@@ -23,9 +23,9 @@ import retrofit2.Response;
  * This class is responsible for displaying fragment in the Money tab of the coffee machine.
  */
 
-public class PageMoneyFragment extends Fragment implements ILibObjectCrud {
+public class VPPageMoneyFragment extends Fragment implements ILibObjectCrud {
 
-    protected final String LOG_TAG = "PageMoneyFragment";
+    protected final String LOG_TAG = "VPPageMoneyFragment";
     public static final String ARG_PAGE = "ARG_PAGE";
 
     private int mPage;
@@ -36,14 +36,14 @@ public class PageMoneyFragment extends Fragment implements ILibObjectCrud {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public PageMoneyFragment() {
+    public VPPageMoneyFragment() {
     }
 
 
-    public static PageMoneyFragment newInstance(int page) {
+    public static VPPageMoneyFragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
-        PageMoneyFragment fragment = new PageMoneyFragment();
+        VPPageMoneyFragment fragment = new VPPageMoneyFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,7 +59,7 @@ public class PageMoneyFragment extends Fragment implements ILibObjectCrud {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "We are in onCreateView method of the PageRecViewFragment class");
+        Log.d(LOG_TAG, "We are in onCreateView method of the VPPageMoneyFragment class");
 
         View view = inflater.inflate(R.layout.fragment_vp_page_money, container, false);
 

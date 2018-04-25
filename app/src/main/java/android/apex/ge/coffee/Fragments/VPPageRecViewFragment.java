@@ -40,9 +40,9 @@ import retrofit2.Response;
  * @see android.apex.ge.coffee.CoffeeMachineDetailActivity
  */
 
-public class PageRecViewFragment extends Fragment implements ILibObjectCrud<ProductData>, EditNumberDialogFragment.EditNumberDialogListener {
+public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<ProductData>, EditNumberDialogFragment.EditNumberDialogListener {
 
-    protected final String LOG_TAG = "PageRecViewFragment";
+    protected final String LOG_TAG = "VPPageRecViewFragment";
     RecyclerView recyclerView;
     RecyclerViewListAdapter adapter;
 
@@ -62,13 +62,13 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public PageRecViewFragment() {
+    public VPPageRecViewFragment() {
     }
 
-    public static PageRecViewFragment newInstance(int page) {
+    public static VPPageRecViewFragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
-        PageRecViewFragment fragment = new PageRecViewFragment();
+        VPPageRecViewFragment fragment = new VPPageRecViewFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -83,7 +83,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "We are in onCreateView method of the PageRecViewFragment class");
+        Log.d(LOG_TAG, "We are in onCreateView method of the VPPageRecViewFragment class");
 
         View view = inflater.inflate(R.layout.fragment_vp_page_general, container, false);
         // TextView
@@ -102,7 +102,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         setUpCorrectAdapter(coffeeService);
 
 
-        adapter.setmListener(PageRecViewFragment.this);
+        adapter.setmListener(VPPageRecViewFragment.this);
         recyclerView.setAdapter(adapter);
 
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
@@ -261,7 +261,7 @@ public class PageRecViewFragment extends Fragment implements ILibObjectCrud<Prod
         FragmentManager fm = getActivity().getSupportFragmentManager();
         EditNumberDialogFragment editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title", prodPPID);
         // SETS the target fragment for use later when sending results
-        editNumberDialogFragment.setTargetFragment(PageRecViewFragment.this, REQUEST_CODE_DIALOG_FRAGMENT);
+        editNumberDialogFragment.setTargetFragment(VPPageRecViewFragment.this, REQUEST_CODE_DIALOG_FRAGMENT);
         editNumberDialogFragment.show(fm, "fragment_edit_name");
     }
 

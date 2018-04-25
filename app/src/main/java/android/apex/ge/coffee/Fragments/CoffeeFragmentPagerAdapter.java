@@ -10,8 +10,8 @@ import android.support.v4.app.FragmentPagerAdapter;
  * This is a FragmentPagerAdapter for the various tabs in CoffeeMachineDetailActivity
  *
  * @see android.apex.ge.coffee.CoffeeMachineDetailActivity
- * @see PageRecViewFragment
- * @see PageMoneyFragment
+ * @see VPPageRecViewFragment
+ * @see VPPageMoneyFragment
  */
 
 public class CoffeeFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -29,13 +29,13 @@ public class CoffeeFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return PageRecViewFragment.newInstance(position + 1);
+                return VPPageRecViewFragment.newInstance(position + 1);
             case 1:
-                return PageRecViewFragment.newInstance(position + 1);
+                return VPPageRecViewFragment.newInstance(position + 1);
             case 2:
-                return PageRecViewFragment.newInstance(position + 1);
+                return VPPageRecViewFragment.newInstance(position + 1);
             case 3:
-                return PageMoneyFragment.newInstance(position + 1);
+                return VPPageMoneyFragment.newInstance(position + 1);
             default:
                 break;
         }
