@@ -13,10 +13,12 @@
         android:layout_marginEnd="@dimen/text_margin_8"
         android:layout_marginStart="@dimen/text_margin_8"
         android:layout_marginTop="@dimen/text_margin_8"
+        android:layout_marginLeft="@dimen/text_margin_8"
         android:maxLines="1"
         app:layout_constraintEnd_toStartOf="@+id/page_produced_quantity1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAppearance="?attr/textAppearanceListItem"/>
 
     <TextView
         android:id="@+id/page_produced_BCode"
@@ -24,8 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/text_margin_8"
         android:layout_marginTop="@dimen/text_margin_16"
+        android:layout_marginLeft="@dimen/text_margin_8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/page_produced_Name" />
+        app:layout_constraintTop_toBottomOf="@+id/page_produced_Name"
+        android:textAppearance="?attr/textAppearanceListItem"/>
 
     <!-- right side of the recycler view item in LTR layout-->
 
@@ -34,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/text_margin_8"
+        android:layout_marginRight="@dimen/text_margin_8"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/page_produced_Name"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -42,7 +47,7 @@
         android:id="@+id/page_produced_quantity2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/text_margin_8"
+        android:layout_marginRight="@dimen/text_margin_8"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/page_produced_BCode"
         app:layout_constraintEnd_toEndOf="parent" />

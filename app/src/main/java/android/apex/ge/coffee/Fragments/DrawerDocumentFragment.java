@@ -76,7 +76,7 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
 
 
         // init SwipeRefreshLayout
-        swipeRefreshLayout = view.findViewById(R.id.cofee_machine_swipe_refresh_layout);
+        swipeRefreshLayout = view.findViewById(R.id.coffee_machine_swipe_refresh_layout);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         /*

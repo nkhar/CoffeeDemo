@@ -116,7 +116,7 @@ public class DrawerMachineFragment extends Fragment implements ILibObjectCrud {
         textView = view.findViewById(R.id.text_view_for_machine);
 
         // init SwipeRefreshLayout
-        swipeRefreshLayout = view.findViewById(R.id.cofee_machine_swipe_refresh_layout);
+        swipeRefreshLayout = view.findViewById(R.id.coffee_machine_swipe_refresh_layout);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         /*

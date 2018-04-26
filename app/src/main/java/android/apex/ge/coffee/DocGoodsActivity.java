@@ -59,7 +59,7 @@ public class DocGoodsActivity extends AppCompatActivity {
         docId = getIntent().getStringExtra(DrawerDocumentFragment.DOCUMENT_ID);
 
         // init SwipeRefreshLayout
-        swipeRefreshLayout = findViewById(R.id.cofee_machine_swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.coffee_machine_swipe_refresh_layout);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         /*
