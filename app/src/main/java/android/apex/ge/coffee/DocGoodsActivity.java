@@ -75,17 +75,13 @@ public class DocGoodsActivity extends AppCompatActivity {
 
 
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
+        getDocGoodsFromAPI(docId);
 
          /*
         Floating Action Button
          */
         FloatingActionButton fab = findViewById(R.id.fab_fragment_machine);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDocGoodsFromAPI(docId);
-            }
-        });
+        fab.hide();
 
         // implement setOnRefreshListener event on SwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

@@ -94,16 +94,13 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
 
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
 
+        getCoffeeDocsFromAPI();
+
          /*
         Floating Action Button
          */
         FloatingActionButton fab = view.findViewById(R.id.fab_fragment_machine);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getCoffeeDocsFromAPI();
-            }
-        });
+        fab.hide();
 
         // implement setOnRefreshListener event on SwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
