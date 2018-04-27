@@ -57,7 +57,9 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
         // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        if(ab!= null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
