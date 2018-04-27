@@ -29,5 +29,9 @@
     <string name="login_sign_in_button_text">Sign in</string>
     <string name="login_cancel_button_text">Exit</string>
 
+    // Dialog texts
+    <string name="dialog_edit_product_data_text_1">Quantity 1</string>
+    <string name="dialog_edit_product_data_text_2">Quantity 2</string>
+
 
 </resources>

@@ -27,8 +27,12 @@
     // actionbar menu
     <string name="search_title">ძებნა</string>
 
-
     // Login Activity
     <string name="login_sign_in_button_text">შესვლა</string>
     <string name="login_cancel_button_text">გამოსვლა</string>
+
+    // Dialog texts
+    <string name="dialog_edit_product_data_text_1">რაოდენობა 1</string>
+    <string name="dialog_edit_product_data_text_2">რაოდენობა 2</string>
+
 </resources>

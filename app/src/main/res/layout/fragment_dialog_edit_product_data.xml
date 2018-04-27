@@ -14,8 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
         android:padding="5dp"
-        android:text="raodenoba 1"
+        android:text="@string/dialog_edit_product_data_text_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,8 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
         android:padding="5dp"
-        android:text="raodenoba 2"
+        android:text="@string/dialog_edit_product_data_text_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_dialog_number_editText" />
 
@@ -60,22 +62,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:text="Cancel"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_1"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_dialog_number_editText2" />
 
     <Button
         android:id="@+id/fragment_dialog_ok_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:text="OK"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_1"
         app:layout_constraintTop_toBottomOf="@+id/fragment_dialog_number_editText2" />
 
