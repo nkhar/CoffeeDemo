@@ -2,11 +2,33 @@
 <resources>
     <string name="app_name">ყავა</string>
 
-    <string name="title_activity_coffee_machine_detail">შეიყვანეთ დეტალური ინფორმაცია</string>
+    <string name="title_activity_coffee_machine_detail">ტრანზაქციის დეტალები</string>
+    <string name="title_activity_pre_order">წინასწარი შეკვეთის დეტალები</string>
+    <string name="title_activity_doc_goods">საბუთის დეტალები</string>
+    <string name="title_activity_login">ავტორიზაცია</string>
+
+
 
     <string name="navigation_drawer_open">გახსენი გვერდული ნავიგაცია</string>
     <string name="navigation_drawer_close">დახურე გვერდული ნავიგაცია</string>
-    <string name="nav_drawer_menu_item_1">აპარატები</string>
+    <string name="nav_drawer_menu_item_1">ყავის აპარატები</string>
     <string name="nav_drawer_menu_item_2">წინასწარი შეკვეთები</string>
     <string name="nav_drawer_menu_item_3">საბუთების რეესტრი</string>
+    <string name="nav_drawer_menu_item_4">პარამეტრები</string>
+    <string name="nav_drawer_menu_item_5">გამოსვლა</string>
+
+    // Coffee Machine ViewPager page titles
+    <string name="coffee_machine_sale_page_title">საქონელი</string>
+    <string name="coffee_machine_produced_page_title">წარმოება</string>
+    <string name="coffee_machine_raw_materials_page_title">მასალა</string>
+    <string name="coffee_machine_money_page_title">ინკასაცია</string>
+
+
+    // actionbar menu
+    <string name="search_title">ძებნა</string>
+
+
+    // Login Activity
+    <string name="login_sign_in_button_text">შესვლა</string>
+    <string name="login_cancel_button_text">გამოსვლა</string>
 </resources>
