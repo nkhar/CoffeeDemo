@@ -1,5 +1,6 @@
 package android.apex.ge.coffee.Fragments;
 
+import android.apex.ge.coffee.CoffeeApp;
 import android.apex.ge.coffee.CoffeeMachineDetailActivity;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
@@ -98,7 +99,8 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
 
-        CoffeeService coffeeService = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        // CoffeeService coffeeService = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        CoffeeService coffeeService = CoffeeApp.AppInstance.getRetrofitService();
         setUpCorrectAdapter(coffeeService);
 
 

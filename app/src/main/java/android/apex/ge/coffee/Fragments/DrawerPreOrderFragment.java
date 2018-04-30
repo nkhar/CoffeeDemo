@@ -1,5 +1,6 @@
 package android.apex.ge.coffee.Fragments;
 
+import android.apex.ge.coffee.CoffeeApp;
 import android.apex.ge.coffee.PreOrderActivity;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
@@ -105,7 +106,8 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
     }
 
     private void getPreOrderAccountsFromAPI() {
-        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        // CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
 
         Call<PreOrderAccounts> preOrderAccounts = service.listPreOrderAccounts();
 
@@ -143,7 +145,8 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
     }
 
     private void getPreOrderGoodsFromAPI() {
-        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        // CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
         Calendar calendar = new GregorianCalendar(2018, 2, 26);

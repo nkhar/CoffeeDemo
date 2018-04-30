@@ -1,5 +1,6 @@
 package android.apex.ge.coffee.Fragments;
 
+import android.apex.ge.coffee.CoffeeApp;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
@@ -66,7 +67,8 @@ public class VPPageMoneyFragment extends Fragment implements ILibObjectCrud {
         // TextView
         textView = view.findViewById(R.id.text_view_page_money);
 
-        CoffeeService coffeeService = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+         // CoffeeService coffeeService = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        CoffeeService coffeeService  = CoffeeApp.AppInstance.getRetrofitService();
         getLastCoffeeCupsCountFromAPI(coffeeService);
 
         return view;

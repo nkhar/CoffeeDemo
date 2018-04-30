@@ -101,7 +101,8 @@ public class DocGoodsActivity extends AppCompatActivity {
 
 
     private void getDocGoodsFromAPI(String id) {
-        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        // CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
 
         Call<DocGoods> callGoodsDocs = service.listDocGoods(id);
 

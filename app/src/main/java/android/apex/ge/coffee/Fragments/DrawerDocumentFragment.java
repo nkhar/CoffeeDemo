@@ -1,5 +1,6 @@
 package android.apex.ge.coffee.Fragments;
 
+import android.apex.ge.coffee.CoffeeApp;
 import android.apex.ge.coffee.DocGoodsActivity;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeDocList;
@@ -120,7 +121,8 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
 
     private void getCoffeeDocsFromAPI() {
 
-        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        // CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
         Calendar calendar = new GregorianCalendar(2018, 03, 18);
