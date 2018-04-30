@@ -3,6 +3,7 @@ package android.apex.ge.coffee;
 import android.apex.ge.coffee.Fragments.DrawerDocumentFragment;
 import android.apex.ge.coffee.Fragments.DrawerMachineFragment;
 import android.apex.ge.coffee.Fragments.DrawerPreOrderFragment;
+import android.apex.ge.coffee.Fragments.SettingsFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -106,9 +107,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, documentFragment, "Document_TAG").commit();
         } else if (id == R.id.nav_login) {
             Log.d(LOG_TAG, "login item was clicked");
-           /* Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            MainActivity.this.finish();*/
+            SettingsFragment settingsFragment = new SettingsFragment();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container_main, settingsFragment, "SETTINGS_MAIN_TAG").commit();
         } else if (id == R.id.nav_logout) {
             Log.d(LOG_TAG, "log out item was clicked");
             logOut();
