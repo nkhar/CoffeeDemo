@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,6 +57,28 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.settings:
+                startSettingsActivity();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    private void startSettingsActivity() {
+        Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
+        startActivity(intent);
+    }
 
     private void checkLoginCredentials() {
         Log.d(LOG_TAG,"We are checking if user is Logged in from checkLoginCredentials");

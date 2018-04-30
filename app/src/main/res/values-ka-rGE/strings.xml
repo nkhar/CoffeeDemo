@@ -6,6 +6,7 @@
     <string name="title_activity_pre_order">წინასწარი შეკვეთის დეტალები</string>
     <string name="title_activity_doc_goods">საბუთის დეტალები</string>
     <string name="title_activity_login">ავტორიზაცია</string>
+    <string name="title_activity_settings">პარამეტრები</string>
 
 
 
@@ -26,6 +27,7 @@
 
     // actionbar menu
     <string name="search_title">ძებნა</string>
+    <string name="settings_title">პარამეტრები</string>
 
     // Login Activity
     <string name="login_sign_in_button_text">შესვლა</string>
