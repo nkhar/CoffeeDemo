@@ -1,11 +1,11 @@
 package android.apex.ge.coffee.Fragments;
 
 
+import android.apex.ge.coffee.CoffeeApp;
 import android.apex.ge.coffee.CoffeeMachineDetailActivity;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
-import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
 import android.apex.ge.coffee.UserInterface.SimpleDividerItemDecoration;
 import android.content.Context;
@@ -67,14 +67,14 @@ public class DrawerMachineFragment extends Fragment implements ILibObjectCrud {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        
+
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate( R.menu.options_menu, menu);
+        getActivity().getMenuInflater().inflate(R.menu.options_menu, menu);
 
-        MenuItem myActionMenuItem = menu.findItem( R.id.search);
+        MenuItem myActionMenuItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) myActionMenuItem.getActionView();
         search(searchView);
 
@@ -162,7 +162,8 @@ public class DrawerMachineFragment extends Fragment implements ILibObjectCrud {
     }
 
     private void getCoffeeMachineListFromAPI() {
-        CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        // CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
+        CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
 
         Call<CoffeeMachineList> coffees = service.listCoffeeMachines("1610003000");
 
