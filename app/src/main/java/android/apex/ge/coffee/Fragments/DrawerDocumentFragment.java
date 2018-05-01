@@ -76,7 +76,10 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.options_menu, menu);
+        /*
+        I use getActivity().getMenuInflater() in some places instead of inflater parameter.
+         */
+        inflater.inflate(R.menu.options_menu, menu);
 
         MenuItem myActionMenuItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) myActionMenuItem.getActionView();
