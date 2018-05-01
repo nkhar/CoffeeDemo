@@ -20,8 +20,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -37,7 +41,7 @@ public class DocGoodsActivity extends AppCompatActivity {
     private final String LOG_TAG = "DocGoodsActivity";
 
     RecyclerView recyclerView;
-    RecyclerViewListAdapter adapter;
+    MyProducedRecyclerViewAdapter adapter;
 
     private TextView textView;
 
@@ -97,6 +101,35 @@ public class DocGoodsActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+
+        MenuItem myActionMenuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) myActionMenuItem.getActionView();
+        search(searchView);
+        return true;
+    }
+
+
+    private void search(SearchView searchView) {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d(LOG_TAG, "\n\n New text is: " + newText);
+
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
     }
 
 
