@@ -4,6 +4,7 @@ import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.app.Application;
 import android.content.res.Configuration;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import java.util.Locale;
@@ -15,6 +16,11 @@ public class CoffeeApp extends Application {
 
     //RetrofitClient service
     CoffeeService service;
+   /*
+    static {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+    }
+    */
 
     public void onCreate() {
         super.onCreate();
