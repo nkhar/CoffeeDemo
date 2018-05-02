@@ -17,6 +17,10 @@
     <string name="nav_drawer_menu_item_5">Logout</string>
 
 
+    // Navigation Drawer Machine Fragment
+    <string name="nav_drawer_machine_text_view_text">Refresh to update the Data</string>
+    <string name="nav_drawer_machine_text_view_api_failure_text">Can\'t Establish a Connection to the Server  %s  %s</string>
+
     // Coffee Machine ViewPager page titles
     <string name="coffee_machine_sale_page_title">Sale</string>
     <string name="coffee_machine_produced_page_title">Sale Produced</string>
@@ -34,6 +38,7 @@
     // Dialog texts
     <string name="dialog_edit_product_data_text_1">Quantity 1</string>
     <string name="dialog_edit_product_data_text_2">Quantity 2</string>
+
 
 
 </resources>

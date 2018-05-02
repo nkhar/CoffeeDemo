@@ -8,6 +8,7 @@
         android:id="@+id/text_view_for_machine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/nav_drawer_machine_text_view_text"
         android:layout_gravity="center_horizontal|center_vertical"
         android:scrollbars="vertical" />
 
@@ -17,12 +18,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/coffee_machines_recycler_view"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/coffee_machines_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+
+
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

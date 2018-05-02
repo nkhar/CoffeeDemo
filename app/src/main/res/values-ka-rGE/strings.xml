@@ -18,6 +18,9 @@
     <string name="nav_drawer_menu_item_4">პარამეტრები</string>
     <string name="nav_drawer_menu_item_5">გამოსვლა</string>
 
+    // Navigation Drawer Machine Fragment
+    <string name="nav_drawer_machine_text_view_text">მონაცემების ჩამოსატვირთად განაახლეთ</string>
+
     // Coffee Machine ViewPager page titles
     <string name="coffee_machine_sale_page_title">საქონელი</string>
     <string name="coffee_machine_produced_page_title">წარმოება</string>
@@ -36,5 +39,7 @@
     // Dialog texts
     <string name="dialog_edit_product_data_text_1">რაოდენობა 1</string>
     <string name="dialog_edit_product_data_text_2">რაოდენობა 2</string>
+    <string name="nav_drawer_machine_text_view_api_failure_text">Can\'t Establish a Connection to the Server  %s  %s</string>
+
 
 </resources>

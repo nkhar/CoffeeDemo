@@ -135,7 +135,7 @@ public class DrawerMachineFragment extends Fragment implements ILibObjectCrud {
         Add ItemDecoration Using SimpleDividerItemDecoration class from UserInterface package.
          */
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
-        getCoffeeMachineListFromAPI();
+        //getCoffeeMachineListFromAPI();
 
 
         /*
@@ -173,6 +173,7 @@ public class DrawerMachineFragment extends Fragment implements ILibObjectCrud {
             public void onResponse(Call<CoffeeMachineList> call, Response<CoffeeMachineList> response) {
                 if (response.isSuccessful()) {
                     Log.d(LOG_TAG, response.code() + "");
+                    changeViewVisibility(textView, View.GONE);
 
 
                     List<CoffeeMachine> kofe = response.body().getResult();
@@ -184,6 +185,7 @@ public class DrawerMachineFragment extends Fragment implements ILibObjectCrud {
                     adapter.setmListener(DrawerMachineFragment.this);
                     DrawerMachineFragment.this.recyclerView.setAdapter(adapter);
                 } else {
+                    changeViewVisibility(textView, View.VISIBLE);
                     textView.setText(response.toString());
                     textView.setMovementMethod(new ScrollingMovementMethod());
                 }
@@ -192,9 +194,16 @@ public class DrawerMachineFragment extends Fragment implements ILibObjectCrud {
             @Override
             public void onFailure(Call<CoffeeMachineList> call, Throwable t) {
                 call.cancel();
-                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+                changeViewVisibility(textView, View.VISIBLE);
+                textView.setText(String.format(getString(R.string.nav_drawer_machine_text_view_api_failure_text), call.toString(), t.getStackTrace()));
             }
         });
+    }
+
+    private void changeViewVisibility(View view, int visible) {
+
+        view.setVisibility(visible);
+
     }
 
     @Override
