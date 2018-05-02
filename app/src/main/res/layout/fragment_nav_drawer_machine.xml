@@ -8,6 +8,7 @@
         android:id="@+id/text_view_for_machine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:scrollbars="vertical" />
 
 
