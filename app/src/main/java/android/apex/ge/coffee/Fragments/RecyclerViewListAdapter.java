@@ -62,6 +62,10 @@ public  abstract class RecyclerViewListAdapter<T extends RecyclerView.ViewHolder
         this.mValues = mValues;
     }
 
+    public List getmValues(){
+        return mValues;
+    }
+
 
     public View.OnClickListener getmViewClick() {
         return mViewClick;
