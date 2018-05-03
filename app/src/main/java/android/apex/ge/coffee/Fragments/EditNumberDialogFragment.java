@@ -1,10 +1,12 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.R;
+import android.apex.ge.coffee.WidgetHelper.DecimalDigitsInputFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +80,10 @@ public class EditNumberDialogFragment extends DialogFragment {
         else {
             Log.d(LOG_TAG,"However strange it may seem this activity is not visual otherwise it would not have returned null");
         }
+
+        // Setting Filter for EditTexts
+        mEditNumberText1.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,4)});
+        mEditNumberText2.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,4)});
 
 
         mDialogOKButton.setOnClickListener(new View.OnClickListener() {
