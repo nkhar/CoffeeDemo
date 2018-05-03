@@ -305,19 +305,27 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
 
     private void setCorrectSaveCoffeeStatsProdTransactionDataArrayList() {
 
-        switch (mPage) {
-            case 1:
-                ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
-                break;
-            case 2:
-                ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleProduced(listProdTransactionData);
-                break;
-            case 3:
-                ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setTransitRawMaterials(listProdTransactionData);
-                break;
-            default:
-                Log.d(LOG_TAG, "This is one strange arrayList setter switch statement");
-                break;
+        if ((getActivity() != null)) {
+
+
+            if (((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats() != null) {
+
+                switch (mPage) {
+                    case 1:
+                        ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
+                        break;
+                    case 2:
+                        ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleProduced(listProdTransactionData);
+                        break;
+                    case 3:
+                        ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setTransitRawMaterials(listProdTransactionData);
+                        break;
+                    default:
+                        Log.d(LOG_TAG, "This is one strange arrayList setter switch statement");
+                        break;
+                }
+
+            }
         }
 
 
