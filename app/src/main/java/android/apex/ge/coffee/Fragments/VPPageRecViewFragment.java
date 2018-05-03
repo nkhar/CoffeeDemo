@@ -240,7 +240,7 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
             public void onFailure(Call<SaleGoods> call, Throwable t) {
 
                 call.cancel();
-                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+                textView.setText(String.format(getString(R.string.nav_drawer_machine_text_view_api_failure_text), call.toString(), t.getStackTrace()));
 
             }
         });
@@ -260,11 +260,14 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
 
     // Call this method to launch the edit dialog
     private void showEditNumberDialog(String prodPPID) {
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        EditNumberDialogFragment editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title", prodPPID);
-        // SETS the target fragment for use later when sending results
-        editNumberDialogFragment.setTargetFragment(VPPageRecViewFragment.this, REQUEST_CODE_DIALOG_FRAGMENT);
-        editNumberDialogFragment.show(fm, "fragment_edit_name");
+
+        if (getActivity()!= null) {
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            EditNumberDialogFragment editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title", prodPPID);
+            // SETS the target fragment for use later when sending results
+            editNumberDialogFragment.setTargetFragment(VPPageRecViewFragment.this, REQUEST_CODE_DIALOG_FRAGMENT);
+            editNumberDialogFragment.show(fm, "fragment_edit_name");
+        }
     }
 
     @Override
@@ -308,8 +311,6 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
         if ((getActivity() != null)) {
 
 
-            if (((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats() != null) {
-
                 switch (mPage) {
                     case 1:
                         ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
@@ -325,7 +326,6 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
                         break;
                 }
 
-            }
         }
 
 
