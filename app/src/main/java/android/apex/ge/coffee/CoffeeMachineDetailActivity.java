@@ -171,14 +171,21 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
 
     }
 
+
     private String convertToJSON() {
         Gson gson = new Gson();
         return  gson.toJson(saveCoffeeStats);
     }
+
+
+
     private SaveCoffeeStats convertFromJSON( String jsonString) {
         Gson gson = new Gson();
         return gson.fromJson(jsonString, SaveCoffeeStats.class);
     }
+
+
+
 
     private void createSaveCoffeeStatsJSONObject(String conString) {
         saveCoffeeStatsJSON = new SaveCoffeeStatsJSON();
@@ -191,6 +198,8 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
     public SaveCoffeeStats getSaveCoffeeStats() {
         return saveCoffeeStats;
     }
+
+
 
 
     /**
