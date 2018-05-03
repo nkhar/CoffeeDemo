@@ -10,9 +10,11 @@ import android.apex.ge.coffee.Retrofit.Model.CoffeeMachine;
 import android.apex.ge.coffee.UserInterface.SimpleDividerItemDecoration;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -209,8 +211,33 @@ public class DrawerMachineFragment extends Fragment implements ILibObjectCrud {
     @Override
     public void onClick(Object value) {
         Log.d(LOG_TAG, "Something was clicked" + value.toString());
-        Intent intent = new Intent(getActivity(), CoffeeMachineDetailActivity.class);
-        startActivity(intent);
+        final String localStr = checkIfPreviousEntryExists();
+        if (!localStr.equals("01")) {
+            Log.d(LOG_TAG, "We are in if statement of localStr");
+
+            Snackbar.make(getView(), "This is SnackBar", Snackbar.LENGTH_LONG)
+                    .setAction("OPEN SESAME", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getActivity(), CoffeeMachineDetailActivity.class);
+                            intent.putExtra("coffeeAcc", localStr);
+                            startActivity(intent);
+                        }
+                    })
+                    .setActionTextColor(getResources().getColor(android.R.color.holo_red_light))
+                    .show();
+        } else {
+            Intent intent = new Intent(getActivity(), CoffeeMachineDetailActivity.class);
+            startActivity(intent);
+        }
+
+    }
+
+    private String checkIfPreviousEntryExists() {
+        SharedPreferences settings = getActivity().getSharedPreferences(CoffeeMachineDetailActivity.PREFERENCES_NAME, 0);
+        //Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
+        String vanAcc = settings.getString(CoffeeMachineDetailActivity.PREFERENCES_COFFEE_ACC, "01");
+        return vanAcc;
     }
 
     @Override

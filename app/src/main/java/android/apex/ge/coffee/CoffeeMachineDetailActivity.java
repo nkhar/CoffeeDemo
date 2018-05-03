@@ -6,6 +6,7 @@ import android.apex.ge.coffee.Fragments.DrawerMachineFragment;
 import android.apex.ge.coffee.JavaToJSON.SaveCoffeeStatsJSON;
 import android.apex.ge.coffee.Retrofit.Model.ProdTransactionData;
 import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -44,6 +45,9 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
 
     // Declaration of DAO to interact with corresponding Author table
     protected Dao<SaveCoffeeStatsJSON, UUID> saveCoffeeStatsJSONDao;
+
+    public static final String PREFERENCES_NAME = "MyPreferencesFile";
+    public static final String PREFERENCES_COFFEE_ACC = "VanAcc";
 
 
     @Override
@@ -219,12 +223,26 @@ public class CoffeeMachineDetailActivity extends AppCompatActivity {
         super.onPause();
         Log.d(LOG_TAG, "\n\n We are in onPause \n\n");
         saveToDatabase();
+        saveToPreferenceFile();
         //Check if activity is finishing.
        /* if(isFinishing()){
             Log.d(LOG_TAG, "\n\n is Finishing \n\n");
             saveToDatabase();
         }*/
 
+    }
+
+    private void saveToPreferenceFile() {
+
+        // We need an Editor object to make preference changes.
+        SharedPreferences settings = getSharedPreferences(CoffeeMachineDetailActivity.PREFERENCES_NAME, 0); // 0 - for private mode same as MODE_PRIVATE
+        SharedPreferences.Editor editor = settings.edit();
+
+        //Set "VanAcc"
+        editor.putString(PREFERENCES_COFFEE_ACC, saveCoffeeStats.getCoffeeAcc());
+
+        // Commit the edits!
+        editor.commit();
     }
 
     @Override
