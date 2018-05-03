@@ -48,6 +48,17 @@ public class EditNumberDialogFragment extends DialogFragment {
         frag.setArguments(args);
         return frag;
     }
+    public static EditNumberDialogFragment newInstance(String title, String prodPPID, String inputString1, String inputString2) {
+
+        EditNumberDialogFragment frag = new EditNumberDialogFragment();
+        Bundle args = new Bundle();
+        args.putString("title", title);
+        args.putString("prodPPID", prodPPID);
+        args.putString("inputString1", inputString1);
+        args.putString("inputString2", inputString2);
+        frag.setArguments(args);
+        return frag;
+    }
 
 
     @Nullable
@@ -84,6 +95,13 @@ public class EditNumberDialogFragment extends DialogFragment {
         // Setting Filter for EditTexts
         mEditNumberText1.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,4)});
         mEditNumberText2.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,4)});
+
+        if (getArguments().getString("inputString1") != null) {
+            mEditNumberText1.setText(getArguments().getString("inputString1"));
+        }
+        if (getArguments().getString("inputString2") != null) {
+            mEditNumberText2.setText(getArguments().getString("inputString2"));
+        }
 
 
         mDialogOKButton.setOnClickListener(new View.OnClickListener() {

@@ -263,7 +263,20 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
 
         if (getActivity()!= null) {
             FragmentManager fm = getActivity().getSupportFragmentManager();
-            EditNumberDialogFragment editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title", prodPPID);
+            EditNumberDialogFragment editNumberDialogFragment = null;
+
+            // Sending values to present in the EditText of the DialogFragment.
+            if ( prodPPIDProdTransactionDataHashMap.get(prodPPID)!= null) {
+                Float inputFloat1 = prodPPIDProdTransactionDataHashMap.get(prodPPID).getCurICount();
+                Float inputFloat2 = prodPPIDProdTransactionDataHashMap.get(prodPPID).getCurSCount();
+                String inputStr1 = String.valueOf(inputFloat1);
+                String inputStr2 = String.valueOf(inputFloat2);
+                 editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title", prodPPID, inputStr1, inputStr2);
+            }else{
+                editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title", prodPPID);
+            }
+
+
             // SETS the target fragment for use later when sending results
             editNumberDialogFragment.setTargetFragment(VPPageRecViewFragment.this, REQUEST_CODE_DIALOG_FRAGMENT);
             editNumberDialogFragment.show(fm, "fragment_edit_name");
