@@ -24,7 +24,7 @@ import java.util.Map;
  * CoffeeMachineDetailActivity.
  */
 
-public class MyProducedRecyclerViewAdapter extends RecyclerViewListAdapter<MyProducedRecyclerViewAdapter.ViewHolder, ProductData> implements Filterable{
+public class MyProducedRecyclerViewAdapter extends RecyclerViewAdapterWithFilter<MyProducedRecyclerViewAdapter.ViewHolder, ProductData>{
 
     protected final String LOG_TAG = "MyProdRecAdapter";
     private Map<String, ProdTransactionData> prodTransactionDataHashMap = new HashMap<>();
@@ -123,7 +123,7 @@ public class MyProducedRecyclerViewAdapter extends RecyclerViewListAdapter<MyPro
 
 
     @Override
-    public Filter getFilter() {
+    public Filter getSpecificFilter() {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {

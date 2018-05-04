@@ -4,7 +4,6 @@ import android.apex.ge.coffee.CoffeeApp;
 import android.apex.ge.coffee.CoffeeMachineDetailActivity;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
-import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.Model.ProdTransactionData;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.Retrofit.ProducedGoods;
@@ -18,9 +17,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -45,7 +48,7 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
 
     protected final String LOG_TAG = "VPPageRecViewFragment";
     RecyclerView recyclerView;
-    RecyclerViewListAdapter adapter;
+    RecyclerViewAdapterWithFilter adapter;
 
     private List<ProdTransactionData> listProdTransactionData;
     private HashMap<String, ProdTransactionData> prodPPIDProdTransactionDataHashMap = new HashMap<>();
@@ -79,7 +82,45 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARG_PAGE);
+        setHasOptionsMenu(true);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.options_menu, menu);
+
+        MenuItem myActionMenuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) myActionMenuItem.getActionView();
+        search(searchView);
+
+    }
+
+
+
+    private void search(SearchView searchView) {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d(LOG_TAG, "\n\n New text is: " + newText);
+
+                // in case search menu action is clicked before adapter is initialized.
+                if(adapter!=null) {
+                    adapter.getFilter().filter(newText);
+                }
+                return true;
+            }
+        });
+    }
+
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -130,13 +171,17 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
             listProdTransactionData = ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().getSaleProduced();
             populateSaleHashMap();
 
-        } else if (mPage == 3) {
+        }
+
+        /*else if (mPage == 3) {
             adapter = new MyRawMaterialsRecyclerViewAdapter(new ArrayList<ProductData>());
             getRawMaterialsListFromAPI(coffeeService);
 
             listProdTransactionData = ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().getTransitRawMaterials();
             populateSaleHashMap();
-        } else {
+        }*/
+
+        else {
             /* return;*/
 
         }
@@ -261,18 +306,18 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
     // Call this method to launch the edit dialog
     private void showEditNumberDialog(String prodPPID) {
 
-        if (getActivity()!= null) {
+        if (getActivity() != null) {
             FragmentManager fm = getActivity().getSupportFragmentManager();
             EditNumberDialogFragment editNumberDialogFragment = null;
 
             // Sending values to present in the EditText of the DialogFragment.
-            if ( prodPPIDProdTransactionDataHashMap.get(prodPPID)!= null) {
+            if (prodPPIDProdTransactionDataHashMap.get(prodPPID) != null) {
                 Float inputFloat1 = prodPPIDProdTransactionDataHashMap.get(prodPPID).getCurICount();
                 Float inputFloat2 = prodPPIDProdTransactionDataHashMap.get(prodPPID).getCurSCount();
                 String inputStr1 = String.valueOf(inputFloat1);
                 String inputStr2 = String.valueOf(inputFloat2);
-                 editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title", prodPPID, inputStr1, inputStr2);
-            }else{
+                editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title", prodPPID, inputStr1, inputStr2);
+            } else {
                 editNumberDialogFragment = EditNumberDialogFragment.newInstance("Number is here Title", prodPPID);
             }
 
@@ -324,20 +369,20 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
         if ((getActivity() != null)) {
 
 
-                switch (mPage) {
-                    case 1:
-                        ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
-                        break;
-                    case 2:
-                        ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleProduced(listProdTransactionData);
-                        break;
-                    case 3:
-                        ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setTransitRawMaterials(listProdTransactionData);
-                        break;
-                    default:
-                        Log.d(LOG_TAG, "This is one strange arrayList setter switch statement");
-                        break;
-                }
+            switch (mPage) {
+                case 1:
+                    ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleAndTransit(listProdTransactionData);
+                    break;
+                case 2:
+                    ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setSaleProduced(listProdTransactionData);
+                    break;
+                case 3:
+                    ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().setTransitRawMaterials(listProdTransactionData);
+                    break;
+                default:
+                    Log.d(LOG_TAG, "This is one strange arrayList setter switch statement");
+                    break;
+            }
 
         }
 
@@ -353,9 +398,9 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
             case 2:
                 ((MyProducedRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
                 break;
-            case 3:
+            /*case 3:
                 ((MyRawMaterialsRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
-                break;
+                break;*/
             default:
                 Log.d(LOG_TAG, "This is one strange switch statement");
                 break;
