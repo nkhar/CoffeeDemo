@@ -101,7 +101,10 @@ public class DrawerMachineFragment extends Fragment implements ILibObjectCrud {
             public boolean onQueryTextChange(String newText) {
                 Log.d(LOG_TAG, "\n\n New text is: " + newText);
 
-                adapter.getFilter().filter(newText);
+                // in case search menu action is clicked before adapter is initialized.
+                if(adapter!=null) {
+                    adapter.getFilter().filter(newText);
+                }
                 return true;
             }
         });

@@ -99,7 +99,10 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
             public boolean onQueryTextChange(String newText) {
                 Log.d(LOG_TAG, "\n\n New text is: " + newText);
 
-                adapter.getFilter().filter(newText);
+                // in case search menu action is clicked before adapter is initialized.
+                if(adapter!=null) {
+                    adapter.getFilter().filter(newText);
+                }
                 return true;
             }
         });
@@ -137,7 +140,7 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
 
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
 
-        getCoffeeDocsFromAPI();
+        //getCoffeeDocsFromAPI();
 
          /*
         Floating Action Button
@@ -178,6 +181,8 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
             public void onResponse(Call<CoffeeDocList> call, Response<CoffeeDocList> response) {
                 if (response.isSuccessful()) {
                     Log.d(LOG_TAG, response.code() + "");
+                    changeViewVisibility(textView, View.GONE);
+
                     List<CoffeeDoc> coffeeDocs = response.body().getResult();
 
                     Collections.sort(coffeeDocs);
@@ -185,6 +190,7 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
                     adapter.setmListener(DrawerDocumentFragment.this);
                     DrawerDocumentFragment.this.recyclerView.setAdapter(adapter);
                 } else {
+                    changeViewVisibility(textView, View.VISIBLE);
                     textView.setText(response.toString());
                     textView.setMovementMethod(new ScrollingMovementMethod());
                 }
@@ -195,9 +201,16 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
                 call.cancel();
                 Log.d(LOG_TAG, "Call url is " + call.request().url());
                 Log.d(LOG_TAG, "The cause for error" + t.getCause());
-                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+                changeViewVisibility(textView, View.VISIBLE);
+                textView.setText(String.format(getString(R.string.nav_drawer_machine_text_view_api_failure_text), call.toString(), t.getStackTrace()));
             }
         });
+
+    }
+
+    private void changeViewVisibility(View view, int visible) {
+
+        view.setVisibility(visible);
 
     }
 
