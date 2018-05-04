@@ -54,7 +54,7 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
 
         holder.mCoffeeMachineNameTextView.setText(value.getName());
         holder.mCoffeeMachineAddressTextView.setText(value.getAddress());
-        final ILibObjectCrud listener = getmListener();
+       /* final ILibObjectCrud listener = getmListener();
         if (listener != null) {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,7 +69,7 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
                     return true;
                 }
             });
-        }
+        }*/
 
     }
 
@@ -90,6 +90,27 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
             mView = itemView;
             mCoffeeMachineNameTextView = itemView.findViewById(R.id.coffee_machine_name);
             mCoffeeMachineAddressTextView = itemView.findViewById(R.id.coffee_machine_address);
+
+
+            final ILibObjectCrud listener = getmListener();
+            if (listener != null) {
+                mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onClick(coffeeListResult);
+                    }
+                });
+                mView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        listener.onLongClick(coffeeListResult);
+                        return true;
+                    }
+                });
+            }
+
+
+
         }
 
     }
