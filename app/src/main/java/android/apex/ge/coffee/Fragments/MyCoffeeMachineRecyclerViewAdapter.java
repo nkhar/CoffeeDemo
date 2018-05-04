@@ -20,7 +20,7 @@ import java.util.List;
  * adapter for coffee machines recycler view
  */
 
-public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<MyCoffeeMachineRecyclerViewAdapter.ViewHolder, CoffeeMachine> implements Filterable{
+public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<MyCoffeeMachineRecyclerViewAdapter.ViewHolder, CoffeeMachine> implements Filterable {
 
     protected final String LOG_TAG = "MyCofRecyclerVAdapter";
     private ArrayList<CoffeeMachine> mListHolder;
@@ -54,22 +54,6 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
 
         holder.mCoffeeMachineNameTextView.setText(value.getName());
         holder.mCoffeeMachineAddressTextView.setText(value.getAddress());
-       /* final ILibObjectCrud listener = getmListener();
-        if (listener != null) {
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onClick(value);
-                }
-            });
-            holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    listener.onLongClick(value);
-                    return true;
-                }
-            });
-        }*/
 
     }
 
@@ -110,16 +94,9 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
             }
 
 
-
         }
 
     }
-
-
-
-
-
-
 
 
     @Override
@@ -141,7 +118,7 @@ public class MyCoffeeMachineRecyclerViewAdapter extends RecyclerViewListAdapter<
 
                     for (CoffeeMachine coffeeMachine : mListHolder) {
 
-                        if (coffeeMachine.getName().toLowerCase().contains(charString) || coffeeMachine.getAddress().toLowerCase().contains(charString) ) {
+                        if (coffeeMachine.getName().toLowerCase().contains(charString) || coffeeMachine.getAddress().toLowerCase().contains(charString)) {
 
 
                             filteredList.add(coffeeMachine);
