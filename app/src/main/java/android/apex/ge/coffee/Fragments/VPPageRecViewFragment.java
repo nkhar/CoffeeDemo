@@ -96,7 +96,6 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
     }
 
 
-
     private void search(SearchView searchView) {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -110,16 +109,13 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
                 Log.d(LOG_TAG, "\n\n New text is: " + newText);
 
                 // in case search menu action is clicked before adapter is initialized.
-                if(adapter!=null) {
+                if (adapter != null) {
                     adapter.getFilter().filter(newText);
                 }
                 return true;
             }
         });
     }
-
-
-
 
 
     @Override
@@ -171,17 +167,13 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
             listProdTransactionData = ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().getSaleProduced();
             populateSaleHashMap();
 
-        }
-
-        /*else if (mPage == 3) {
+        } else if (mPage == 3) {
             adapter = new MyRawMaterialsRecyclerViewAdapter(new ArrayList<ProductData>());
             getRawMaterialsListFromAPI(coffeeService);
 
             listProdTransactionData = ((CoffeeMachineDetailActivity) getActivity()).getSaveCoffeeStats().getTransitRawMaterials();
             populateSaleHashMap();
-        }*/
-
-        else {
+        } else {
             /* return;*/
 
         }
@@ -398,9 +390,9 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
             case 2:
                 ((MyProducedRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
                 break;
-            /*case 3:
+            case 3:
                 ((MyRawMaterialsRecyclerViewAdapter) adapter).updateHashMap(prodPPIDProdTransactionDataHashMap);
-                break;*/
+                break;
             default:
                 Log.d(LOG_TAG, "This is one strange switch statement");
                 break;

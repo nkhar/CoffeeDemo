@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,7 @@ import java.util.Map;
  * CoffeeMachineDetailActivity.
  */
 
-public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<MyRawMaterialsRecyclerViewAdapter.ViewHolder, ProductData> {
+public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewAdapterWithFilter<MyRawMaterialsRecyclerViewAdapter.ViewHolder, ProductData> {
 
     protected final String LOG_TAG = "MyRMaterialsRecAdapter";
     private Map<String, ProdTransactionData> prodTransactionDataHashMap = new HashMap<>();
@@ -110,6 +112,51 @@ public class MyRawMaterialsRecyclerViewAdapter extends RecyclerViewListAdapter<M
             mRawMaterialsQuantity2TextView = itemView.findViewById(R.id.page_raw_materials_quantity2);
         }
 
+    }
+
+
+    @Override
+    public Filter getSpecificFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+
+                String charString = charSequence.toString();
+
+                if (charString.isEmpty()) {
+                    mFilteredList = mListHolder;
+
+                } else {
+                    Log.d(LOG_TAG, "\n\nWE are filtering the list for search");
+
+                    ArrayList<ProductData> filteredList = new ArrayList<>();
+
+                    for (ProductData productData : mListHolder) {
+
+                        if (productData.getName().toLowerCase().contains(charString) || productData.getBCode().contains(charString)) {
+
+
+                            filteredList.add(productData);
+                        }
+                    }
+
+                    mFilteredList = filteredList;
+
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mFilteredList;
+                Log.d(LOG_TAG, "Filtered list toString: " + filterResults.values.toString());
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                mFilteredList = (ArrayList<ProductData>) filterResults.values;
+                setmValues(mFilteredList);
+                notifyDataSetChanged();
+            }
+        };
     }
 
 
