@@ -62,6 +62,9 @@ public class DocGoodsActivity extends AppCompatActivity {
 
         docId = getIntent().getStringExtra(DrawerDocumentFragment.DOCUMENT_ID);
 
+        // init TextView.
+        textView = findViewById(R.id.text_view_for_machine);
+
         // init SwipeRefreshLayout
         swipeRefreshLayout = findViewById(R.id.coffee_machine_swipe_refresh_layout);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
@@ -144,6 +147,9 @@ public class DocGoodsActivity extends AppCompatActivity {
             public void onResponse(Call<DocGoods> call, Response<DocGoods> response) {
                 if (response.isSuccessful()) {
                     Log.d(LOG_TAG, response.code() + "");
+                    changeViewVisibility(textView, View.GONE);
+
+
                     List<ProductData> goodsDocs = response.body().getResult();
 
                     Collections.sort(goodsDocs);
@@ -153,6 +159,7 @@ public class DocGoodsActivity extends AppCompatActivity {
 
                 } else {
                     Log.d(LOG_TAG, response.code() + "");
+                    changeViewVisibility(textView, View.VISIBLE);
                     textView.setText(response.toString());
                     textView.setMovementMethod(new ScrollingMovementMethod());
                 }
@@ -161,9 +168,16 @@ public class DocGoodsActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<DocGoods> call, Throwable t) {
                 call.cancel();
-                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+                changeViewVisibility(textView, View.VISIBLE);
+                textView.setText(String.format(getString(R.string.nav_drawer_machine_text_view_api_failure_text), call.toString(), t.getStackTrace()));
             }
         });
+    }
+
+    private void changeViewVisibility(View view, int visible) {
+
+        view.setVisibility(visible);
+
     }
 
 
