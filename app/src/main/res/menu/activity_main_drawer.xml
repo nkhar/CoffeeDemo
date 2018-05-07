@@ -21,7 +21,7 @@
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_login"
+                android:id="@+id/nav_settings"
 
                 android:title="@string/nav_drawer_menu_item_4" />
             <item
