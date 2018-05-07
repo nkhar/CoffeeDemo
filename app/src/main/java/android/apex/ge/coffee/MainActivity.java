@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Insert the fragment by replacing FrameLayout.
             DrawerDocumentFragment documentFragment = new DrawerDocumentFragment();
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, documentFragment, "Document_TAG").commit();
-        } else if (id == R.id.nav_login) {
+        } else if (id == R.id.nav_settings) {
             Log.d(LOG_TAG, "login item was clicked");
             SettingsFragment settingsFragment = new SettingsFragment();
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, settingsFragment, "SETTINGS_MAIN_TAG").commit();
