@@ -43,7 +43,7 @@ public class DocGoodsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MyProducedRecyclerViewAdapter adapter;
 
-    private TextView textView;
+    private TextView textViewRefresh;
 
     private final int mColumnCount = 1;
 
@@ -62,8 +62,8 @@ public class DocGoodsActivity extends AppCompatActivity {
 
         docId = getIntent().getStringExtra(DrawerDocumentFragment.DOCUMENT_ID);
 
-        // init TextView.
-        textView = findViewById(R.id.text_view_for_doc_goods);
+        // init TextViewRefresh.
+        textViewRefresh = findViewById(R.id.text_view_for_doc_goods_refresh);
 
         // init SwipeRefreshLayout
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_doc_goods_activity);
@@ -149,7 +149,7 @@ public class DocGoodsActivity extends AppCompatActivity {
             public void onResponse(Call<DocGoods> call, Response<DocGoods> response) {
                 if (response.isSuccessful()) {
                     Log.d(LOG_TAG, response.code() + "");
-                    changeViewVisibility(textView, View.GONE);
+                    changeViewVisibility(textViewRefresh, View.GONE);
 
 
                     List<ProductData> goodsDocs = response.body().getResult();
@@ -161,17 +161,17 @@ public class DocGoodsActivity extends AppCompatActivity {
 
                 } else {
                     Log.d(LOG_TAG, response.code() + "");
-                    changeViewVisibility(textView, View.VISIBLE);
-                    textView.setText(response.toString());
-                    textView.setMovementMethod(new ScrollingMovementMethod());
+                    changeViewVisibility(textViewRefresh, View.VISIBLE);
+                    textViewRefresh.setText(response.toString());
+                    textViewRefresh.setMovementMethod(new ScrollingMovementMethod());
                 }
             }
 
             @Override
             public void onFailure(Call<DocGoods> call, Throwable t) {
                 call.cancel();
-                changeViewVisibility(textView, View.VISIBLE);
-                textView.setText(String.format(getString(R.string.nav_drawer_machine_text_view_api_failure_text), call.toString(), t.getStackTrace()));
+                changeViewVisibility(textViewRefresh, View.VISIBLE);
+                textViewRefresh.setText(String.format(getString(R.string.nav_drawer_machine_text_view_api_failure_text), call.toString(), t.getStackTrace()));
             }
         });
     }
