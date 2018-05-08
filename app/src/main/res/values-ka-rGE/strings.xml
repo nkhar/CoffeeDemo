@@ -37,7 +37,7 @@
     <string name="login_cancel_button_text">გამოსვლა</string>
 
     // DocGoodsActivity
-    <string name="doc_goods_doc_id">დოკუმენტის id: </string>
+    <string name="doc_goods_doc_id">"დოკუმენტის id: "</string>
 
     // Dialog texts
     <string name="dialog_edit_product_data_text_1">რაოდენობა 1</string>

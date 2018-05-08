@@ -36,7 +36,7 @@
     <string name="login_cancel_button_text">Exit</string>
 
     // DocGoodsActivity
-    <string name="doc_goods_doc_id">Document id: </string>
+    <string name="doc_goods_doc_id">"Document id: "</string>
 
     // Dialog texts
     <string name="dialog_edit_product_data_text_1">Quantity 1</string>
