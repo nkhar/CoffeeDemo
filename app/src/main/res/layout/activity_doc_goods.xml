@@ -43,8 +43,7 @@
                         android:id="@+id/text_view_for_doc_goods_doc_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:gravity="center"/>
+                        android:textSize="16sp"/>
                     <TextView
                         android:id="@+id/text_view_for_doc_goods_correspond_acc"
                         android:layout_width="match_parent"
