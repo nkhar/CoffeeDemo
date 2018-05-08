@@ -58,22 +58,22 @@ public class DocGoodsActivity extends AppCompatActivity {
            /*
         Here we are using the same layout as with DrawerMachineFragment class: fragment_nav_drawer_machine
          */
-        setContentView(R.layout.fragment_nav_drawer_machine);
+        setContentView(R.layout.activity_doc_goods);
 
         docId = getIntent().getStringExtra(DrawerDocumentFragment.DOCUMENT_ID);
 
         // init TextView.
-        textView = findViewById(R.id.text_view_for_machine);
+        textView = findViewById(R.id.text_view_for_doc_goods);
 
         // init SwipeRefreshLayout
-        swipeRefreshLayout = findViewById(R.id.coffee_machine_swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_doc_goods_activity);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         /*
         Recycler View
          */
 
-        recyclerView = findViewById(R.id.coffee_machines_recycler_view);
+        recyclerView = findViewById(R.id.recycler_view_doc_goods_activity);
         if (mColumnCount <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
         } else {
@@ -82,13 +82,15 @@ public class DocGoodsActivity extends AppCompatActivity {
 
 
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
-        getDocGoodsFromAPI(docId);
+        //getDocGoodsFromAPI(docId);
 
          /*
         Floating Action Button
          */
+        /*
         FloatingActionButton fab = findViewById(R.id.fab_fragment_machine);
         fab.hide();
+        */
 
         // implement setOnRefreshListener event on SwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
