@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coordinator_layout_activity_doc_goods"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,40 +11,67 @@
         android:id="@+id/text_view_for_doc_goods_refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nav_drawer_machine_text_view_text"
-        android:layout_gravity="center_horizontal|center_vertical" />
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:text="@string/nav_drawer_machine_text_view_text" />
 
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout_doc_goods_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout_doc_goods_activity"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                app:cardMaxElevation="4dp"
+                app:cardElevation="3dp"
+                app:contentPadding="10dp"
+                app:cardUseCompatPadding="true"
+                >
 
-                <TextView
-                    android:id="@+id/text_view_for_doc_goods_doc_id"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view_doc_goods_activity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/text_view_for_doc_goods_doc_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/text_view_for_doc_goods_correspond_acc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/text_view_for_doc_goods_waybill_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp" />
 
-                </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
 
-            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_doc_goods_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
 
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </LinearLayout>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
