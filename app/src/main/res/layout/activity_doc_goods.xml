@@ -33,7 +33,6 @@
                     android:id="@+id/text_view_for_doc_goods_doc_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DocID: "
                     android:textSize="16sp" />
 
                 <android.support.v7.widget.RecyclerView

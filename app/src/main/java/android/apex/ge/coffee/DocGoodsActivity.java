@@ -44,6 +44,7 @@ public class DocGoodsActivity extends AppCompatActivity {
     MyProducedRecyclerViewAdapter adapter;
 
     private TextView textViewRefresh;
+    private TextView textViewDocId;
 
     private final int mColumnCount = 1;
 
@@ -64,6 +65,9 @@ public class DocGoodsActivity extends AppCompatActivity {
 
         // init TextViewRefresh.
         textViewRefresh = findViewById(R.id.text_view_for_doc_goods_refresh);
+        // init textViewDocId.
+        textViewDocId = findViewById(R.id.text_view_for_doc_goods_doc_id);
+        textViewDocId.setText(getString(R.string.doc_goods_doc_id) + docId);
 
         // init SwipeRefreshLayout
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_doc_goods_activity);
