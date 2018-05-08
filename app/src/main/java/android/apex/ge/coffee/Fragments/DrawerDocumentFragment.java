@@ -49,6 +49,9 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
     protected final String LOG_TAG = "DrawerDocumentFragment";
 
     public static final String DOCUMENT_ID = "DOCUMENT_ID";
+    public static final String CORRESPOND_ACC = "CORRESPOND_ACC";
+    public static final String WAYBILL_NUM = "WAYBILL_NUM";
+    public static final String NUMBER_IN = "NUMBER_IN";
 
     RecyclerView recyclerView;
     MyCoffeeDocRecyclerViewAdapter adapter;
@@ -220,6 +223,9 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
         Log.d(LOG_TAG, "Something was clicked" + value.toString());
         Intent intent = new Intent(this.getActivity(), DocGoodsActivity.class);
         intent.putExtra(DOCUMENT_ID, value.getDocsID());
+        intent.putExtra(CORRESPOND_ACC, value.getCorespondAcc());
+        intent.putExtra(WAYBILL_NUM, value.getWaybillNum());
+        intent.putExtra(NUMBER_IN, value.getNumberIn());
         startActivity(intent);
     }
 

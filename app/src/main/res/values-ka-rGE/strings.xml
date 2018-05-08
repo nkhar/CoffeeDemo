@@ -38,6 +38,8 @@
 
     // DocGoodsActivity
     <string name="doc_goods_doc_id">"დოკუმენტის id: "</string>
+    <string name="doc_goods_correspond_acc">"აცც: "</string>
+    <string name="doc_goods_waybill_num">"ზედნადები: "</string>
 
     // Dialog texts
     <string name="dialog_edit_product_data_text_1">რაოდენობა 1</string>

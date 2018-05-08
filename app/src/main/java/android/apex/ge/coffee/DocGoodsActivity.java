@@ -45,10 +45,16 @@ public class DocGoodsActivity extends AppCompatActivity {
 
     private TextView textViewRefresh;
     private TextView textViewDocId;
+    private TextView textViewCorrespondAcc;
+    private TextView textViewWaybillNumOrNumberIn;
+
 
     private final int mColumnCount = 1;
 
     private String docId;
+    private String correspondAcc;
+    private String waybillNum;
+    private String numberIn;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -62,12 +68,33 @@ public class DocGoodsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doc_goods);
 
         docId = getIntent().getStringExtra(DrawerDocumentFragment.DOCUMENT_ID);
+        correspondAcc = getIntent().getStringExtra(DrawerDocumentFragment.CORRESPOND_ACC);
+        waybillNum = getIntent().getStringExtra(DrawerDocumentFragment.WAYBILL_NUM);
+        numberIn = getIntent().getStringExtra(DrawerDocumentFragment.NUMBER_IN);
 
         // init TextViewRefresh.
         textViewRefresh = findViewById(R.id.text_view_for_doc_goods_refresh);
+
         // init textViewDocId.
         textViewDocId = findViewById(R.id.text_view_for_doc_goods_doc_id);
         textViewDocId.setText(getString(R.string.doc_goods_doc_id) + docId);
+
+        // init textViewCorrespondAcc.
+        textViewCorrespondAcc = findViewById(R.id.text_view_for_doc_goods_correspond_acc);
+        textViewCorrespondAcc.setText(getString(R.string.doc_goods_correspond_acc) + correspondAcc);
+
+        // init textViewWaybillNum.
+        textViewWaybillNumOrNumberIn = findViewById(R.id.text_view_for_doc_goods_waybill_num);
+        if (waybillNum != null) {
+
+            textViewWaybillNumOrNumberIn.setText(getString(R.string.doc_goods_waybill_num) + waybillNum);
+        } else {
+            textViewWaybillNumOrNumberIn.setText(getString(R.string.doc_goods_waybill_num) + numberIn);
+        }
+
+
+
+
 
         // init SwipeRefreshLayout
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout_doc_goods_activity);
