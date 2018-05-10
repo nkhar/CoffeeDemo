@@ -2,10 +2,10 @@ package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.CoffeeApp;
 import android.apex.ge.coffee.DocGoodsActivity;
+import android.apex.ge.coffee.MainActivity;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeDocList;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
-import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
 import android.apex.ge.coffee.Retrofit.Model.CoffeeDoc;
 import android.apex.ge.coffee.UserInterface.SimpleDividerItemDecoration;
 import android.app.DatePickerDialog;
@@ -36,7 +36,6 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -65,6 +64,9 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
     private TextView textView;
 
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar mCurrentCalendar = Calendar.getInstance();
 
 
     /**
@@ -107,7 +109,7 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
                 Log.d(LOG_TAG, "\n\n New text is: " + newText);
 
                 // in case search menu action is clicked before adapter is initialized.
-                if(adapter!=null) {
+                if (adapter != null) {
                     adapter.getFilter().filter(newText);
                 }
                 return true;
@@ -190,23 +192,7 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
         // CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
         CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
 
-       /*
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
-        Calendar calendar = new GregorianCalendar(2018, 03, 18);
-        System.out.println(sdf.format(calendar.getTime()));
-        */
-/*
-        Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs("2018-04-19", "1610007800", "dh:iso8601");
-        */
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        //Calendar calendar = new GregorianCalendar(2018, 03, 18);
-        Calendar currentCalendar = Calendar.getInstance();
-        System.out.println(sdf.format(currentCalendar.getTime()));
-
-        currentCalendar.set(2018, 03, 11);
-
-        String dateString = sdf.format(currentCalendar.getTime());
+        String dateString = formatDate();
         Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs(dateString, "1610007800", "dh:iso8601");
 
 
@@ -244,6 +230,10 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
 
     }
 
+    private String formatDate() {
+        return mSimpleDateFormat.format(mCurrentCalendar.getTime());
+    }
+
     private void changeViewVisibility(View view, int visible) {
 
         view.setVisibility(visible);
@@ -268,17 +258,18 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
     }
 
 
-
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
+
+        private Calendar mDateCalendar = Calendar.getInstance();
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
+            //final Calendar c = Calendar.getInstance();
+            int year = mDateCalendar.get(Calendar.YEAR);
+            int month = mDateCalendar.get(Calendar.MONTH);
+            int day = mDateCalendar.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
@@ -286,18 +277,19 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
+            mDateCalendar.set(year, month, day);
         }
 
-
+        public Calendar getmDateCalendar() {
+            return mDateCalendar;
+        }
     }
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
+        mCurrentCalendar = ((DatePickerFragment) newFragment).getmDateCalendar();
     }
-
-
-
 
 
 }
