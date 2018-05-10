@@ -68,6 +68,7 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
 
     SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Calendar mCurrentCalendar = Calendar.getInstance();
+    String mDateString;
 
 
     /**
@@ -193,8 +194,8 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
         // CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
         CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
 
-        String dateString = formatDate();
-        Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs(dateString, "1610007800", "dh:iso8601");
+        mDateString = formatDate();
+        Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs(mDateString, "1610007800", "dh:iso8601");
 
 
         Log.d(LOG_TAG, "\n\nThis is call docs list \n" + callCoffeeDocs.toString());
