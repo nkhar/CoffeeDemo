@@ -13,6 +13,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -33,6 +34,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
@@ -57,6 +59,9 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
     public static final String NUMBER_IN = "NUMBER_IN";
     public static final String D_DATE = "D_DATE";
 
+    private static final String CHOSEN_DATE="CHOSEN_DATE";
+    private static final String DEFAULT_DATE_NOT_SAVED="DEFAULT_DATE_NOT_SAVED";
+
     RecyclerView recyclerView;
     MyCoffeeDocRecyclerViewAdapter adapter;
 
@@ -67,7 +72,7 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
     private SwipeRefreshLayout swipeRefreshLayout;
 
     SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    Calendar mCurrentCalendar = Calendar.getInstance();
+    Calendar mCurrentCalendar;
     String mDateString;
 
 
@@ -79,8 +84,33 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        Log.d(LOG_TAG, "We are in onSaveInstanceState of DrawerDocumentFragment class");
+        outState.putString(CHOSEN_DATE, mDateString);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mCurrentCalendar = Calendar.getInstance();
+
+        if (savedInstanceState!=null) {
+            String localDate= savedInstanceState.getString(CHOSEN_DATE, DEFAULT_DATE_NOT_SAVED);
+            Log.d(LOG_TAG, "Date saved to bundle is in string format: " + localDate);
+            if (!localDate.equals(DEFAULT_DATE_NOT_SAVED)) {
+                Log.d(LOG_TAG, "Date saved is not null inside if statement: " + localDate);
+
+                try {
+
+                    Log.d(LOG_TAG, "Trying to parse String back to Date format \n\n" + mSimpleDateFormat.parse(localDate).toString() + "\n\n");
+                    mCurrentCalendar.setTime(mSimpleDateFormat.parse(localDate));
+                    Log.d(LOG_TAG, mCurrentCalendar.getTime().toString() + "\n\n");
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         setHasOptionsMenu(true);
 
     }
