@@ -40,7 +40,7 @@
     <string name="login_cancel_button_text">Exit</string>
 
     // DocGoodsActivity
-    <string name="doc_goods_doc_id">"Document id: "</string>
+    <string name="doc_goods_d_date">"date: "</string>
     <string name="doc_goods_correspond_acc">"acc: "</string>
     <string name="doc_goods_waybill_num">"waybill: "</string>
 

@@ -55,6 +55,7 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
     public static final String CORRESPOND_ACC = "CORRESPOND_ACC";
     public static final String WAYBILL_NUM = "WAYBILL_NUM";
     public static final String NUMBER_IN = "NUMBER_IN";
+    public static final String D_DATE = "D_DATE";
 
     RecyclerView recyclerView;
     MyCoffeeDocRecyclerViewAdapter adapter;
@@ -249,6 +250,7 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
         intent.putExtra(CORRESPOND_ACC, value.getCorespondAcc());
         intent.putExtra(WAYBILL_NUM, value.getWaybillNum());
         intent.putExtra(NUMBER_IN, value.getNumberIn());
+        intent.putExtra(D_DATE, mSimpleDateFormat.format(value.getdDate()));
         startActivity(intent);
     }
 

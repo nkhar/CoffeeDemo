@@ -44,7 +44,7 @@ public class DocGoodsActivity extends AppCompatActivity {
     MyProducedRecyclerViewAdapter adapter;
 
     private TextView textViewRefresh;
-    private TextView textViewDocId;
+    private TextView textViewDate;
     private TextView textViewCorrespondAcc;
     private TextView textViewWaybillNumOrNumberIn;
 
@@ -55,6 +55,7 @@ public class DocGoodsActivity extends AppCompatActivity {
     private String correspondAcc;
     private String waybillNum;
     private String numberIn;
+    private String dDate;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -71,13 +72,14 @@ public class DocGoodsActivity extends AppCompatActivity {
         correspondAcc = getIntent().getStringExtra(DrawerDocumentFragment.CORRESPOND_ACC);
         waybillNum = getIntent().getStringExtra(DrawerDocumentFragment.WAYBILL_NUM);
         numberIn = getIntent().getStringExtra(DrawerDocumentFragment.NUMBER_IN);
+        dDate = getIntent().getStringExtra(DrawerDocumentFragment.D_DATE);
 
         // init TextViewRefresh.
         textViewRefresh = findViewById(R.id.text_view_for_doc_goods_refresh);
 
         // init textViewDocId.
-        textViewDocId = findViewById(R.id.text_view_for_doc_goods_doc_id);
-        textViewDocId.setText(getString(R.string.doc_goods_doc_id) + docId);
+        textViewDate = findViewById(R.id.text_view_for_doc_goods_d_date);
+        textViewDate.setText(getString(R.string.doc_goods_d_date) + dDate);
 
         // init textViewCorrespondAcc.
         textViewCorrespondAcc = findViewById(R.id.text_view_for_doc_goods_correspond_acc);
