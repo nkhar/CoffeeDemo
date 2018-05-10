@@ -14,6 +14,7 @@ public class CoffeeApp extends Application {
 
     public static CoffeeApp AppInstance;
 
+
     //RetrofitClient service
     CoffeeService service;
    /*
@@ -21,6 +22,9 @@ public class CoffeeApp extends Application {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
     */
+
+   private String vanAccount;
+   private String clientURL;
 
     public void onCreate() {
         super.onCreate();
