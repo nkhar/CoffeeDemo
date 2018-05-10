@@ -47,7 +47,7 @@ import retrofit2.Response;
  * This class is used to display Documents item from NavigationDrawer
  */
 
-public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<CoffeeDoc> {
+public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<CoffeeDoc>, DatePickerDialog.OnDateSetListener {
 
     protected final String LOG_TAG = "DrawerDocumentFragment";
 
@@ -123,7 +123,9 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.pick_date_documents_fragment:
-                showDatePickerDialog(this.getView());
+                showDatePickerDialog();
+                
+                //showDatePickerDialog(this.getView());
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
@@ -131,6 +133,14 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    private void showDatePickerDialog() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), this,
+                mCurrentCalendar.get(Calendar.YEAR),
+                mCurrentCalendar.get(Calendar.MONTH),
+                mCurrentCalendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
     }
 
     @Nullable
@@ -260,6 +270,23 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
         Log.d(LOG_TAG, "Something was longClicked" + value.toString());
     }
 
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+        mCurrentCalendar.set(year, month, dayOfMonth);
+        getCoffeeDocsFromAPI();
+
+    }
+
+
+
+
+
+
+
+
+
+/*
 
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
@@ -293,6 +320,7 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
         newFragment.show(getFragmentManager(), "datePicker");
         mCurrentCalendar = ((DatePickerFragment) newFragment).getmDateCalendar();
     }
+*/
 
 
 }
