@@ -32,6 +32,10 @@
     <string name="search_title">ძებნა</string>
     <string name="settings_title">პარამეტრები</string>
 
+    // documents fragment menu
+    <string name="search_documents_fragment_title">ძებნა</string>
+    <string name="pick_date_documents_fragment">აირჩიეთ თარიღი</string>
+
     // Login Activity
     <string name="login_sign_in_button_text">შესვლა</string>
     <string name="login_cancel_button_text">გამოსვლა</string>

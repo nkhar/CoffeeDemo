@@ -82,9 +82,9 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
         /*
         I use getActivity().getMenuInflater() in some places instead of inflater parameter.
          */
-        inflater.inflate(R.menu.options_menu, menu);
+        inflater.inflate(R.menu.options_menu_documents_fragment, menu);
 
-        MenuItem myActionMenuItem = menu.findItem(R.id.search);
+        MenuItem myActionMenuItem = menu.findItem(R.id.search_documents_fragment);
         SearchView searchView = (SearchView) myActionMenuItem.getActionView();
         search(searchView);
 
@@ -172,11 +172,26 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
         // CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
         CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
 
+       /*
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
         Calendar calendar = new GregorianCalendar(2018, 03, 18);
         System.out.println(sdf.format(calendar.getTime()));
-
+        */
+/*
         Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs("2018-04-19", "1610007800", "dh:iso8601");
+        */
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //Calendar calendar = new GregorianCalendar(2018, 03, 18);
+        Calendar currentCalendar = Calendar.getInstance();
+        System.out.println(sdf.format(currentCalendar.getTime()));
+
+        currentCalendar.set(2018, 03, 11);
+
+        String dateString = sdf.format(currentCalendar.getTime());
+        Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs(dateString, "1610007800", "dh:iso8601");
+
+
         Log.d(LOG_TAG, "\n\nThis is call docs list \n" + callCoffeeDocs.toString());
 
         callCoffeeDocs.enqueue(new Callback<CoffeeDocList>() {

@@ -31,6 +31,10 @@
     <string name="search_title">search</string>
     <string name="settings_title">settings</string>
 
+    // documents fragment menu
+    <string name="search_documents_fragment_title">search</string>
+    <string name="pick_date_documents_fragment">pick date</string>
+
     // Login Activity
     <string name="login_sign_in_button_text">Sign in</string>
     <string name="login_cancel_button_text">Exit</string>
