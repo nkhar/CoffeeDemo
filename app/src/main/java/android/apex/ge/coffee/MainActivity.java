@@ -113,15 +113,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, documentFragment, "Document_TAG").commit();
         } else if (id == R.id.nav_settings) {
-            Log.d(LOG_TAG, "login item was clicked");
+
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+
+           /* Log.d(LOG_TAG, "login item was clicked");
             SettingsFragment settingsFragment = new SettingsFragment();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container_main, settingsFragment, "SETTINGS_MAIN_TAG").commit();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container_main, settingsFragment, "SETTINGS_MAIN_TAG").commit();*/
         } else if (id == R.id.nav_logout) {
             Log.d(LOG_TAG, "log out item was clicked");
             logOut();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        setTitle(item.getTitle());
+        if (id != R.id.nav_settings) {
+            setTitle(item.getTitle());
+        }
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
