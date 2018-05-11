@@ -156,7 +156,7 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
                 CoffeeAcc: 1610007800
                 VanAcc: 1610007800
                  */
-        Call<PreorderGoods> preOrderGoods = service.listPreorderGoods("1610000100", "1610007800", sdf.format(calendar.getTime()));
+        Call<PreorderGoods> preOrderGoods = service.listPreorderGoods("1610000100", CoffeeApp.AppInstance.getVanAccountFromApp(), sdf.format(calendar.getTime()));
 
 
         preOrderGoods.enqueue(new Callback<PreorderGoods>() {

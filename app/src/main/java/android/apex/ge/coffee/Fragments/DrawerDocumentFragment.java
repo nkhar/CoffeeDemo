@@ -235,7 +235,7 @@ public class DrawerDocumentFragment extends Fragment implements ILibObjectCrud<C
         CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
 
         mDateString = formatDate();
-        Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs(mDateString, "1610007800", "dh:iso8601");
+        Call<CoffeeDocList> callCoffeeDocs = service.listCoffeeDocs(mDateString, CoffeeApp.AppInstance.getVanAccountFromApp(), "dh:iso8601");
 
 
         Log.d(LOG_TAG, "\n\nThis is call docs list \n" + callCoffeeDocs.toString());

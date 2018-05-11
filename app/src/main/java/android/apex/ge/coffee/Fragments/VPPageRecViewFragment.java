@@ -181,7 +181,7 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
 
 
     private void getRawMaterialsListFromAPI(CoffeeService service) {
-        Call<RawMaterials> callRawMaterials = service.listRawMaterials("1610003000", "1610007800");
+        Call<RawMaterials> callRawMaterials = service.listRawMaterials("1610003000", CoffeeApp.AppInstance.getVanAccountFromApp());
 
         callRawMaterials.enqueue(new Callback<RawMaterials>() {
             @Override
@@ -215,7 +215,7 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
     }
 
     private void getProducedGoodsListFromAPI(CoffeeService service) {
-        Call<ProducedGoods> callProducedGoods = service.listProducedGoods("1610003000", "1610007800");
+        Call<ProducedGoods> callProducedGoods = service.listProducedGoods("1610003000", CoffeeApp.AppInstance.getVanAccountFromApp());
 
         callProducedGoods.enqueue(new Callback<ProducedGoods>() {
             @Override
@@ -250,7 +250,7 @@ public class VPPageRecViewFragment extends Fragment implements ILibObjectCrud<Pr
     }
 
     private void getSaleGoodsListFromAPI(CoffeeService service) {
-        Call<SaleGoods> callSaleGoods = service.listSaleGoods("1610003000", "1610007800");
+        Call<SaleGoods> callSaleGoods = service.listSaleGoods("1610003000", CoffeeApp.AppInstance.getVanAccountFromApp());
 
         callSaleGoods.enqueue(new Callback<SaleGoods>() {
             @Override
