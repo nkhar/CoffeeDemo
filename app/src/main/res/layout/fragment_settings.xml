@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edit_text_fragment_settings_password" />
 
     <EditText
-        android:id="@+id/edit_text_van_acc_fragment_settings"
+        android:id="@+id/edit_text_fragment_settings_van_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -51,7 +51,7 @@
         android:text="URL"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_van_acc_fragment_settings" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_fragment_settings_van_account" />
 
     <EditText
         android:id="@+id/edit_text_fragment_settings_url"
@@ -141,13 +141,13 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_fragment_settings_password" />
 
     <Button
-        android:id="@+id/button_fragment_settings_ok"
+        android:id="@+id/button_fragment_settings_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:text="OK"
+        android:text="SAVE"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch_fragment_settings_language" />
