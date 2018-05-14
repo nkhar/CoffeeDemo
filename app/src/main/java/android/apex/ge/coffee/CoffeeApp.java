@@ -11,8 +11,10 @@ import java.util.Locale;
 
 public class CoffeeApp extends Application {
 
+    private static final String LOG_TAG = "CoffeeApp";
 
     public static CoffeeApp AppInstance;
+    SharedPreferences settings;
 
 
     //RetrofitClient service
@@ -61,8 +63,37 @@ public class CoffeeApp extends Application {
 
     private void init() {
         AppInstance = this;
+        initPreferenceFile();
+        initPreferenceChangeListener();
         initPreferenceFileValues();
         initRetrofitService();
+    }
+
+    private void initPreferenceFile() {
+         settings = getSharedPreferences(PREFERENCES_NAME, 0); // 0 - for private mode same as MODE_PRIVATE
+    }
+
+    private void initPreferenceChangeListener() {
+        settings.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                Log.d(LOG_TAG,  "\n\n Preferences Listener method Has been called, some preference has changed.");
+
+                if(key.equals(SERVER_URL)){
+                    clientURL = sharedPreferences.getString(SERVER_URL, NO_SERVER_URL);
+                }
+                if(key.equals(SERVER_USER)){
+                    clientUserName = sharedPreferences.getString(SERVER_USER, NO_SERVER_USER);
+                }
+                if(key.equals(SERVER_PASSWORD)){
+                    clientPassword = sharedPreferences.getString(SERVER_PASSWORD, NO_SERVER_PASSWORD);
+                }
+                if(key.equals(VAN_ACCOUNT)){
+                    vanAccount = sharedPreferences.getString(VAN_ACCOUNT, NO_VAN_ACCOUNT);
+                }
+
+            }
+        });
     }
 
     private void initRetrofitService() {
@@ -70,7 +101,7 @@ public class CoffeeApp extends Application {
     }
 
     private void initPreferenceFileValues() {
-        SharedPreferences settings = getSharedPreferences(PREFERENCES_NAME, 0); // 0 - for private mode same as MODE_PRIVATE
+
         clientURL = settings.getString(SERVER_URL, NO_SERVER_URL);
         clientUserName = settings.getString(SERVER_USER, NO_SERVER_USER);
         clientPassword = settings.getString(SERVER_PASSWORD, NO_SERVER_PASSWORD);
