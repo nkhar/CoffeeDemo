@@ -3,7 +3,6 @@ package android.apex.ge.coffee;
 import android.apex.ge.coffee.Fragments.DrawerDocumentFragment;
 import android.apex.ge.coffee.Fragments.DrawerMachineFragment;
 import android.apex.ge.coffee.Fragments.DrawerPreOrderFragment;
-import android.apex.ge.coffee.Fragments.SettingsFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -89,7 +88,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             selectedNavDrawerItemIndex = 0;
 
             // Insert the fragment by replacing FrameLayout.
-            DrawerMachineFragment machineFragment = new DrawerMachineFragment();
+            Fragment fragment = fragmentManager.findFragmentByTag("MACHINE_TAG");
+            DrawerMachineFragment machineFragment;
+            if(fragment == null) {
+                machineFragment = new DrawerMachineFragment();
+            } else{
+                machineFragment = (DrawerMachineFragment) fragment;
+            }
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, machineFragment, "MACHINE_TAG").commit();
 
         } else if (id == R.id.nav_second) {
@@ -97,19 +102,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             selectedNavDrawerItemIndex = 1;
 
             // Insert the fragment by replacing FrameLayout.
-            DrawerPreOrderFragment preOrderFragment = new DrawerPreOrderFragment();
+            Fragment fragment = fragmentManager.findFragmentByTag("PRE_ORDER_TAG");
+            DrawerPreOrderFragment preOrderFragment;
+            if (fragment == null) {
+                preOrderFragment = new DrawerPreOrderFragment();
+            } else{
+                preOrderFragment = (DrawerPreOrderFragment) fragment;
+            }
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, preOrderFragment, "PRE_ORDER_TAG").commit();
         } else if (id == R.id.nav_third) {
             Log.d(LOG_TAG, "third item was clicked");
             selectedNavDrawerItemIndex = 2;
 
             // Insert the fragment by replacing FrameLayout.
-            Fragment fragment =  fragmentManager.findFragmentByTag("Document_TAG");
+            Fragment fragment = fragmentManager.findFragmentByTag("Document_TAG");
             DrawerDocumentFragment documentFragment;
             if (fragment == null) {
                 documentFragment = new DrawerDocumentFragment();
             } else {
-                documentFragment = (DrawerDocumentFragment )fragment;
+                documentFragment = (DrawerDocumentFragment) fragment;
             }
             fragmentManager.beginTransaction().replace(R.id.fragment_container_main, documentFragment, "Document_TAG").commit();
         } else if (id == R.id.nav_settings) {
@@ -117,13 +128,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
 
-           /* Log.d(LOG_TAG, "login item was clicked");
-            SettingsFragment settingsFragment = new SettingsFragment();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container_main, settingsFragment, "SETTINGS_MAIN_TAG").commit();*/
+
         } else if (id == R.id.nav_logout) {
             Log.d(LOG_TAG, "log out item was clicked");
             logOut();
         }
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (id != R.id.nav_settings) {
             setTitle(item.getTitle());
