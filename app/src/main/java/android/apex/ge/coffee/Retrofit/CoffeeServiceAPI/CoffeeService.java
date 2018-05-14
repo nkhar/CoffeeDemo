@@ -32,10 +32,9 @@ import retrofit2.http.Query;
 
 public interface CoffeeService {
 
-    @GET("users/{user}/repos")
-    Call<List<Repo>> listRepos(@Path("user") String user);
-
-
+    /*
+    VanAcc should be 1610007800 for testing.
+     */
 
     /*GET methods*/
 
