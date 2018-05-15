@@ -1,5 +1,7 @@
 package android.apex.ge.coffee.Retrofit.Model;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +10,8 @@ import com.google.gson.annotations.SerializedName;
  * This class is used for (de)serialization of CrmOrderView object
  */
 
-public class CrmOrderView {
+public class CrmOrderView  implements Comparable<CrmOrderView>{
+
 
     @SerializedName("order_id")
     @Expose
@@ -52,5 +55,10 @@ public class CrmOrderView {
                 .append("\norderDate: " + orderDate)
                 .append("\nrecipientCompanyName: " + recipientCompanyName)
                 .toString();
+    }
+
+    @Override
+    public int compareTo(@NonNull CrmOrderView o) {
+        return this.getRecipientCompanyName().compareTo(o.getRecipientCompanyName());
     }
 }
