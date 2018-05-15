@@ -4,6 +4,7 @@ import android.apex.ge.coffee.Retrofit.CoffeeDocList;
 import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
 import android.apex.ge.coffee.Retrofit.DocGoods;
 import android.apex.ge.coffee.Retrofit.LastCoffeeCupsCount;
+import android.apex.ge.coffee.Retrofit.Model.CrmOrderView;
 import android.apex.ge.coffee.Retrofit.Model.SaveCoffeePreOrder;
 import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
 import android.apex.ge.coffee.Retrofit.PreOrderAccounts;
@@ -51,7 +52,7 @@ public interface CoffeeService {
     Call<RawMaterials> listRawMaterials(@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
 
     @GET("/Crm/Orders/View.json")
-    Call<RawMaterials> listCrmOrdersView(@Query("CUser") String cUser, @Query("order_date") String orderDate);
+    Call<CrmOrderView> listCrmOrdersView(@Query("CUser") String cUser, @Query("order_date") String orderDate);
 
     @GET("CoffeeService/GetPreorderGoods.json")
     Call<PreorderGoods> listPreorderGoods(@Query("WarehouseAcc") String warehouseAcc, @Query("VanAcc") String vanAcc, @Query("BDate") String bDate); //Not sure about Date type.

@@ -95,8 +95,13 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
             public void onClick(View v) {
                 //getPreOrderAccountsFromAPI();
                 //getPreOrderGoodsFromAPI();
+
+                /*
                 Intent intent = new Intent(DrawerPreOrderFragment.this.getActivity(), PreOrderActivity.class);
                 startActivity(intent);
+                */
+
+                getCrmOrdersView();
             }
         });
 
@@ -104,6 +109,16 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
         return view;
 
     }
+
+
+    private void getCrmOrdersView(){
+        CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
+
+
+    }
+
+
+
 
     private void getPreOrderAccountsFromAPI() {
         // CoffeeService service = RetrofitClient.getRetrofitClient().create(CoffeeService.class);
