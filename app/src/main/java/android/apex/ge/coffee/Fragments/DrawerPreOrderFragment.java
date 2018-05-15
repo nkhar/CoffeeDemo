@@ -1,17 +1,16 @@
 package android.apex.ge.coffee.Fragments;
 
 import android.apex.ge.coffee.CoffeeApp;
-import android.apex.ge.coffee.PreOrderActivity;
 import android.apex.ge.coffee.R;
 import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.CoffeeService;
-import android.apex.ge.coffee.Retrofit.CoffeeServiceAPI.RetrofitClient;
+import android.apex.ge.coffee.Retrofit.CrmOrderViewList;
 import android.apex.ge.coffee.Retrofit.Model.AccountInfo;
+import android.apex.ge.coffee.Retrofit.Model.CrmOrderView;
 import android.apex.ge.coffee.Retrofit.Model.ProductData;
 import android.apex.ge.coffee.Retrofit.PreOrderAccounts;
 import android.apex.ge.coffee.Retrofit.PreorderGoods;
 import android.apex.ge.coffee.UserInterface.SimpleDividerItemDecoration;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -50,6 +49,8 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
     private final int mColumnCount = 1;
 
     private TextView textView;
+
+    SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
     /**
@@ -113,6 +114,42 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
 
     private void getCrmOrdersView(){
         CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
+        String orderDateTo = mSimpleDateFormat.format(Calendar.getInstance().getTime());
+
+        Calendar calendar = new GregorianCalendar(2016, 2, 26);
+        String orderDateFrom = mSimpleDateFormat.format(calendar.getTime());
+
+        Call<CrmOrderViewList> callCrmOrdersView=service.listCrmOrdersView(CoffeeApp.AppInstance.getClientUserNameFromApp(), orderDateFrom + "," + orderDateTo);
+
+        callCrmOrdersView.enqueue(new Callback<CrmOrderViewList>() {
+            @Override
+            public void onResponse(Call<CrmOrderViewList> call, Response<CrmOrderViewList> response) {
+                if (response.isSuccessful()) {
+                    Log.d(LOG_TAG, response.code() + "");
+
+                     String displayCrmOrdersViewResponse = "";
+                    List<CrmOrderView> crmOrders = response.body().getResult();
+
+                    displayCrmOrdersViewResponse += "\n    " + crmOrders.size() + " \n";
+
+                            for (CrmOrderView crm : crmOrders) {
+                                displayCrmOrdersViewResponse += crm.toString();
+                               Log.d(LOG_TAG, crm.getOrderId());
+                            }
+
+                            textView.setText(displayCrmOrdersViewResponse);
+                } else {
+                    textView.setText(response.toString());
+                    textView.setMovementMethod(new ScrollingMovementMethod());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CrmOrderViewList> call, Throwable t) {
+                call.cancel();
+                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+            }
+        });
 
 
     }

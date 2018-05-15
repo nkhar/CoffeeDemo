@@ -127,4 +127,7 @@ public class CoffeeApp extends Application {
     public String getVanAccountFromApp() {
         return vanAccount;
     }
+    public String getClientUserNameFromApp(){
+        return clientUserName;
+    }
 }

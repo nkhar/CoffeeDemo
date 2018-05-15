@@ -10,29 +10,47 @@ import com.google.gson.annotations.SerializedName;
 
 public class CrmOrderView {
 
-    @SerializedName("Acc")
+    @SerializedName("order_id")
     @Expose
-    private String acc;
-    @SerializedName("Name")
+    private String orderId;
+    @SerializedName("order_date")
     @Expose
-    private String name;
-    @SerializedName("SN")
+    private String orderDate;
+    @SerializedName("recipient_company_name")
     @Expose
-    private String sN;
-    @SerializedName("WarehouseAddress")
-    @Expose
-    private String warehouseAddress;
+    private String recipientCompanyName;
 
-    @SerializedName("Address")
-    @Expose
-    private String address;
-    @SerializedName("Phone")
-    @Expose
-    private String phone;
-    @SerializedName("AccWithName")
-    @Expose
-    private String accWithName;
-    @SerializedName("VatType")
-    @Expose
-    private int vatType;
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public String getRecipientCompanyName() {
+        return recipientCompanyName;
+    }
+
+    public void setRecipientCompanyName(String recipientCompanyName) {
+        this.recipientCompanyName = recipientCompanyName;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder
+                .append("\n\n\norderId: " + orderId)
+                .append("\norderDate: " + orderDate)
+                .append("\nrecipientCompanyName: " + recipientCompanyName)
+                .toString();
+    }
 }

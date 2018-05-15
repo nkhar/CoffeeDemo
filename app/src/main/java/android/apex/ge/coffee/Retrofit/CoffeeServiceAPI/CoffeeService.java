@@ -2,28 +2,24 @@ package android.apex.ge.coffee.Retrofit.CoffeeServiceAPI;
 
 import android.apex.ge.coffee.Retrofit.CoffeeDocList;
 import android.apex.ge.coffee.Retrofit.CoffeeMachineList;
+import android.apex.ge.coffee.Retrofit.CrmOrderViewList;
 import android.apex.ge.coffee.Retrofit.DocGoods;
 import android.apex.ge.coffee.Retrofit.LastCoffeeCupsCount;
-import android.apex.ge.coffee.Retrofit.Model.CrmOrderView;
 import android.apex.ge.coffee.Retrofit.Model.SaveCoffeePreOrder;
 import android.apex.ge.coffee.Retrofit.Model.SaveCoffeeStats;
 import android.apex.ge.coffee.Retrofit.PreOrderAccounts;
 import android.apex.ge.coffee.Retrofit.PreorderGoods;
 import android.apex.ge.coffee.Retrofit.ProducedGoods;
 import android.apex.ge.coffee.Retrofit.RawMaterials;
-import android.apex.ge.coffee.Retrofit.Repo;
 import android.apex.ge.coffee.Retrofit.SaleGoods;
 import android.apex.ge.coffee.Retrofit.SaveCoffeePreOrderResponse;
 import android.apex.ge.coffee.Retrofit.SaveCoffeeStatsResponse;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -52,7 +48,7 @@ public interface CoffeeService {
     Call<RawMaterials> listRawMaterials(@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
 
     @GET("/Crm/Orders/View.json")
-    Call<CrmOrderView> listCrmOrdersView(@Query("CUser") String cUser, @Query("order_date") String orderDate);
+    Call<CrmOrderViewList> listCrmOrdersView(@Query("CUser") String cUser, @Query("order_date") String orderDate);
 
     @GET("CoffeeService/GetPreorderGoods.json")
     Call<PreorderGoods> listPreorderGoods(@Query("WarehouseAcc") String warehouseAcc, @Query("VanAcc") String vanAcc, @Query("BDate") String bDate); //Not sure about Date type.
