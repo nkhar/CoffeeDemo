@@ -19,9 +19,17 @@ public class CrmOrderView  implements Comparable<CrmOrderView>{
     @SerializedName("order_date")
     @Expose
     private String orderDate;
-    @SerializedName("recipient_company_name")
+    @SerializedName("recipient_branch_name")
     @Expose
-    private String recipientCompanyName;
+    private String recipientBranchName;
+
+    @SerializedName("to_address")
+    @Expose
+    private String toAddress;
+
+    @SerializedName("total_amount")
+    @Expose
+    private double totalAmount;
 
 
     public String getOrderId() {
@@ -40,12 +48,28 @@ public class CrmOrderView  implements Comparable<CrmOrderView>{
         this.orderDate = orderDate;
     }
 
-    public String getRecipientCompanyName() {
-        return recipientCompanyName;
+    public String getRecipientBranchName() {
+        return recipientBranchName;
     }
 
-    public void setRecipientCompanyName(String recipientCompanyName) {
-        this.recipientCompanyName = recipientCompanyName;
+    public void setRecipientBranchName(String recipientBranchName) {
+        this.recipientBranchName = recipientBranchName;
+    }
+
+    public String getToAddress() {
+        return toAddress;
+    }
+
+    public void setToAddress(String toAddress) {
+        this.toAddress = toAddress;
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public String toString() {
@@ -53,12 +77,12 @@ public class CrmOrderView  implements Comparable<CrmOrderView>{
         return stringBuilder
                 .append("\n\n\norderId: " + orderId)
                 .append("\norderDate: " + orderDate)
-                .append("\nrecipientCompanyName: " + recipientCompanyName)
+                .append("\nrecipientCompanyName: " + recipientBranchName)
                 .toString();
     }
 
     @Override
     public int compareTo(@NonNull CrmOrderView o) {
-        return this.getRecipientCompanyName().compareTo(o.getRecipientCompanyName());
+        return this.getRecipientBranchName().compareTo(o.getRecipientBranchName());
     }
 }
