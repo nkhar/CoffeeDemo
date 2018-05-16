@@ -46,6 +46,7 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
     RecyclerView recyclerView;
     RecyclerViewListAdapter adapter;
 
+
     private final int mColumnCount = 1;
 
     private TextView textView;
@@ -127,18 +128,12 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
                 if (response.isSuccessful()) {
                     Log.d(LOG_TAG, response.code() + "");
 
-                    String displayCrmOrdersViewResponse = "";
                     List<CrmOrderView> crmOrders = response.body().getResult();
+                    adapter = new MyCrmOrdersViewAdapter(crmOrders);
+                    adapter.setmListener(DrawerPreOrderFragment.this);
+                    DrawerPreOrderFragment.this.recyclerView.setAdapter(adapter);
 
-                    displayCrmOrdersViewResponse += "\n    " + crmOrders.size() + " \n";
 
-                    for (CrmOrderView crm : crmOrders) {
-                        displayCrmOrdersViewResponse += crm.toString();
-                        Log.d(LOG_TAG, crm.getOrderId());
-                    }
-
-                    textView.setText(displayCrmOrdersViewResponse);
-                    textView.setMovementMethod(new ScrollingMovementMethod());
                 } else {
                     textView.setText(response.toString());
                     textView.setMovementMethod(new ScrollingMovementMethod());
