@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +50,7 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
 
     private final int mColumnCount = 1;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
     private TextView textView;
 
     SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -73,6 +75,10 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
 
         textView = view.findViewById(R.id.text_view_for_pre_order);
 
+        // init SwipeRefreshLayout
+        swipeRefreshLayout = view.findViewById(R.id.pre_order_swipe_refresh_layout);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+
         /*
         Recycler View
          */
@@ -92,21 +98,19 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
         Floating Action Button
          */
         FloatingActionButton fab = view.findViewById(R.id.fab_fragment_pre_order);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //getPreOrderAccountsFromAPI();
-                //getPreOrderGoodsFromAPI();
+        fab.hide();
 
-                /*
-                Intent intent = new Intent(DrawerPreOrderFragment.this.getActivity(), PreOrderActivity.class);
-                startActivity(intent);
-                */
+        // implement setOnRefreshListener event on SwipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
 
                 getCrmOrdersView();
+
+
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
-
 
         return view;
 
@@ -127,6 +131,7 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
             public void onResponse(Call<CrmOrderViewList> call, Response<CrmOrderViewList> response) {
                 if (response.isSuccessful()) {
                     Log.d(LOG_TAG, response.code() + "");
+                    changeViewVisibility(textView, View.GONE);
 
                     List<CrmOrderView> crmOrders = response.body().getResult();
                     adapter = new MyCrmOrdersViewAdapter(crmOrders);
@@ -135,6 +140,7 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
 
 
                 } else {
+                    changeViewVisibility(textView, View.VISIBLE);
                     textView.setText(response.toString());
                     textView.setMovementMethod(new ScrollingMovementMethod());
                 }
@@ -143,7 +149,8 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
             @Override
             public void onFailure(Call<CrmOrderViewList> call, Throwable t) {
                 call.cancel();
-                textView.setText("Can't Establish a Connection to the Server\n\n" + call.toString() + "\n\n" + t.getStackTrace());
+                changeViewVisibility(textView, View.VISIBLE);
+                textView.setText(String.format(getString(R.string.nav_drawer_machine_text_view_api_failure_text), call.toString(), t.getStackTrace()));
             }
         });
 
@@ -237,6 +244,11 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
 
     }
 
+    private void changeViewVisibility(View view, int visible) {
+
+        view.setVisibility(visible);
+
+    }
 
     @Override
     public void onClick(Object value) {
