@@ -112,14 +112,14 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
     }
 
 
-    private void getCrmOrdersView(){
+    private void getCrmOrdersView() {
         CoffeeService service = CoffeeApp.AppInstance.getRetrofitService();
         String orderDateTo = mSimpleDateFormat.format(Calendar.getInstance().getTime());
 
         Calendar calendar = new GregorianCalendar(2016, 2, 26);
         String orderDateFrom = mSimpleDateFormat.format(calendar.getTime());
 
-        Call<CrmOrderViewList> callCrmOrdersView=service.listCrmOrdersView(CoffeeApp.AppInstance.getClientUserNameFromApp(), orderDateFrom + "," + orderDateTo);
+        Call<CrmOrderViewList> callCrmOrdersView = service.listCrmOrdersView(CoffeeApp.AppInstance.getClientUserNameFromApp(), orderDateFrom + "," + orderDateTo);
 
         callCrmOrdersView.enqueue(new Callback<CrmOrderViewList>() {
             @Override
@@ -127,17 +127,18 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
                 if (response.isSuccessful()) {
                     Log.d(LOG_TAG, response.code() + "");
 
-                     String displayCrmOrdersViewResponse = "";
+                    String displayCrmOrdersViewResponse = "";
                     List<CrmOrderView> crmOrders = response.body().getResult();
 
                     displayCrmOrdersViewResponse += "\n    " + crmOrders.size() + " \n";
 
-                            for (CrmOrderView crm : crmOrders) {
-                                displayCrmOrdersViewResponse += crm.toString();
-                               Log.d(LOG_TAG, crm.getOrderId());
-                            }
+                    for (CrmOrderView crm : crmOrders) {
+                        displayCrmOrdersViewResponse += crm.toString();
+                        Log.d(LOG_TAG, crm.getOrderId());
+                    }
 
-                            textView.setText(displayCrmOrdersViewResponse);
+                    textView.setText(displayCrmOrdersViewResponse);
+                    textView.setMovementMethod(new ScrollingMovementMethod());
                 } else {
                     textView.setText(response.toString());
                     textView.setMovementMethod(new ScrollingMovementMethod());
@@ -153,8 +154,6 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
 
 
     }
-
-
 
 
     private void getPreOrderAccountsFromAPI() {

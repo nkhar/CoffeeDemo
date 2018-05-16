@@ -78,6 +78,8 @@ public class CrmOrderView  implements Comparable<CrmOrderView>{
                 .append("\n\n\norderId: " + orderId)
                 .append("\norderDate: " + orderDate)
                 .append("\nrecipientCompanyName: " + recipientBranchName)
+                .append("\ntoAddress: " + toAddress)
+                .append("\ntotalAmount: " + totalAmount)
                 .toString();
     }
 
