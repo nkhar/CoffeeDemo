@@ -120,7 +120,7 @@ public class DrawerPreOrderFragment extends Fragment implements ILibObjectCrud {
         Calendar calendar = new GregorianCalendar(2016, 2, 26);
         String orderDateFrom = mSimpleDateFormat.format(calendar.getTime());
 
-        Call<CrmOrderViewList> callCrmOrdersView = service.listCrmOrdersView(CoffeeApp.AppInstance.getClientUserNameFromApp(), orderDateFrom + "," + orderDateTo);
+        Call<CrmOrderViewList> callCrmOrdersView = service.listCrmOrdersView(CoffeeApp.AppInstance.getClientUserNameFromApp(), orderDateFrom + "," + orderDateTo, "dh:iso8601");
 
         callCrmOrdersView.enqueue(new Callback<CrmOrderViewList>() {
             @Override

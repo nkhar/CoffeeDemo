@@ -48,7 +48,7 @@ public interface CoffeeService {
     Call<RawMaterials> listRawMaterials(@Query("CoffeeAcc") String coffeeAcc, @Query("VanAcc") String vanAcc);
 
     @GET("/Crm/Orders/View.json")
-    Call<CrmOrderViewList> listCrmOrdersView(@Query("CUser") String cUser, @Query("order_date") String orderDate);
+    Call<CrmOrderViewList> listCrmOrdersView(@Query("CUser") String cUser, @Query("order_date") String orderDate, @Query("jsconfig") String jsConfig);
 
     @GET("CoffeeService/GetPreorderGoods.json")
     Call<PreorderGoods> listPreorderGoods(@Query("WarehouseAcc") String warehouseAcc, @Query("VanAcc") String vanAcc, @Query("BDate") String bDate); //Not sure about Date type.

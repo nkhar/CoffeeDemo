@@ -53,7 +53,7 @@ public class MyCrmOrdersViewAdapter extends RecyclerViewAdapterWithFilter<MyCrmO
 
 
         holder.mOrderIdTextView.setText(value.getOrderId());
-        holder.mOrderDateTextView.setText(value.getOrderDate());
+        holder.mOrderDateTextView.setText(value.getOrderDate().toString());
         holder.mRecipientBranchNameTextView.setText(value.getRecipientBranchName());
         holder.mToAddressTextView.setText(value.getToAddress());
         holder.mTotalAmountTextView.setText(String.valueOf(value.getTotalAmount()));

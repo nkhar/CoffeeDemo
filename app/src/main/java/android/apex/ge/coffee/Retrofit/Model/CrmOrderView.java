@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 /**
  * Created by Nika on 20/03/2018.
  * This class is used for (de)serialization of CrmOrderView object
@@ -18,7 +20,7 @@ public class CrmOrderView  implements Comparable<CrmOrderView>{
     private String orderId;
     @SerializedName("order_date")
     @Expose
-    private String orderDate;
+    private Date orderDate;
     @SerializedName("recipient_branch_name")
     @Expose
     private String recipientBranchName;
@@ -40,11 +42,11 @@ public class CrmOrderView  implements Comparable<CrmOrderView>{
         this.orderId = orderId;
     }
 
-    public String getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(String orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
